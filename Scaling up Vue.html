@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scaling up Vue - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important;
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important;
+        }
+        
+        /* Exercise hover effects */
+        .option-card:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            transform: translateX(5px) !important;
+        }
+        
+        .exercise-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4) !important;
+        }
+        
+        /* Image styling */
+        .tutorial-image {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid #f0f0f0;
+        }
+        
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue Templates.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Our First SFC Web Page.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Scaling up Vue</h2>
+            <p>Vue ஐ அளவிட கற்றுக்கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Scaling up Vue</h2>
+            
+            <p>எங்கள் Vue திட்டத்திற்கு *.vue கோப்புகளைப் பயன்படுத்துவது அர்த்தமுள்ளதாகும், ஏனெனில்:</p>
+            
+            <ul>
+                <li>டெம்ப்ளேட்டுகள் மற்றும் கூறுகளின் பயன்பாட்டுடன் பெரிய திட்டங்களைக் கையாள எளிதாகிறது.</li>
+                <li>பயனர்கள் பக்கத்தைப் பார்ப்பதைப் போல https நெறிமுறை மூலம் எங்கள் திட்டத்தைப் பார்க்கவும் சோதிக்கவும் முடியும்.</li>
+                <li>மாற்றங்கள் சேமிக்கப்படும்போது பக்கம் உடனடியாக புதுப்பிக்கப்படுகிறது, மீள் ஏற்றம் இல்லாமல்.</li>
+                <li>Vue இல் உண்மையான வலைப்பக்கங்கள் இவ்வாறு கட்டப்படுகின்றன.</li>
+                <li>டெவலப்பர்கள் இப்படித்தான் வேலை செய்கிறார்கள்.</li>
+            </ul>
+        </section>
+
+        <!-- Why? -->
+        <section class="content-section" id="why">
+            <h2>Why?</h2>
+            
+            <p>Vue இல் டெம்ப்ளேட்டுகள் மற்றும் கூறுகள் பற்றிய முந்தைய பக்கத்தில் நாம் பார்த்தபடி, இப்போது வேறுபட்ட வழியில் வேலை செய்ய வேண்டிய தேவை உள்ளது, ஏனெனில் நாங்கள் விரும்புகிறோம்:</p>
+            
+            <ul>
+                <li>பெரிய திட்டங்களைக் கொண்டிருக்க</li>
+                <li>அனைத்து Vue தொடர்பான குறியீட்டையும் ஒரே இடத்தில் சேகரிக்க</li>
+                <li>Vue இல் கூறுகளைப் பயன்படுத்த (விரைவில் இதற்கு வருவோம்)</li>
+                <li>எடிட்டரில் முன்னிலைப்படுத்தல் மற்றும் தானியங்கி நிறைவு ஆதரவைக் கொண்டிருக்க</li>
+                <li>உலாவியை தானாக புதுப்பிக்க</li>
+            </ul>
+            
+            <p>இவை அனைத்தையும் சாத்தியமாக்க, நாம் *.vue கோப்புகளுக்கு மாற வேண்டும்.</p>
+        </section>
+
+        <!-- How? -->
+        <section class="content-section" id="how">
+            <h2>How?</h2>
+            
+            <p>SFCகள் (ஒற்றை கோப்பு கூறுகள்), அல்லது *.vue கோப்புகள், வேலை செய்ய எளிதானவை, ஆனால் உலாவியில் நேரடியாக இயக்க முடியாது, எனவே எங்கள் கணினியை எங்கள் *.vue கோப்புகளை *.html, *.css மற்றும் *.js கோப்புகளாக தொகுக்க அமைக்க வேண்டும், இதனால் உலாவி எங்கள் Vue பயன்பாட்டை இயக்க முடியும்.</p>
+            
+            <p>SFCகளை அடிப்படையாகக் கொண்ட எங்கள் வலைப்பக்கத்தை உருவாக்க, வைட் என்று அழைக்கப்படும் ஒரு நிரலை பில்டு கருவியாகப் பயன்படுத்துகிறோம், மற்றும் Vue 3 மொழி அம்சங்களுக்கான வோலர் நீட்டிப்புடன் VS Code எடிட்டரில் எங்கள் குறியீட்டை எழுதுகிறோம்.</p>
+        </section>
+
+        <!-- Setup -->
+        <section class="content-section" id="setup">
+            <h2>Setup</h2>
+            
+            <p>உங்கள் கணினியில் Vue SFC பயன்பாடுகளை இயக்க உங்களுக்குத் தேவையானவற்றை நிறுவ கீழே உள்ள மூன்று படிகளைப் பின்பற்றவும்.</p>
+            
+            <h3>The "VS Code" Editor</h3>
+            
+            <p>Vue திட்டங்களுக்கு பல வெவ்வேறு எடிட்டர்கள் பயன்படுத்தப்படலாம். நாங்கள் VS Code எடிட்டரைப் பயன்படுத்துகிறோம். VS Code ஐ பதிவிறக்கம் செய்து நிறுவவும்.</p>
+            
+            <img src="7.png" alt="VS Code Editor" class="tutorial-image">
+            <div class="image-caption">VS Code எடிட்டர்</div>
+            
+            <h3>The VS Code "Volar" Extension</h3>
+            
+            <p>எடிட்டரில் *.vue கோப்புகளுடன் முன்னிலைப்படுத்தல் மற்றும் தானியங்கி நிறைவைப் பெற, VS Code ஐத் திறக்கவும், இடது பக்கத்தில் "Extensions" க்குச் செல்லவும். "Volar" க்கு தேடவும் மற்றும் அதிக பதிவிறக்கங்களுடன் "Language support for Vue 3" என்ற விளக்கத்துடன் நீட்டிப்பை நிறுவவும்.</p>
+            
+            <img src="8.png" alt="Volar Extension" class="tutorial-image">
+            <div class="image-caption">VS Code இல் Volar நீட்டிப்பு</div>
+            
+            <h3>Node.js</h3>
+            
+            <p>Node.js இன் சமீபத்திய பதிப்பை பதிவிறக்கம் செய்து நிறுவவும், ஏனெனில் Vue பில்டு கருவி "Vite" இதன் மேல் இயங்குகிறது.</p>
+            
+            <p>Node.js என்பது திறந்த மூல சேவையக-பக்க ஜாவாஸ்கிரிப்ட் ரன்டைம் சூழலாகும்.</p>
+            
+            <img src="9.png" alt="Node.js" class="tutorial-image">
+            <div class="image-caption">Node.js வலைத்தளம்</div>
+        </section>
+
+        <!-- Create The Default Example Project -->
+        <section class="content-section" id="create-project">
+            <h2>Create The Default Example Project</h2>
+            
+            <p>உங்கள் கணினியில் இயல்புநிலை Vue எடுத்துக்காட்டுத் திட்டத்தை உருவாக்க கீழே உள்ள படிகளைப் பின்பற்றவும்.</p>
+            
+            <ol>
+                <li>உங்கள் கணினியில் உங்கள் Vue திட்டங்களுக்கான ஒரு கோப்புறையை உருவாக்கவும்.</li>
+                <li>VS Code இல், மெனுவில் இருந்து Terminal -> New Terminal ஐத் தேர்ந்தெடுப்பதன் மூலம் ஒரு டெர்மினலைத் திறக்கவும்:</li>
+            </ol>
+            
+            <img src="10.png" alt="VS Code Terminal" class="tutorial-image">
+            <div class="image-caption">VS Code இல் புதிய டெர்மினல்</div>
+            
+            <ol start="3">
+                <li>cd &lt;folder-name&gt;, cd .., ls (Mac/Linux) மற்றும் dir (Windows) போன்ற கட்டளைகளைப் பயன்படுத்தி நீங்கள் உருவாக்கிய Vue கோப்புறைக்குச் செல்ல டெர்மினலைப் பயன்படுத்தவும். டெர்மினலில் கட்டளைகளை எழுதுவதில் நீங்கள் பழக்கமில்லை என்றால், கட்டளை வரி இடைமுகம் (CLI) பற்றிய எங்கள் அறிமுகத்தை இங்கே பார்க்கவும்.</li>
+                <li>டெர்மினலில் உங்கள் Vue கோப்புறைக்குச் சென்ற பிறகு, எழுதவும்:</li>
+            </ol>
+            
+            <div class="code-example">
+                <pre><code>npm init vue@latest</code></pre>
+            </div>
+            
+            <img src="11.png" alt="npm init vue@latest" class="tutorial-image">
+            <div class="image-caption">npm init vue@latest கட்டளை</div>
+            
+            <p>திட்ட பெயராக "firstsfc" உடன் உங்கள் முதல் திட்டத்தை உருவாக்கவும்:</p>
+            
+            <img src="12.png" alt="Create project firstsfc" class="tutorial-image">
+            <div class="image-caption">திட்ட பெயரை "firstsfc" என உள்ளிடவும்</div>
+            
+            <p>அனைத்து விருப்பங்களுக்கும் "No" என்று பதிலளிக்கவும்:</p>
+            
+            <img src="13.png" alt="Answer No to all options" class="tutorial-image">
+            <div class="image-caption">அனைத்து விருப்பங்களுக்கும் "No" என பதிலளிக்கவும்</div>
+            
+            <p>இப்போது இது உங்கள் டெர்மினலில் வழங்கப்பட வேண்டும்:</p>
+            
+            <img src="14.png" alt="Terminal output" class="tutorial-image">
+            <div class="image-caption">டெர்மினல் வெளியீடு</div>
+            
+            <p>இப்போது மேலே பரிந்துரைக்கப்பட்டுள்ள கட்டளைகளை இயக்குவோம்.</p>
+            
+            <p>'firstsfc' கோப்புறைக்குள் உங்கள் புதிய திட்டத்திற்கு கோப்பகத்தை மாற்ற இந்த கட்டளையை இயக்கவும்:</p>
+            
+            <div class="code-example">
+                <pre><code>cd firstsfc</code></pre>
+            </div>
+            
+            <p>Vue திட்டம் வேலை செய்ய தேவையான அனைத்து சார்புகளையும் நிறுவவும்:</p>
+            
+            <div class="code-example">
+                <pre><code>npm install</code></pre>
+            </div>
+            
+            <p>டெவலப்ப்மென்ட் சேவையகத்தைத் தொடங்கவும்:</p>
+            
+            <div class="code-example">
+                <pre><code>npm run dev</code></pre>
+            </div>
+            
+            <p>டெர்மினல் சாளரம் இப்போது இதுபோல் தெரிய வேண்டும்:</p>
+            
+            <img src="15.png" alt="Terminal after npm run dev" class="tutorial-image">
+            <div class="image-caption">npm run dev க்குப் பிறகு டெர்மினல்</div>
+            
+            <p>மேலும் உங்கள் உலாவி எடுத்துக்காட்டுத் திட்டத்தை தானாகவே திறக்க வேண்டும்:</p>
+            
+            <img src="16.png" alt="Browser with Vue project" class="tutorial-image">
+            <div class="image-caption">Vue எடுத்துக்காட்டுத் திட்டத்துடன் உலாவி</div>
+            
+            <p>உலாவியில் எடுத்துக்காட்டுத் திட்டத்தைக் கண்டுபிடிக்க முடியாவிட்டால், டெர்மினலிலிருந்து இணைப்பைப் பயன்படுத்தவும். உங்கள் டெர்மினல் சாளரத்தில் காணப்படும் இணைப்பு மேலே உள்ள ஸ்கிரீன்ஷாட்டில் உள்ள முகவரியை விட வேறுபட்ட முகவரியைக் கொண்டிருக்கலாம்.</p>
+            
+            <p>இப்போது எடுத்துக்காட்டுத் திட்டம் வைட் பில்டு கருவியால் உங்கள் இயந்திரத்தில் டெவலப்ப்மென்ட் பயன்முறையில் இயங்குகிறது.</p>
+        </section>
+
+        <!-- The Project Files -->
+        <section class="content-section" id="project-files">
+            <h2>The Project Files</h2>
+            
+            <p>தானாகவே உருவாக்கப்பட்ட எடுத்துக்காட்டுத் திட்டம் பல கோப்புகளைக் கொண்டுள்ளது, மேலும் அவற்றில் சிலவற்றை விரைவாகப் பார்ப்போம்.</p>
+            
+            <h3>main.js</h3>
+            
+            <p>VS Code எடிட்டரில் உங்கள் Vue திட்டத்திற்குச் சென்று, "src" கோப்புறையில் "main.js" கோப்பைக் கண்டறியவும்:</p>
+            
+            <img src="17.png" alt="main.js file in src folder" class="tutorial-image">
+            <div class="image-caption">src கோப்புறையில் main.js கோப்பு</div>
+            
+            <p>"main.js" "App.vue" கோப்பை அடிப்படையாகக் கொண்டு Vue திட்டத்தை எவ்வாறு உருவாக்குவது என்பதை வைட்டிற்குச் சொல்லும். இது எங்கள் Vue குறியீட்டை எவ்வாறு இயக்குவது என்பதை உலாவிக்குச் சொல்ல ஸ்கிரிப்ட் குறிச்சொல்லுடன் ஒரு CDN இணைப்பை நாங்கள் முன்பு எவ்வாறு வழங்கினோம் என்பதைப் போன்றது, மேலும் Vue உதாரணத்தை &lt;div id="app"&gt; குறிச்சொல்லில் எவ்வாறு ஏற்றினோம் என்பதைப் போன்றது.</p>
+            
+            <h3>App.vue</h3>
+            
+            <p>அதே எடுத்துக்காட்டுத் திட்ட கோப்புறையில், "App.vue" கோப்பைக் கண்டறிந்து திறக்கவும். மற்ற அனைத்து *.vue கோப்புகளைப் போலவே, "App.vue" மூன்று பகுதிகளைக் கொண்டுள்ளது: ஒரு &lt;script&gt; பகுதி, ஒரு &lt;template&gt; பகுதி மற்றும் ஒரு &lt;style&gt; பகுதி.</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;script setup&gt;
+import HelloWorld from './components/HelloWorld.vue'
+import TheWelcome from './components/TheWelcome.vue'
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;header&gt;
+    &lt;img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" /&gt;
+
+    &lt;div class="wrapper"&gt;
+      &lt;HelloWorld msg="You did it!" /&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;TheWelcome /&gt;
+  &lt;/main&gt;
+&lt;/template&gt;
+
+&lt;style scoped&gt;
+header {
+  line-height: 1.5;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+@media (min-width: 1024px) {
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
+}
+&lt;/style&gt;</code></pre>
+            </div>
+            
+            <p>"App.vue" இன் ஸ்கிரிப்ட் பகுதியில் நீங்கள் பார்க்க முடியும், மற்ற *.vue கோப்புகள் குறிப்பிடப்படுகின்றன: அவை 'கூறுகள்' மற்றும் 'components' கோப்புறையில் அமைந்துள்ளன. 'App.vue' கோப்பின் 'template' பகுதியில் நீங்கள் பார்த்தால், சாதாரண HTML குறிச்சொற்கள் அல்லாத குறிச்சொற்களைக் காணலாம்: &lt;HelloWorld&gt; மற்றும் &lt;TheWelcome&gt;. இவ்வாறுதான் கூறுகள் குறிப்பிடப்படுகின்றன. கூறுகள் ஆப் உள்ளே உள்ள ஆப் போன்றவை. விரைவில் கூறுகள் பற்றி மேலும் அறிவோம்.</p>
+        </section>
+
+        <!-- Single Exercise Section -->
+        <section class="content-section" id="exercises">
+            <h2>Vue Exercises</h2>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> கோப்பின் பெயர் என்ன?</h4>
+                
+                <p style="color: white; margin-bottom: 20px;">______ என்பது தொகுப்பியை Vue திட்டம் எந்த கோப்புகளைக் கொண்டுள்ளது என்பதைச் சொல்ல பொறுப்பாகும்.</p>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">main.js</div>
+                            <div class="option-feedback correct">✓ சரி! main.js கோப்பு Vue திட்டத்தை எவ்வாறு உருவாக்குவது என்பதை தொகுப்பிக்குச் சொல்லும் முதன்மை நுழைவுப் புள்ளியாகும்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">App.vue</div>
+                            <div class="option-feedback incorrect">✗ தவறு! App.vue முதன்மை Vue கூறு ஆனால் தொகுப்பிக்கு திட்ட கட்டமைப்பைச் சொல்லாது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">index.html</div>
+                            <div class="option-feedback incorrect">✗ தவறு! index.html உலாவிக்கான HTML கட்டமைப்பு ஆனால் Vue தொகுப்பி அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">package.json</div>
+                            <div class="option-feedback incorrect">✗ தவறு! package.json திட்ட சார்புகள் மற்றும் ஸ்கிரிப்ட்களை விவரிக்கிறது ஆனால் Vue கோப்புகளின் கட்டமைப்பை தொகுப்பிக்குச் சொல்லாது</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue Templates.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Our First SFC Web Page.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">Vue ஐ அளவிடுதல்</a></li>
+                    <li><a href="#why">ஏன்?</a></li>
+                    <li><a href="#how">எப்படி?</a></li>
+                    <li><a href="#setup">அமைப்பு</a></li>
+                    <li><a href="#create-project">எடுத்துக்காட்டுத் திட்டம்</a></li>
+                    <li><a href="#project-files">திட்ட கோப்புகள்</a></li>
+                    <li><a href="#exercises">Vue பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

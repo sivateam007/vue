@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue $data Object - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+        
+        .data-visual {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        
+        .data-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        .data-core {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 200px;
+        }
+        
+        .data-core i {
+            font-size: 3rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .data-arrow {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .data-diagram {
+                flex-direction: column;
+            }
+            
+            .data-arrow {
+                transform: rotate(90deg);
+            }
+        }
+        
+        .example-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .example-title {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .code-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .comparison-card {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .comparison-card h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .code-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .special-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .case-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 4px solid #27ae60;
+        }
+        
+        .case-card h4 {
+            color: #27ae60;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20%24attrs%20Object.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20%24el%20Object.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue $data Object</h2>
+            <p>Vue.js இல் கூறு தரவுப் பண்புகளைக் கையாள $data பொருளைக் கற்றுக்கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Main Example -->
+        <section class="content-section" id="main-example">
+            <h2>Vue $data Object</h2>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            <p>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</p>
+            <p>கிளிக் செய்யப்படும் போது ஒரு &lt;div&gt; உறுப்பின் நிறத்தை மாற்ற $data பொருளைப் பயன்படுத்துதல்.</p>
+            
+                </div>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>export default {
+  data() {
+    return {
+      color: 'lightgreen'
+    }
+  },
+  methods: {
+    changeColor() {
+      this.$data.color = 'pink';
+    }
+  }
+}</code></pre>
+            </div>
+            
+            <p>கீழே மேலும் எடுத்துக்காட்டுகளைப் பார்க்கவும்.</p>
+        </section>
+
+        <!-- Definition and Usage -->
+        <section class="content-section" id="definition">
+            <h2>வரையறை மற்றும் பயன்பாடு</h2>
+            
+            <p>$data பொருள் Vue நிகழ்வின் தரவுப் பகுதியில் சேமிக்கப்பட்ட அனைத்து பண்புகளையும் குறிக்கிறது.</p>
+            
+             </div>
+                </div>
+            </div>
+            
+            <p>மேலே உள்ள எடுத்துக்காட்டில், color பண்பு this.$data.color உடன் குறிப்பிடப்படுகிறது, ஆனால் அதே பண்பை this.color என்று எழுதலாம், அது மிகவும் பொதுவானது.</p>
+            
+            <p>Vue நிகழ்வின் தரவுப் பகுதியில் ஒரு பண்பைக் குறிப்பிடுவதை வெளிப்படையாகக் குறிக்க வேண்டியபோது $data பொருள் பயன்படுத்தப்படுகிறது.</p>
+            
+            <div class="special-cases">
+                <div class="case-card">
+                    <h4><i class="fas fa-exclamation-triangle"></i> சிறப்பு வழக்குகள்</h4>
+                    <p>"_" அல்லது "$" உடன் தொடங்கும் பெயரைக் கொண்ட தரவுப் பண்பைக் குறிப்பிட வேண்டும் போது $data பொருளைப் பயன்படுத்த வேண்டும், ஏனெனில் அத்தகைய சந்தர்ப்பங்களில் this முன்னொட்டு மட்டும் வேலை செய்யாது.</p>
+                </div>
+                
+                <div class="case-card">
+                    <h4><i class="fas fa-code"></i> உதாரணம்</h4>
+                    <div class="code-example">
+                        <pre>data() {
+  return {
+    _private: 'secret',
+    $special: 'value'
+  }
+}
+
+// this._private வேலை செய்யாது
+// this.$special வேலை செய்யாது
+
+// $data வழியாக மட்டுமே:
+this.$data._private
+this.$data.$special</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- More Examples -->
+        <section class="content-section" id="more-examples">
+            <h2>மேலும் எடுத்துக்காட்டுகள்</h2>
+            
+            <div class="example-container">
+                <h3 class="example-title">எடுத்துக்காட்டு</h3>
+                <p>கிளிக் செய்யும் ஒவ்வொரு முறையும் ஒரு &lt;div&gt; உறுப்பின் நிறத்தை மாற்ற $data பொருளைப் பயன்படுத்துதல்.</p>
+                
+                <div class="code-example">
+                    <pre><code>&lt;div 
+  v-on:click="$data.color+=100"
+  v-bind:style="{backgroundColor:'hsl('+$data.color+',80%,80%)'}"
+&gt;
+  &lt;p&gt;Click here&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-card">
+                        <h4>நிலைமை 2: this உடன் (வெளிப்பாடுகளில்)</h4>
+                        <div class="code-example">
+                            <pre>&lt;div 
+  @click="incrementCounter"
+  :style="{ color: textColor }"
+&gt;
+  {{ counter }}
+&lt;/div&gt;
+
+&lt;script&gt;
+export default {
+  methods: {
+    incrementCounter() {
+      this.counter++;
+    }
+  }
+}
+&lt;/script&gt;</pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <h4><span class="tip-icon">💡</span> வெளிப்பாடுகளில் $data</h4>
+                    <p>டெம்ப்ளேட் வெளிப்பாடுகளில், நீங்கள் நேரடியாக $data ஐப் பயன்படுத்தலாம், இது தரவுப் பண்புகளை வெளிப்படையாகக் குறிக்க உதவுகிறது. இருப்பினும், பெரும்பாலான சந்தர்ப்பங்களில் this பயன்பாடு சுத்தமானது.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- When to Use $data -->
+        <section class="content-section" id="when-to-use">
+            <h2>எப்போது $data ஐப் பயன்படுத்த வேண்டும்</h2>
+            
+            <div class="best-practice-list">
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>சிறப்பு பெயர்கள்:</strong> "_" அல்லது "$" உடன் தொடங்கும் தரவுப் பண்புகளை அணுக</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>வெளிப்படைத்தன்மை:</strong> குறியீட்டைப் படிக்கும் போது தரவுப் பண்பு என்பதை வெளிப்படையாகக் காட்ட</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>டைனமிக் பண்புகள்:</strong> மாறி பெயர்களுடன் தரவுப் பண்புகளை அணுக</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>டெம்ப்ளேட் வெளிப்பாடுகள்:</strong> சிக்கலான டெம்ப்ளேட் வெளிப்பாடுகளில் தரவுப் பண்புகளைக் குறிப்பிட</div>
+                </div>
+                
+                <div class="practice-item negative">
+                    <i class="fas fa-times-circle"></i>
+                    <div><strong>சாதாரண அணுகல்:</strong> சாதாரண தரவுப் பண்புகளுக்கு (this.property பயன்படுத்தவும்)</div>
+                </div>
+                
+                <div class="practice-item negative">
+                    <i class="fas fa-times-circle"></i>
+                    <div><strong>கம்ப்யூடட் பண்புகள்:</strong> கம்ப்யூடட் பண்புகளை அணுக (this.computedProperty பயன்படுத்தவும்)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practical Code Examples -->
+        <section class="content-section" id="practical-examples">
+            <h2>நடைமுறை குறியீட்டு எடுத்துக்காட்டுகள்</h2>
+            
+            <h3>1. சிறப்பு பெயர்களுடன் தரவுப் பண்புகள்</h3>
+            <div class="code-example">
+                <pre><code>export default {
+  data() {
+    return {
+      // சாதாரண பண்புகள்
+      username: 'John',
+      age: 30,
+      
+      // சிறப்பு பண்புகள்
+      _internalState: 'active',
+      $metadata: { version: '1.0' },
+      $$privateFlag: true
+    }
+  },
+  methods: {
+    updateInternalState() {
+      // இது வேலை செய்யாது:
+      // this._internalState = 'inactive';
+      // this.$metadata.version = '2.0';
+      
+      // $data வழியாக மட்டுமே:
+      this.$data._internalState = 'inactive';
+      this.$data.$metadata.version = '2.0';
+      this.$data.$$privateFlag = false;
+    },
+    logAllData() {
+      // முழு $data பொருளையும் பார்க்க
+      console.log(this.$data);
+      
+      // தனிப்பட்ட பண்புகளை அணுக
+      console.log('Username:', this.username); // வேலை செய்கிறது
+      console.log('Internal:', this.$data._internalState); // வேலை செய்கிறது
+    }
+  }
+}</code></pre>
+            </div>
+            
+            <h3>2. டைனமிக் பண்பு அணுகல்</h3>
+            <div class="code-example">
+                <pre><code>export default {
+  data() {
+    return {
+      user: {
+        name: 'Alice',
+        email: 'alice@example.com',
+        age: 25
+      }
+    }
+  },
+  methods: {
+    updateProperty(propName, value) {
+      // மாறி பெயருடன் டைனமிக் அணுகல்
+      this.$data.user[propName] = value;
+      
+      // இதற்கு சமம்:
+      // if (propName === 'name') this.user.name = value;
+      // if (propName === 'email') this.user.email = value;
+      // if (propName === 'age') this.user.age = value;
+    },
+    getAllDataProperties() {
+      // $data இல் அனைத்து பண்புகளையும் பெற
+      return Object.keys(this.$data);
+    }
+  }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Vue Exercises -->
+        <section class="content-section" id="exercises">
+            <h2>Vue பயிற்சிகள்</h2>
+            
+            <p>பயிற்சிகளுடன் உங்களை சோதிக்கவும்</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> Vue நிகழ்வின் தரவுப் பகுதியில் சேமிக்கப்பட்ட அனைத்து பண்புகளையும் குறிக்க எந்த கூறு நிகழ்வு பொருள் பயன்படுகிறது?</h4>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">$attrs</div>
+                            <div class="option-feedback incorrect">✗ தவறு! $attrs பொருள் பாழ்விழும் பண்புக்கூறுகளைக் குறிக்கிறது, தரவுப் பண்புகளை அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">$props</div>
+                            <div class="option-feedback incorrect">✗ தவறு! $props பொருள் பெறப்பட்ட புரொப்ஸ் களைக் குறிக்கிறது, தரவுப் பண்புகளை அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">$data</div>
+                            <div class="option-feedback correct">✓ சரி! $data பொருள் Vue நிகழ்வின் தரவுப் பகுதியில் சேமிக்கப்பட்ட அனைத்து பண்புகளையும் குறிக்கிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">$el</div>
+                            <div class="option-feedback incorrect">✗ தவறு! $el பொருள் ரூட் DOM முனையைக் குறிக்கிறது, தரவுப் பண்புகளை அல்ல</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20%24attrs%20Object.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20%24el%20Object.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#main-example">முக்கிய எடுத்துக்காட்டு</a></li>
+                    <li><a href="#definition">வரையறை மற்றும் பயன்பாடு</a></li>
+                    <li><a href="#more-examples">மேலும் எடுத்துக்காட்டுகள்</a></li>
+                    <li><a href="#when-to-use">எப்போது $data ஐப் பயன்படுத்த வேண்டும்</a></li>
+                    <li><a href="#practical-examples">நடைமுறை குறியீட்டு எடுத்துக்காட்டுகள்</a></li>
+                    <li><a href="#exercises">Vue பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

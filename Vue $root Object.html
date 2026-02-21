@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue $root Object - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20$refs%20Object.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20$slots%20Object.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue $root Object</h2>
+            <p>Vue $root பொருளைப் பற்றி அறிந்து கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue $root பொருள்</h2>
+            
+            <p>$root பொருள் முழு Vue பயன்பாட்டின் ரூட் கூறின் Vue உதாரணத்தைக் குறிக்கிறது.</p>
+            
+            <p>$root பொருள் ரூட் கூறில் பயன்படுத்தப்பட்டால், அது அந்த கூற்றின் உதாரணத்தையே குறிக்கும்.</p>
+        </section>
+
+        <!-- Example Get your own Vue Server -->
+        <section class="content-section" id="example">
+            <h2>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</h2>
+            
+            <p>Vue பயன்பாட்டின் ரூட் கூறில் உள்ள 'text' தரவுப் பண்பை மாற்ற குழந்தை கூறில் $root பொருளைப் பயன்படுத்துவது.</p>
+            
+            <div class="code-example">
+                <h3>Example</h3>
+                <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h3&gt;Change Text&lt;/h3&gt;
+    &lt;p&gt;Click the button to toggle the text in the PRE tag of the root component.&lt;/p&gt;
+    &lt;button v-on:click="this.$root.text='Hello!'"&gt;Change text in root&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">💡</span> குறிப்பு:</h4>
+                <p>கீழே மேலும் எடுத்துக்காட்டுகளைப் பார்க்கவும்.</p>
+            </div>
+        </section>
+
+        <!-- Definition and Usage -->
+        <section class="content-section" id="definition">
+            <h2>வரையறை மற்றும் பயன்பாடு</h2>
+            
+            <p>$root பொருள் முழு Vue பயன்பாட்டின் ரூட் கூறின் Vue உதாரணத்தைக் குறிக்கிறது.</p>
+            
+            <p>$root பொருள் ரூட் கூறில் பயன்படுத்தப்பட்டால், அது அந்த கூற்றின் உதாரணத்தையே குறிக்கும்.</p>
+            
+            <p>கூறு மர அமைப்பில் மிகவும் கீழே இருக்கும் குழந்தை கூறிலிருந்தும் ரூட் உதாரணத்தை நேரடியாக அணுக $root பொருளைப் பயன்படுத்தலாம், முறைகளை அழைக்க, தரவுப் பண்புகளைப் படிக்க அல்லது மாற்றியமைக்க, மற்றும் பல.</p>
+            
+            <div class="warning-box">
+                <h4><span class="warning-icon">⚠️</span> கவனிக்க:</h4>
+                <p>Vue கூறுகளுக்கு இடையேயான தொடர்புக்கு props/emit அல்லது provide/inject ஐப் பயன்படுத்துவதைக் கவனியுங்கள், ஏனெனில் இவை வெளிப்படையாக வரையறுக்கப்பட்ட தொடர்பு வழிகளைக் கொண்ட குறியீடு பராமரிக்க எளிதானது.</p>
+            </div>
+        </section>
+
+        <!-- More Examples -->
+        <section class="content-section" id="more-examples">
+            <h2>மேலும் எடுத்துக்காட்டுகள்</h2>
+            
+            <div class="example-section">
+                <h3>Example</h3>
+                <p>கூறு மர அமைப்பில் ஒன்றுக்கு மேற்பட்ட நிலை மேலே உள்ள ரூட் கூறில் &lt;p&gt; குறியின் வண்ணத்தை மாற்ற குழந்தை கூறில் $root பொருளைப் பயன்படுத்துவது.</p>
+                
+                <div class="code-example">
+                    <h4>Template</h4>
+                    <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h4&gt;Grand Child Component&lt;/h4&gt;
+    &lt;p&gt;Click the button to toggle the color of the P tag in the root component.&lt;/p&gt;
+    &lt;button v-on:click="this.$root.color='lightgreen'"&gt;Change color in root&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercise Section -->
+        <section class="content-section" id="exercise">
+            <h2>பயிற்சி</h2>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> Vue $root பொருள் எப்போது பயனுள்ளதாக இருக்கும்?</h4>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">ரூட் கூறிலிருந்து குழந்தை கூறுகளை அணுக</div>
+                            <div class="option-feedback incorrect">✗ தவறு! ரூட் கூறிலிருந்து குழந்தை கூறுகளை அணுக $children பொருள் பயன்படுத்தப்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">குழந்தை கூறிலிருந்து நேரடி பெற்றோர் கூறை அணுக</div>
+                            <div class="option-feedback incorrect">✗ தவறு! நேரடி பெற்றோர் கூறை அணுக $parent பொருள் பயன்படுத்தப்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">கூறு மரத்தின் மிகவும் கீழே இருந்து ரூட் உதாரணத்தை அணுக</div>
+                            <div class="option-feedback correct">✓ சரி! $root பொருள் கூறு மர அமைப்பில் மிகவும் கீழே இருக்கும் குழந்தை கூறிலிருந்தும் ரூட் உதாரணத்தை அணுக பயன்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">DOM உறுப்புகளை அணுக</div>
+                            <div class="option-feedback incorrect">✗ தவறு! DOM உறுப்புகளை அணுக $refs பொருள் பயன்படுத்தப்படுகிறது</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Pages -->
+        <section class="content-section" id="related">
+            <h2>தொடர்புடைய பக்கங்கள்</h2>
+            
+            <div class="best-practice-list">
+                <div class="practice-item positive">
+                    <i class="fas fa-book"></i>
+                    <div>Vue டுடோரியல்: Vue Props</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-book"></i>
+                    <div>Vue டுடோரியல்: Vue $emit() முறை</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-book"></i>
+                    <div>Vue டுடோரியல்: Vue Provide/Inject</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-code"></i>
+                    <div>Vue குறிப்பு: Vue $emit() முறை</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-code"></i>
+                    <div>Vue குறிப்பு: Vue $parent பொருள்</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20$refs%20Object.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20$slots%20Object.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Tamil இல் தரமான நிரலாக்க கல்வியை வழங்கும் முன்னணி கல்வி நிறுவனம்.</p>
+            </div>
+            <div class="footer-column">
+                <h3>விரைவு இணைப்புகள்</h3>
+                <ul>
+                    <li><a href="#introduction">Vue $root பொருள்</a></li>
+                    <li><a href="#example">எடுத்துக்காட்டுகள்</a></li>
+                    <li><a href="#definition">வரையறை மற்றும் பயன்பாடு</a></li>
+                    <li><a href="#more-examples">மேலும் எடுத்துக்காட்டுகள்</a></li>
+                    <li><a href="#exercise">பயிற்சி</a></li>
+                    <li><a href="#related">தொடர்புடைய பக்கங்கள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>தொடர்பு</h3>
+                <ul>
+                    <li><a href="#">எங்களைப் பற்றி</a></li>
+                    <li><a href="#">தொடர்பு கொள்ளுங்கள்</a></li>
+                    <li><a href="#">இடம் மற்றும் நேரங்கள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>எங்களைப் பின்தொடருங்கள்</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

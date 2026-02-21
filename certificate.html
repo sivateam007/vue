@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Course Completion Certificate - Siva Team Institution</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional styles for certificate page */
+        .certificate-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 3rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 20px solid #2c3e50;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-border {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 3px solid #42b883;
+            border-radius: 10px;
+            pointer-events: none;
+        }
+
+        .certificate-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .certificate-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #42b883, #35495e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .certificate-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .certificate-subtitle {
+            font-size: 1.8rem;
+            color: #42b883;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .certificate-body {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .award-text {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .student-name {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: linear-gradient(135deg, #42b883, #35495e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 3px solid #42b883;
+            display: inline-block;
+        }
+
+        .course-details {
+            font-size: 1.3rem;
+            margin: 2rem 0;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .achievement-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin: 2rem 0;
+            color: #7f8c8d;
+        }
+
+        .certificate-footer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid #bdc3c7;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .signature-block {
+            text-align: center;
+        }
+
+        .signature-line {
+            width: 200px;
+            height: 2px;
+            background: #2c3e50;
+            margin: 2rem auto 0.5rem;
+        }
+
+        .signature-name {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .signature-title {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .certificate-date {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .date-display {
+            font-weight: bold;
+            color: #42b883;
+            font-size: 1.4rem;
+        }
+
+        .certificate-id {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 0.8rem;
+            color: #95a5a6;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 8rem;
+            color: rgba(66, 184, 131, 0.1);
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .seal {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #42b883, #35495e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 3px solid white;
+        }
+
+        .institution-stamp {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+        }
+
+        .stamp-box {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: 2px solid #2c3e50;
+            border-radius: 5px;
+            background: #f8f9fa;
+        }
+
+        .stamp-text {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .customization-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #42b883;
+            box-shadow: 0 0 0 3px rgba(66, 184, 131, 0.2);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .certificate-btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-width: 200px;
+        }
+
+        .certificate-btn-primary {
+            background: linear-gradient(135deg, #42b883, #35495e);
+            color: white;
+        }
+
+        .certificate-btn-success {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+        }
+
+        .certificate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .certificate-course-details {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+        }
+
+        @media print {
+            .nav-tabs, .bottom-nav, .customization-form, .home-icon,
+            .certificate-course-details {
+                display: none !important;
+            }
+            
+            .certificate-container {
+                border: 15px solid #2c3e50;
+                box-shadow: none;
+                margin: 0;
+                padding: 2rem;
+            }
+            
+            body {
+                background: white !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .certificate-container {
+                margin: 1rem;
+                padding: 1.5rem;
+                border-width: 10px;
+            }
+            
+            .certificate-title {
+                font-size: 2.5rem;
+            }
+            
+            .certificate-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .student-name {
+                font-size: 2.2rem;
+            }
+            
+            .certificate-footer {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .watermark {
+                font-size: 4rem;
+            }
+            
+            .seal {
+                width: 70px;
+                height: 70px;
+                font-size: 1.5rem;
+                top: 30px;
+                right: 30px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .certificate-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        .logo-icon {
+            animation: none !important;
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20Tutorial.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="index.html" class="nav-tab next">
+            <span>முகப்பு</span>
+            <i class="fas fa-home"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue Course Completion Certificate</h2>
+            <p>Vue பாடநெறி முடித்தமைக்கான சான்றிதழ் - தனிப்பயன் தயாரிக்கவும்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Customization Form -->
+        <div class="customization-form">
+            <h3 style="text-align: center; color: #2c3e50; margin-bottom: 2rem;">
+                <i class="fas fa-edit"></i> சான்றிதழை தனிப்பயனாக்குங்கள்
+            </h3>
+            
+            <div class="form-group">
+                <label class="form-label" for="studentName">
+                    <i class="fas fa-user-graduate"></i> மாணவர் பெயர் / Student Name
+                </label>
+                <input type="text" id="studentName" class="form-input" 
+                       placeholder="உங்கள் முழு பெயரை உள்ளிடுக" value="ரவி குமார்">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="completionDate">
+                    <i class="fas fa-calendar-check"></i> பூர்த்தி தேதி / Completion Date
+                </label>
+                <input type="date" id="completionDate" class="form-input">
+            </div>
+            
+            <div class="action-buttons">
+                <button onclick="updateCertificate()" class="certificate-btn certificate-btn-primary">
+                    <i class="fas fa-sync-alt"></i> சான்றிதழைப் புதுப்பிக்குக
+                </button>
+                <button onclick="printCertificate()" class="certificate-btn certificate-btn-success">
+                    <i class="fas fa-print"></i> சான்றிதழை அச்சிடுக
+                </button>
+            </div>
+        </div>
+
+        <!-- Certificate Container -->
+        <div class="certificate-container">
+            <!-- Watermark -->
+            <div class="watermark">VUE CERTIFIED</div>
+            
+            <!-- Official Seal -->
+            <div class="seal">
+                <i class="fab fa-vuejs"></i>
+            </div>
+            
+            <!-- Certificate Border -->
+            <div class="certificate-border"></div>
+            
+            <!-- Certificate Header -->
+            <div class="certificate-header">
+                <div class="certificate-logo">
+                    <i class="fab fa-vuejs"></i>
+                </div>
+                <h1 class="certificate-title">Certificate</h1>
+                <h2 class="certificate-subtitle">of Completion</h2>
+            </div>
+            
+            <!-- Certificate Body -->
+            <div class="certificate-body">
+                <p class="award-text">This is to certify that</p>
+                
+                <div class="student-name" id="displayName">ரவி குமார்</div>
+                
+                <p class="award-text">has successfully completed the</p>
+                
+                <div class="course-details">
+                    <strong>Complete Vue.js Programming Course</strong><br>
+                    with distinction and demonstrated exceptional proficiency in<br>
+                    Vue.js Framework, Components, Vue Router, and Vuex State Management
+                </div>
+                
+                <p class="achievement-text">
+                    "Successfully mastered Vue.js fundamentals, component-based architecture, 
+                    reactive programming, state management with Vuex, and routing with Vue Router."
+                </p>
+
+                <div class="certificate-date">
+                    Completed on: <span class="date-display" id="displayDate">November 28, 2023</span>
+                </div>
+            </div>
+            
+            <!-- Certificate Footer -->
+            <div class="certificate-footer">
+                <div class="signature-block">
+                    <div class="signature-line"></div>
+                    <div class="signature-name">Siva Team Institution</div>
+                    <div class="signature-title">Authorized Signatory</div>
+                </div>
+                
+                <div class="signature-block">
+                    <div class="signature-line"></div>
+                    <div class="signature-name">Digital Certification</div>
+                    <div class="signature-title">Verified Electronically</div>
+                </div>
+            </div>
+
+            <!-- Institution Stamp -->
+            <div class="institution-stamp">
+                <div class="stamp-box">
+                    <div class="stamp-text">OFFICIALLY CERTIFIED</div>
+                    <div style="font-size: 0.9rem; color: #7f8c8d; margin-top: 0.5rem;">
+                        Siva Team Institution
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Certificate ID -->
+            <div class="certificate-id">
+                Certificate ID: JT-VUE-<span id="certificateId">20231128001</span>
+            </div>
+        </div>
+
+        <!-- Course Details -->
+        <section class="certificate-course-details" id="course-details">
+            <h2 style="text-align: center; color: #2c3e50; margin-bottom: 2.5rem; position: relative; padding-bottom: 15px;">
+                பாடநெறி விவரங்கள்
+                <div style="content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 100px; height: 4px; background: var(--git-color); border-radius: 2px;"></div>
+            </h2>
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-book-open"></i>
+                        <h4>பாடத்திட்டம்</h4>
+                    </div>
+                    <ul>
+                        <li>Vue.js அடிப்படைகள் மற்றும் கருத்துக்கள்</li>
+                        <li>காம்போனென்ட் சார்ந்த கட்டமைப்பு</li>
+                        <li>Vue Router மற்றும் வழிசெலுத்தல்</li>
+                        <li>Vuex State மேலாண்மை</li>
+                        <li>நிஜ உலக திட்டங்களுடன் ஒருங்கிணைப்பு</li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-clock"></i>
+                        <h4>கால அளவு</h4>
+                    </div>
+                    <ul>
+                        <li>மொத்த பாட நேரம்: 100 மணி நேரம்</li>
+                        <li>நடைமுறை பயிற்சிகள்: 50+</li>
+                        <li>திட்டங்கள்: 6 நிஜ உலக திட்டங்கள்</li>
+                        <li>மதிப்பீடுகள்: 5 நடைமுறை பரீட்சைகள்</li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-award"></i>
+                        <h4>தகுதிகள்</h4>
+                    </div>
+                    <ul>
+                        <li>அனைத்து பாட தொகுதிகளும் முடிக்கப்பட்டது</li>
+                        <li>மதிப்பீடுகளில் குறைந்தபட்சம் 80% மதிப்பெண்</li>
+                        <li>இறுதித் திட்ட மதிப்பீடு</li>
+                        <li>பங்கேற்பு சான்று</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="Vue%20Tutorial.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="index.html" class="nav-tab next">
+            <span>முகப்பு</span>
+            <i class="fas fa-home"></i>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#course-details">பாடநெறி விவரங்கள்</a></li>
+                    <li><a href="#">Our Courses</a></li>
+                    <li><a href="#">Contact Admissions</a></li>
+                    <li><a href="#">Student Portal</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Format date to readable string
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        // Generate certificate ID
+        function generateCertificateId(dateString) {
+            const date = new Date(dateString);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const random = Math.floor(Math.random() * 900) + 100;
+            
+            return `${year}${month}${day}${random}`;
+        }
+
+        // Update certificate with student name and date
+        function updateCertificate() {
+            const nameInput = document.getElementById('studentName');
+            const dateInput = document.getElementById('completionDate');
+            
+            const studentName = nameInput.value.trim();
+            const completionDate = dateInput.value || new Date().toISOString().split('T')[0];
+            
+            if (studentName) {
+                // Update name
+                document.getElementById('displayName').textContent = studentName;
+                
+                // Update date
+                const formattedDate = formatDate(completionDate);
+                document.getElementById('displayDate').textContent = formattedDate;
+                
+                // Update certificate ID
+                const certId = generateCertificateId(completionDate);
+                document.getElementById('certificateId').textContent = certId;
+                
+                // Show success message
+                showNotification('சான்றிதழ் வெற்றிகரமாக புதுப்பிக்கப்பட்டது!', 'success');
+            } else {
+                showNotification('தயவு செய்து பெயர் மற்றும் தேதியை உள்ளிடுக.', 'error');
+            }
+        }
+
+        // Print certificate
+        function printCertificate() {
+            window.print();
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notification => {
+                notification.remove();
+            });
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 4 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 4000);
+        }
+
+        // Initialize certificate with current date
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('completionDate').value = today;
+            
+            // Set initial values
+            updateCertificate();
+            
+            // Add event listeners for real-time updates
+            document.getElementById('studentName').addEventListener('input', updateCertificate);
+            document.getElementById('completionDate').addEventListener('change', updateCertificate);
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.comparison-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

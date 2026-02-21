@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Animations with v-for - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+        
+        .code-files {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .code-file {
+            background: #2d2d2d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .code-header {
+            background: #3d3d3d;
+            padding: 0.8rem 1rem;
+            color: white !important;
+            font-family: monospace;
+            font-weight: bold;
+            border-bottom: 1px solid #555;
+        }
+        
+        .code-content {
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        
+        /* Make ALL code text white */
+        .code-content pre,
+        .code-content code,
+        .code-example pre,
+        .code-example code {
+            color: white !important;
+        }
+        
+        /* Make sure code examples also have white text */
+        .code-example {
+            background-color: #2d2d2d;
+            color: white !important;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            overflow-x: auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .image-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--git-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .image-box h4 {
+            color: var(--dark) !important;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .image-caption {
+            color: #666 !important;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 0.8rem;
+            font-style: italic;
+        }
+        
+        .image-box img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20Animations.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Build%20Your%20Project.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue Animations with v-for</h2>
+            <p>v-for உடன் Vue அனிமேஷன்களைக் கற்றுக்கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>v-for உடன் Vue அனிமேஷன்கள்</h2>
+            
+            <p>Vue இல் உள்ள built-in &lt;TransitionGroup&gt; கம்போனென்ட் v-for உடன் எங்கள் பக்கத்தில் சேர்க்கப்படும் உறுப்புகளை அனிமேட் செய்ய உதவுகிறது.</p>
+            
+            <h3>&lt;TransitionGroup&gt; கம்போனென்ட்</h3>
+            <p>&lt;TransitionGroup&gt; கம்போனென்ட் v-for உடன் உருவாக்கப்பட்ட உறுப்புகளைச் சுற்றி பயன்படுத்தப்படுகிறது, இந்த உறுப்புகள் சேர்க்கப்படும் அல்லது அகற்றப்படும் போது தனிப்பட்ட அனிமேஷன்களை வழங்க.</p>
+            
+            <p>&lt;TransitionGroup&gt; கம்போனென்ட் உள்ளே v-for உடன் உருவாக்கப்பட்ட டேக்குகள் key பண்புடன் வரையறுக்கப்பட வேண்டும்.</p>
+            
+            <p>&lt;TransitionGroup&gt; கம்போனென்ட் tag prop ஐப் பயன்படுத்தி ஒரு குறிப்பிட்ட டேக்காக வரையறுக்கப்பட்டால் மட்டுமே HTML டேக்காக ரெண்டர் செய்யப்படுகிறது, இது போல்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;TransitionGroup tag="ol"&gt;
+  &lt;li v-for="x in products" :key="x"&gt;
+    {{ x }}
+  &lt;/li&gt;
+&lt;/TransitionGroup&gt;</code></pre>
+            </div>
+            
+            <p>மேலே உள்ள குறியீட்டின் முடிவு, Vue ஆல் ரெண்டர் செய்யப்பட்ட பிறகு:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;ol&gt;
+  &lt;li&gt;Apple&lt;/li&gt;
+  &lt;li&gt;Pizza&lt;/li&gt;
+  &lt;li&gt;Rice&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+            </div>
+            
+            <p>பட்டியலில் புதிய உருப்படிகள் சேர்க்கப்படும்போது அவற்றை அனிமேட் செய்ய CSS குறியீட்டை இப்போது சேர்க்கலாம்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;style&gt;
+  .v-enter-from {
+    opacity: 0;
+    rotate: 180deg;
+  }
+  .v-enter-to {
+    opacity: 1;
+    rotate: 0deg;
+  }
+  .v-enter-active {
+    transition: all 0.7s;
+  }
+&lt;/style&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Example 1 -->
+        <section class="content-section" id="example1">
+            <h3>எடுத்துக்காட்டு</h3>
+            <p>இந்த எடுத்துக்காட்டில், புதிய உருப்படிகள் 'products' வரிசையில் சேர்ப்பதன் மூலம் எளிமையாக அனிமேட் செய்யப்படும்:</p>
+            <p>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</p>
+            
+            <div class="code-files">
+                <div class="code-file">
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h3&gt;The &lt;TransitionGroup&gt; Component&lt;/h3&gt;
+  &lt;p&gt;New products are given animations using the &lt;TransitionGroup&gt; component.&lt;/p&gt;
+  &lt;input type="text" v-model="inpName"&gt; 
+  &lt;button @click="addEl"&gt;Add&lt;/button&gt;
+  &lt;TransitionGroup tag="ol"&gt;
+    &lt;li v-for="x in products" :key="x"&gt;
+      {{ x }}
+    &lt;/li&gt;
+  &lt;/TransitionGroup&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data() {
+      return {
+        products: ['Apple','Pizza','Rice'],
+        inpName: ''
+      }
+    },
+    methods: {
+      addEl() {
+        const el = this.inpName;
+        this.products.push(el);
+        this.inpName = null;
+      }
+    }
+  }
+&lt;/script&gt;
+
+&lt;style&gt;
+  .v-enter-from {
+    opacity: 0;
+    rotate: 180deg;
+  }
+  .v-enter-to {
+    opacity: 1;
+    rotate: 0deg;
+  }
+  .v-enter-active {
+    transition: all 0.7s;
+  }
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add and Remove Elements -->
+        <section class="content-section" id="add-remove">
+            <h2>உறுப்புகளைச் சேர்த்தல் மற்றும் நீக்குதல்</h2>
+            
+            <p>மற்ற உறுப்புகளுக்கு இடையில் உறுப்புகளை அகற்றும் போது, மற்ற உறுப்புகள் அகற்றப்பட்ட உறுப்பு இருந்த இடத்தில் வந்து சேரும். ஒரு உறுப்பு அகற்றப்படும்போது மீதமுள்ள பட்டியல் உருப்படிகள் எவ்வாறு புதிய இடங்களுக்கு நகர்கின்றன என்பதை அனிமேட் செய்ய, தானாக உருவாக்கப்பட்ட v-move வகுப்பைப் பயன்படுத்துவோம்.</p>
+            
+            <p>ஆனால் முதலில், ஒரு உறுப்பு அகற்றப்படும் போது மற்ற உருப்படிகள் எவ்வாறு புதிய இடங்களுக்கு நகர்கின்றன என்பது அனிமேட் செய்யப்படாத ஒரு எடுத்துக்காட்டைப் பார்ப்போம்:</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            
+            <div class="code-files">
+                <div class="code-file">
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h3&gt;The &lt;TransitionGroup&gt; Component&lt;/h3&gt;
+  &lt;p&gt;New products are given animations using the &lt;TransitionGroup&gt; component.&lt;/p&gt;
+  &lt;button @click="addDie"&gt;Roll&lt;/button&gt;
+  &lt;button @click="removeDie"&gt;Remove random&lt;/button&gt;&lt;br&gt;
+  &lt;TransitionGroup&gt;
+    &lt;div v-for="x in dice" :key="x" class="diceDiv" :style="{ backgroundColor: 'hsl('+x*40+',85%,85%)' }"&gt;
+      {{ x }}
+    &lt;/div&gt;
+  &lt;/TransitionGroup&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data() {
+      return {
+        dice: [],
+        inpName: ''
+      }
+    },
+    methods: {
+      addDie() {
+        const newDie = Math.ceil(Math.random()*6);
+        this.dice.push(newDie);
+      },
+      removeDie() {
+        if(this.dice.length&gt;0){
+          this.dice.splice(Math.floor(Math.random()*this.dice.length), 1);
+        }
+      }
+    },
+    mounted() {
+      this.addDie();
+      this.addDie();
+      this.addDie();
+    }
+  }
+&lt;/script&gt;
+
+&lt;style&gt;
+.v-enter-from {
+  opacity: 0;
+  translate: 200px 0;
+  rotate: 360deg;
+}
+.v-enter-to {
+  opacity: 1;
+  translate: 0 0;
+  rotate: 0deg;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.7s;
+}
+.v-leave-from { opacity: 1; }
+.v-leave-to { opacity: 0; }
+.diceDiv {
+  margin: 10px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  text-align: center;
+  border: solid black 1px;
+  border-radius: 5px;
+  display: inline-block;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <p>மேலே உள்ள எடுத்துக்காட்டில் நீங்கள் பார்க்க முடியும் என, ஒரு உருப்படி அகற்றப்படும் போது, அகற்றப்பட்ட உருப்படிக்குப் பின் வரும் உருப்படிகள் திடீரென அவற்றின் புதிய நிலைகளுக்கு குதிக்கின்றன. ஒரு உருப்படி அகற்றப்படும் போது மீதமுள்ள உருப்படிகளை அனிமேட் செய்ய, தானாக உருவாக்கப்பட்ட v-move வகுப்பைப் பயன்படுத்துகிறோம்.</p>
+            
+            <p>v-move வகுப்பு அகற்றப்பட்ட உருப்படி வெளியேறும்போது மற்ற உறுப்புகளை அனிமேட் செய்கிறது, ஆனால் ஒரு சிக்கல் உள்ளது: அகற்றப்பட்ட உருப்படி இன்னும் உள்ளது மற்றும் அகற்றப்படும் வரை இடத்தை எடுத்துக்கொள்கிறது, எனவே v-move வகுப்பிற்கு எந்த விளைவும் இருக்காது. v-move வகுப்பிற்கு அனிமேட் செய்ய ஏதாவது வழங்க, v-leave-active வகுப்பில் position: absolute; அமைக்கலாம். position: absolute; நீக்கும் காலத்தில் அமைக்கப்பட்டால், அகற்றப்பட்ட உருப்படி இன்னும் தெரியும், ஆனால் இடத்தை எடுத்துக்கொள்ளாது.</p>
+            
+            <p>இந்த எடுத்துக்காட்டில், முந்தைய எடுத்துக்காட்டிலிருந்து ஒரே வித்தியாசம் வரி 14 மற்றும் 17 இல் சேர்க்கப்பட்ட இரண்டு புதிய CSS வகுப்புகள்:</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            
+            <div class="code-files">
+                <div class="code-file">
+                    <div class="code-header">App.vue - Style பகுதி:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;style&gt;
+.v-enter-from {
+  opacity: 0;
+  translate: 200px 0;
+  rotate: 360deg;
+}
+.v-enter-to {
+  opacity: 1;
+  translate: 0 0;
+  rotate: 0deg;
+}
+.v-enter-active,
+.v-leave-active,
+.v-move {
+  transition: all 0.7s;
+}
+.v-leave-active { position: absolute; }
+.v-leave-from { opacity: 1; }
+.v-leave-to { opacity: 0; }
+.diceDiv {
+  margin: 10px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  text-align: center;
+  border: solid black 1px;
+  border-radius: 5px;
+  display: inline-block;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- A Larger Example -->
+        <section class="content-section" id="larger-example">
+            <h2>ஒரு பெரிய எடுத்துக்காட்டு</h2>
+            
+            <p>மேலே உள்ள எடுத்துக்காட்டை ஒரு புதிய எடுத்துக்காட்டிற்கான அடிப்படையாகப் பயன்படுத்துவோம்.</p>
+            
+            <p>இந்த எடுத்துக்காட்டில், புதிய உருப்படி சேர்க்கப்படும் அல்லது அகற்றப்படும் போது அல்லது முழு வரிசையும் வரிசைப்படுத்தப்படும் போது முழு பட்டியலும் எவ்வாறு அனிமேட் செய்யப்படுகிறது என்பது இன்னும் தெளிவாகிறது.</p>
+            
+            <p>இந்த எடுத்துக்காட்டில் நாம் செய்யலாம்:</p>
+            
+            <ul>
+                <li>அவற்றைக் கிளிக் செய்வதன் மூலம் உருப்படிகளை அகற்று</li>
+                <li>உருப்படிகளை வரிசைப்படுத்து</li>
+                <li>பட்டியலில் ஒரு சீரற்ற இடத்தில் புதிய உருப்படிகளைச் சேர்</li>
+            </ul>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            
+            <div class="code-files">
+                <div class="code-file">
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h3&gt;The &lt;TransitionGroup&gt; Component&lt;/h3&gt;
+  &lt;p&gt;Items inside the &lt;TransitionGroup&gt; component are animated when they are created or removed.&lt;/p&gt;
+  &lt;button @click="addDie"&gt;Roll&lt;/button&gt;
+  &lt;button @click="addDie10"&gt;Roll 10 dice&lt;/button&gt;
+  &lt;button @click="dice.sort(compareFunc)"&gt;Sort&lt;/button&gt;
+  &lt;button @click="dice.sort(shuffleFunc)"&gt;Shuffle&lt;/button&gt;&lt;br&gt;
+  &lt;TransitionGroup&gt;
+    &lt;div 
+    v-for="x in dice" 
+    :key="x.keyNmbr" 
+    class="diceDiv" 
+    :style="{ backgroundColor: 'hsl('+x.dieNmbr*60+',85%,85%)' }"
+    @click="removeDie(x.keyNmbr)"&gt;
+      {{ x.dieNmbr }}
+    &lt;/div&gt;
+  &lt;/TransitionGroup&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data() {
+      return {
+        dice: [],
+        keyNumber: 0
+      }
+    },
+    methods: {
+      addDie() {
+        const newDie = {
+          dieNmbr: Math.ceil(Math.random()*6),
+          keyNmbr: this.keyNumber
+        };
+        this.dice.splice(Math.floor(Math.random()*this.dice.length),0,newDie);
+        this.keyNumber++;
+      },
+      addDie10() {
+        for(let i=0; i&lt;10; i++) {
+          this.addDie();
+        }
+      },
+      compareFunc(a,b){
+        return a.dieNmbr - b.dieNmbr;
+      },
+      shuffleFunc(a,b){
+        return Math.random()-0.5;
+      },
+      removeDie(key) {
+        const pos = this.dice.map(e =&gt; e.keyNmbr).indexOf(key);
+        this.dice.splice(pos, 1);
+      }
+    },
+    mounted() {
+      this.addDie10();
+    }
+  }
+&lt;/script&gt;
+
+&lt;style&gt;
+.v-enter-from {
+  opacity: 0;
+  scale: 0;
+  rotate: 360deg;
+}
+.v-enter-to {
+  opacity: 1;
+  scale: 1;
+  rotate: 0deg;
+}
+.v-enter-active,
+.v-leave-active,
+.v-move {
+  transition: all 0.7s;
+}
+.v-leave-active { position: absolute; }
+.v-leave-from { opacity: 1; }
+.v-leave-to { opacity: 0; }
+.diceDiv {
+  margin: 10px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  text-align: center;
+  border: solid black 1px;
+  border-radius: 5px;
+  display: inline-block;
+}
+.diceDiv:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#app {
+  position: relative;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vue Exercises -->
+        <section class="content-section" id="exercises">
+            <h2>Vue பயிற்சிகள்</h2>
+            
+            <p>பயிற்சிகளுடன் உங்களை சோதிக்கவும்</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> பயிற்சி:</h4>
+                <p>v-for உடன் உருவாக்கப்பட்ட அல்லது அகற்றப்பட்ட உறுப்புகளை அனிமேட் செய்ய பயன்படுத்தப்படும் Vue குறிப்பிட்ட கம்போனென்ட்டின் பெயர் என்ன?</p>
+                
+                <div class="code-example" style="margin: 1rem 0;">
+                    <pre><code>&lt;______ tag="ol"&gt;
+  &lt;li v-for="x in products" :key="x"&gt;
+    {{ x }}
+  &lt;/li&gt;
+&lt;/______&gt;</code></pre>
+                </div>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">Transition</div>
+                            <div class="option-feedback incorrect">✗ தவறு! Transition கம்போனென்ட் தனிப்பட்ட உறுப்புகளுக்கானது, v-for உடன் உருவாக்கப்பட்ட பல உறுப்புகளுக்கு அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">KeepAlive</div>
+                            <div class="option-feedback incorrect">✗ தவறு! KeepAlive கம்போனென்ட் கம்போனென்ட்களை கேச் செய்வதற்கானது, அனிமேஷன்களுக்கு அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">TransitionGroup</div>
+                            <div class="option-feedback correct">✓ சரி! TransitionGroup கம்போனென்ட் v-for உடன் உருவாக்கப்பட்ட உறுப்புகளை அனிமேட் செய்ய பயன்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">AnimationGroup</div>
+                            <div class="option-feedback incorrect">✗ தவறு! Vue இல் AnimationGroup என்ற கம்போனென்ட் இல்லை</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20Animations.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Build%20Your%20Project.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">v-for உடன் Vue அனிமேஷன்கள்</a></li>
+                    <li><a href="#example1">எடுத்துக்காட்டு 1</a></li>
+                    <li><a href="#add-remove">உறுப்புகளைச் சேர்த்தல் மற்றும் நீக்குதல்</a></li>
+                    <li><a href="#larger-example">பெரிய எடுத்துக்காட்டு</a></li>
+                    <li><a href="#exercises">பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

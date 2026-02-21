@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoped Styling - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20Fallthrough%20Attributes.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Local%20Components.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Scoped Styling</h2>
+            <p>Vue Scoped ஸ்டைலிங் பற்றி அறிக</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Scoped ஸ்டைலிங்</h2>
+            
+            <p>ஒரு கம்போனெண்டில் &lt;style&gt; டேக்கிற்குள் வரையறுக்கப்பட்ட ஸ்டைலிங், அல்லது App.vue இல், உண்மையில் அனைத்து கம்போனெண்ட்களிலும் globally கிடைக்கும்.</p>
+            
+            <p>ஸ்டைலிங் கம்போனெண்டுக்கு உள்ளூராக மட்டுமே வரையறுக்க, அந்த கம்போனெண்டில் scope attribute ஐப் பயன்படுத்தலாம்: &lt;style scoped&gt;</p>
+        </section>
+
+        <!-- Global Styling -->
+        <section class="content-section" id="global-styling">
+            <h2>Global ஸ்டைலிங்</h2>
+            
+            <p>எந்த *.vue ஃபைலிலும் &lt;style&gt; டேக்கிற்குள் எழுதப்பட்ட CSS globally வேலை செய்கிறது.</p>
+            
+            <p>இதன் பொருள், நாம் எடுத்துக்காட்டாக ஒரு *.vue ஃபைலில் &lt;style&gt; டேக்கிற்குள் &lt;p&gt; டேக்குகளுக்கு pink background color அமைத்தால், இது அந்த project இல் உள்ள அனைத்து *.vue ஃபைல்களிலும் உள்ள &lt;p&gt; டேக்குகளை பாதிக்கும்.</p>
+        </section>
+
+        <!-- Example Section -->
+        <section class="content-section" id="example">
+            <h2>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</h2>
+            
+            <p>இந்த பயன்பாட்டில் நம்மிடம் மூன்று *.vue ஃபைல்கள் உள்ளன: App.vue, மற்றும் இரண்டு கம்போனெண்ட்கள் CompOne.vue மற்றும் CompTwo.vue.</p>
+            
+            <p>CompOne.vue இல் உள்ள CSS ஸ்டைலிங் மூன்று *.vue ஃபைல்களிலும் உள்ள &lt;p&gt; டேக்குகளை பாதிக்கிறது:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;p&gt;This p-tag belongs to 'CompOne.vue'&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;&lt;/script&gt;
+
+&lt;style&gt;
+  p {
+    background-color: pink;
+    width: 150px;
+  }
+&lt;/style&gt;</code></pre>
+            </div>
+            
+            <p>இது எவ்வாறு செயல்படுகிறது என்பதைப் பார்க்க "Try it Yourself" பொத்தானைக் கிளிக் செய்யவும்.</p>
+        </section>
+
+        <!-- Scoped Styling -->
+        <section class="content-section" id="scoped-styling">
+            <h2>Scoped ஸ்டைலிங்</h2>
+            
+            <p>ஒரு கம்போனெண்டில் உள்ள ஸ்டைலிங் மற்ற கம்போனெண்ட்களில் உள்ள எலிமெண்ட்களின் ஸ்டைலிங்கை பாதிக்காமல் இருப்பதற்கு நாம் &lt;style&gt; டேக்கில் 'scoped' attribute ஐப் பயன்படுத்துகிறோம்:</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            
+            <p>CompOne.vue இல் உள்ள &lt;style&gt; டேக்கிற்கு scoped attribute கொடுக்கப்படுகிறது:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;p&gt;This p-tag belongs to 'CompOne.vue'&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;&lt;/script&gt;
+
+&lt;style scoped&gt;
+  p {
+    background-color: pink;
+    width: 150px;
+  }
+&lt;/style&gt;</code></pre>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">💡</span> Scoped ஸ்டைலிங் எவ்வாறு வேலை செய்கிறது:</h4>
+                <p>Scoped attribute இணைக்கப்படும் போது, Vue தானாகவே ஒரு தனிப்பட்ட data attribute ஐ கம்போனெண்டின் எலிமெண்ட்களுக்குச் சேர்க்கிறது. CSS selectors இந்த data attribute உடன் தானாகவே update செய்யப்படுகின்றன, இதனால் ஸ்டைலிங் அந்த குறிப்பிட்ட கம்போனெண்டுக்கு மட்டுமே பயன்படுத்தப்படுகிறது.</p>
+            </div>
+        </section>
+
+        <!-- Comparison -->
+        <section class="content-section" id="comparison">
+            <h2>Global vs Scoped ஸ்டைலிங் ஒப்பீடு</h2>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-globe"></i>
+                        <h4>Global ஸ்டைலிங்</h4>
+                    </div>
+                    <p>அனைத்து கம்போனெண்ட்களுக்கும் பொருந்தும்</p>
+                    <p>Syntax: &lt;style&gt;</p>
+                    <p>குறிப்பிட்ட கம்போனெண்டுக்கு ஸ்டைலிங் கட்டுப்படுத்த முடியாது</p>
+                    <p>மிகவும் எளிமையானது, ஆனால் பராமரிக்க கடினமாக இருக்கலாம்</p>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-lock"></i>
+                        <h4>Scoped ஸ்டைலிங்</h4>
+                    </div>
+                    <p>கம்போனெண்டுக்கு உள்ளூராக மட்டுமே பொருந்தும்</p>
+                    <p>Syntax: &lt;style scoped&gt;</p>
+                    <p>ஸ்டைலிங் மோதல்களை தடுக்கிறது</p>
+                    <p>பெரிய ப்ராஜெக்ட்களுக்கு மிகவும் பயனுள்ளது</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercise Section -->
+        <section class="content-section" id="exercises">
+            <h2>Vue பயிற்சிகள்</h2>
+            
+            <p>இந்த டுடோரியலில் உள்ள பல அத்தியாயங்கள் உங்கள் அறிவு நிலையைச் சரிபார்க்கக்கூடிய பயிற்சியுடன் முடிகின்றன.</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> Scoped ஸ்டைலிங் பற்றிய சரியான கூற்று எது?</h4>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">Scoped ஸ்டைலிங் அனைத்து கம்போனெண்ட்களுக்கும் பொருந்தும்</div>
+                            <div class="option-feedback incorrect">✗ தவறு! Scoped ஸ்டைலிங் குறிப்பிட்ட கம்போனெண்டுக்கு மட்டுமே பொருந்தும். இது ஸ்டைலிங் மோதல்களை தடுக்கிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">Scoped ஸ்டைலிங் கம்போனெண்டுக்கு உள்ளூராக ஸ்டைலிங் கட்டுப்படுத்த பயன்படுகிறது</div>
+                            <div class="option-feedback correct">✓ சரி! Scoped ஸ்டைலிங் &lt;style scoped&gt; attribute பயன்படுத்தி கம்போனெண்டுக்கு உள்ளூராக ஸ்டைலிங் கட்டுப்படுத்த பயன்படுகிறது. இது CSS ஐ தானாகவே தனித்துவமான selectors உடன் scope செய்கிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">Scoped ஸ்டைலிங் Vue 2 இல் கிடைக்காது</div>
+                            <div class="option-feedback incorrect">✗ தவறு! Scoped ஸ்டைலிங் Vue 2 மற்றும் Vue 3 இரண்டிலும் கிடைக்கும். இது Vue இன் built-in feature ஆகும்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">Scoped ஸ்டைலிங் child கம்போனெண்ட்களுக்கும் பொருந்தும்</div>
+                            <div class="option-feedback incorrect">✗ தவறு! Scoped ஸ்டைலிங் child கம்போனெண்ட்களுக்கு பொருந்தாது. இது குறிப்பிட்ட கம்போனெண்டுக்கு மட்டுமே உள்ளது. Child கம்போனெண்ட்கள் தங்கள் சொந்த scoped ஸ்டைலிங் கொண்டிருக்க வேண்டும்</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practical Tips -->
+        <section class="content-section" id="tips">
+            <h2>நடைமுறை உதவிக்குறிப்புகள்</h2>
+            
+            <div class="best-practice-list">
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div>பெரிய ப்ராஜெக்ட்களில் எப்போதும் scoped ஸ்டைலிங் பயன்படுத்தவும்</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div>Global ஸ்டைலிங் முக்கியமான விளைவுகள் கொண்ட ப்ராஜெக்ட்களில் தவிர்க்கவும்</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div>Scoped மற்றும் global ஸ்டைலிங் கலந்து பயன்படுத்தலாம்</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div>Scoped ஸ்டைலிங் CSS specificity issues ஐ குறைக்கிறது</div>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h4><span class="warning-icon">⚠️</span> கவனத்திற்கு:</h4>
+                <p>Scoped ஸ்டைலிங் CSS selectors ஐ தானாகவே மாற்றுகிறது, எனவே சில CSS frameworks அல்லது libraries உடன் சிக்கல்கள் இருக்கலாம். எப்போதும் உங்கள் பயன்பாடு சரியாக வேலை செய்கிறதா என சோதிக்கவும்.</p>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20Fallthrough%20Attributes.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Local%20Components.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">Scoped ஸ்டைலிங்</a></li>
+                    <li><a href="#global-styling">Global ஸ்டைலிங்</a></li>
+                    <li><a href="#example">எடுத்துக்காட்டு</a></li>
+                    <li><a href="#scoped-styling">Scoped ஸ்டைலிங்</a></li>
+                    <li><a href="#comparison">ஒப்பீடு</a></li>
+                    <li><a href="#exercises">Vue பயிற்சிகள்</a></li>
+                    <li><a href="#tips">உதவிக்குறிப்புகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

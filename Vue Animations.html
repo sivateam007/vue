@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Animations - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+        
+        /* Animation visualization */
+        .animation-demo {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            border-left: 5px solid var(--git-color);
+            text-align: center;
+        }
+        
+        .demo-box {
+            width: 60px;
+            height: 60px;
+            background-color: lightcoral;
+            border: solid black 2px;
+            margin: 1rem auto;
+            transition: all 0.5s;
+        }
+        
+        .demo-box.rotate {
+            rotate: 160deg;
+        }
+        
+        .demo-box.move {
+            animation: moveDemo .5s alternate 4 ease-in-out;
+        }
+        
+        @keyframes moveDemo {
+            from {
+                translate: 0 0;
+            }
+            to {
+                translate: 70px 0;
+            }
+        }
+        
+        .transition-classes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .transition-phase {
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid;
+        }
+        
+        .enter-phase { border-left-color: #28a745; }
+        .leave-phase { border-left-color: #dc3545; }
+        
+        .phase-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .phase-classes {
+            font-family: monospace;
+            background: #f5f5f5;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .animation-timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #e9ecef;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .timeline-point {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .timeline-point::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--git-color);
+            border-radius: 50%;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            top: -14px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--git-color);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20Form%20Inputs.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20Animations%20with%20v-for.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue Animations</h2>
+            <p>உறுப்புகள் சேர்க்கப்படும் போது அல்லது நீக்கப்படும் போது அனிமேஷன்களைச் செய்ய உள்ளமைக்கப்பட்ட &lt;Transition&gt; கூறு</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue அனிமேஷன்கள்</h2>
+            
+            <p>Vue இல் உள்ளமைக்கப்பட்ட <code>&lt;Transition&gt;</code> கூறு v-if, v-show அல்லது டைனமிக் கூறுகளுடன் உறுப்புகள் சேர்க்கப்படும் போது அல்லது நீக்கப்படும் போது அனிமேஷன்களைச் செய்ய உதவுகிறது.</p>
+            
+            <p>மற்ற சந்தர்ப்பங்களில் பிளேன் CSS transitions மற்றும் animations ஐப் பயன்படுத்துவதில் தவறில்லை.</p>
+        </section>
+
+        <!-- CSS Transition and Animation Introduction -->
+        <section class="content-section" id="css-intro">
+            <h2>CSS Transition மற்றும் Animation குறுகிய அறிமுகம்</h2>
+            
+            <p>டுடோரியலின் இந்த பகுதி அடிப்படை CSS animations மற்றும் transitions பற்றிய அறிவைத் தேவைப்படுகிறது.</p>
+            
+            <p>ஆனால் Vue குறிப்பிட்ட உள்ளமைக்கப்பட்ட <code>&lt;Transition&gt;</code> கூறைப் பயன்படுத்தி அனிமேஷன்களை உருவாக்குவதற்கு முன், Vue உடன் பிளேன் CSS animations மற்றும் transitions எவ்வாறு பயன்படுத்தப்படலாம் என்பதற்கான இரண்டு எடுத்துக்காட்டுகளைப் பார்ப்போம்.</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🎯</span> எடுத்துக்காட்டு</h4>
+                <p>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</p>
+                <p>App.vue:</p>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Basic CSS Transition&lt;/h1&gt;
+  &lt;button @click="this.doesRotate = true"&gt;Rotate&lt;/button&gt;
+  &lt;div :class="{ rotate: doesRotate }"&gt;&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      doesRotate: false
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+  .rotate {
+    rotate: 160deg;
+    transition: rotate 1s;
+  }
+  div {
+    border: solid black 2px;
+    background-color: lightcoral;
+    width: 60px;
+    height: 60px;
+  }
+  h1, button, div {
+    margin: 10px;
+  }
+&lt;/style&gt;</code></pre>
+            </div>
+            
+            <div class="animation-demo">
+                <button onclick="document.querySelector('.demo-box').classList.toggle('rotate')">Rotate</button>
+                <div class="demo-box"></div>
+                <p>CSS transition: 1 வினாடி</p>
+            </div>
+            
+            <p>மேலே உள்ள எடுத்துக்காட்டில், <code>&lt;div&gt;</code> டேக் சுழலும் வகையில் ஒரு வகுப்பை வழங்க v-bind ஐப் பயன்படுத்துகிறோம். சுழற்சி 1 வினாடி எடுக்கும் காரணம், அது CSS transition பண்புடன் வரையறுக்கப்பட்டுள்ளது.</p>
+            
+            <p>கீழே உள்ள எடுத்துக்காட்டில், CSS animation பண்புடன் ஒரு பொருளை எவ்வாறு நகர்த்தலாம் என்று பார்க்கிறோம்.</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Basic CSS Animation&lt;/h1&gt;
+  &lt;button @click="this.doesMove = true"&gt;Start&lt;/button&gt;
+  &lt;div :class="{ move: doesMove }"&gt;&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      doesMove: false
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+  .move {
+    animation: move .5s alternate 4 ease-in-out;
+  }
+  @keyframes move {
+    from {
+      translate: 0 0;
+    }
+    to {
+      translate: 70px 0;
+    }
+  }
+  div {
+    border: solid black 2px;
+    background-color: lightcoral;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+  }
+  h1, button, div {
+    margin: 10px;
+  }
+&lt;/style&gt;</code></pre>
+            </div>
+            
+            <div class="animation-demo">
+                <button onclick="document.querySelector('.demo-box').classList.toggle('move')">Start</button>
+                <div class="demo-box" style="border-radius: 50%;"></div>
+                <p>CSS animation: 0.5 வினாடி, 4 முறை</p>
+            </div>
+        </section>
+
+        <!-- The <Transition> Component -->
+        <section class="content-section" id="transition-component">
+            <h2>&lt;Transition&gt; கூறு</h2>
+            
+            <p>மேலே உள்ள இரண்டு எடுத்துக்காட்டுகளில் நாம் செய்தது போல பிளேன் CSS transitions மற்றும் animations ஐப் பயன்படுத்துவதில் தவறில்லை.</p>
+            
+            <p>ஆனால் அதிர்ஷ்டவசமாக Vue v-if அல்லது v-show உடன் ஒரு உறுப்பு அகற்றப்படும் போது அல்லது சேர்க்கப்படும் போது அனிமேஷன் செய்ய விரும்பும் சந்தர்ப்பங்களில் உள்ளமைக்கப்பட்ட <code>&lt;Transition&gt;</code> கூறை வழங்குகிறது, ஏனெனில் அது பிளேன் CSS animation உடன் செய்வது கடினமாக இருக்கும்.</p>
+            
+            <p>முதலில் ஒரு பொத்தான் <code>&lt;p&gt;</code> டேக்கைச் சேர்க்கும் அல்லது அகற்றும் ஒரு பயன்பாட்டை உருவாக்குவோம்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Add/Remove &lt;p&gt; Tag&lt;/h1&gt;
+  &lt;button @click="this.exists = !this.exists"&gt;{{btnText}}&lt;/button&gt;&lt;br&gt;
+  &lt;p v-if="exists"&gt;Hello World!&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      exists: false
+    }
+  },
+  computed: {
+    btnText() {
+      if(this.exists) {
+        return 'Remove';
+      }
+      else {
+        return 'Add';
+      }
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+            </div>
+            
+            <p>இப்போது <code>&lt;Transition&gt;</code> கூறை <code>&lt;p&gt;</code> டேக்கைச் சுற்றி wrap செய்து, <code>&lt;p&gt;</code> டேக்கை அகற்றுவதை எவ்வாறு அனிமேட் செய்யலாம் என்று பார்ப்போம்.</p>
+            
+            <p>நாம் <code>&lt;Transition&gt;</code> கூறைப் பயன்படுத்தும் போது, உறுப்புகள் சேர்க்கப்படும் போது அல்லது அகற்றப்படும் போது அனிமேஷன் செய்ய பயன்படுத்தக்கூடிய ஆறு வெவ்வேறு CSS வகுப்புகளை தானாகவே பெறுகிறோம்.</p>
+        </section>
+
+        <!-- The Six <Transition> Classes -->
+        <section class="content-section" id="transition-classes">
+            <h2>ஆறு &lt;Transition&gt; வகுப்புகள்</h2>
+            
+            <p>நாம் <code>&lt;Transition&gt;</code> கூறைப் பயன்படுத்தும் போது நமக்குத் தானாகவே கிடைக்கும் ஆறு வகுப்புகள் உள்ளன.</p>
+            
+            <p><code>&lt;Transition&gt;</code> கூறுக்குள் ஒரு உறுப்பு சேர்க்கப்படும் போது, அந்த transition ஐ அனிமேட் செய்ய இந்த முதல் மூன்று வகுப்புகளைப் பயன்படுத்தலாம்:</p>
+            
+            <div class="transition-classes">
+                <div class="transition-phase enter-phase">
+                    <div class="phase-title">Enter (உறுப்பு சேர்க்கப்படுகிறது)</div>
+                    <div class="phase-classes">v-enter-from<br>v-enter-active<br>v-enter-to</div>
+                </div>
+                
+                <div class="transition-phase leave-phase">
+                    <div class="phase-title">Leave (உறுப்பு அகற்றப்படுகிறது)</div>
+                    <div class="phase-classes">v-leave-from<br>v-leave-active<br>v-leave-to</div>
+                </div>
+            </div>
+            
+            <div class="animation-timeline">
+                <div class="timeline-line"></div>
+                <div class="timeline-point">
+                    <div class="phase-classes">v-enter-from</div>
+                    <div>ஆரம்ப நிலை</div>
+                </div>
+                <div class="timeline-point">
+                    <div class="phase-classes">v-enter-active</div>
+                    <div>அனிமேஷன் நடக்கிறது</div>
+                </div>
+                <div class="timeline-point">
+                    <div class="phase-classes">v-enter-to</div>
+                    <div>இறுதி நிலை</div>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h4><span class="warning-icon">⚠️</span> குறிப்பு:</h4>
+                <p><code>&lt;Transition&gt;</code> கூறின் ரூட் நிலையில் ஒரே ஒரு உறுப்பு மட்டுமே இருக்க முடியும்.</p>
+            </div>
+            
+            <p>இப்போது, <code>&lt;p&gt;</code> டேக் சேர்க்கப்படும் போதும், அகற்றப்படும் போதும் அனிமேட் செய்ய இந்த வகுப்புகளில் நான்கைப் பயன்படுத்துவோம்.</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Add/Remove &lt;p&gt; Tag&lt;/h1&gt;
+  &lt;button @click="this.exists = !this.exists"&gt;{{btnText}}&lt;/button&gt;&lt;br&gt;
+  &lt;Transition&gt;
+    &lt;p v-if="exists"&gt;Hello World!&lt;/p&gt;
+  &lt;/Transition&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      exists: false
+    }
+  },
+  computed: {
+    btnText() {
+      if(this.exists) {
+        return 'Remove';
+      }
+      else {
+        return 'Add';
+      }
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+  .v-enter-from {
+    opacity: 0;
+    translate: -100px 0;
+  }
+  .v-enter-to {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .v-leave-from {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .v-leave-to {
+    opacity: 0;
+    translate: 100px 0;
+  }
+  p {
+    background-color: lightgreen;
+    display: inline-block;
+    padding: 10px;
+    transition: all 0.5s;
+  }
+&lt;/style&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Exercise Section (ONLY ONE) -->
+        <section class="content-section" id="exercise">
+            <h2>Vue Animations பயிற்சி</h2>
+            
+            <p><code>&lt;Transition&gt;</code> கூறு ஒரு உறுப்பை அனிமேட் செய்ய பயன்படுத்தக்கூடிய 6 வெவ்வேறு CSS வகுப்புகளை தானாகவே நமக்கு வழங்குகிறது.</p>
+            
+            <p>ஒரு உறுப்பு காண்பிக்கப்படும் போது முதல் 3 வகுப்புப் பெயர்கள் சரியான வரிசையில் நிரப்பப்படும் வகையில் வெற்றிடங்களை நிரப்பவும்:</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">✏️</span> Vue Transition Classes பயிற்சி</h4>
+                
+                <div class="code-example">
+                    <pre><code>  1. v-<span style="background-color: yellow;">_____</span>-from
+
+  2. v-<span style="background-color: yellow;">_____</span>-active
+
+  3. v-<span style="background-color: yellow;">_____</span>-to</code></pre>
+                </div>
+                
+                <p>கீழே உள்ள விருப்பங்களிலிருந்து சரியான பதிலைத் தேர்ந்தெடுக்கவும்:</p>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">enter, enter, enter</div>
+                            <div class="option-feedback correct">✓ சரி! 'enter' வகுப்புகள் ஒரு உறுப்பு DOM க்கு சேர்க்கப்படும் போது பயன்படுத்தப்படுகின்றன. வரிசை: 1. v-enter-from (ஆரம்ப நிலை), 2. v-enter-active (அனிமேஷன் நிகழ்கிறது), 3. v-enter-to (இறுதி நிலை)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">show, show, show</div>
+                            <div class="option-feedback incorrect">✗ தவறு! 'show' என்பது Vue Transition இல் பயன்படுத்தப்படும் வகுப்புப் பெயர் அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">leave, leave, leave</div>
+                            <div class="option-feedback incorrect">✗ தவறு! 'leave' வகுப்புகள் ஒரு உறுப்பு DOM இலிருந்து நீக்கப்படும் போது பயன்படுத்தப்படுகின்றன, சேர்க்கப்படும் போது அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">start, during, end</div>
+                            <div class="option-feedback incorrect">✗ தவறு! Vue Transition வகுப்புகள் 'enter' மற்றும் 'leave' என்று பெயரிடப்பட்டுள்ளன, 'start', 'during', 'end' அல்ல</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Transition 'name' Prop -->
+        <section class="content-section" id="transition-name">
+            <h2>Transition 'name' Prop</h2>
+            
+            <p>உங்களிடம் பல <code>&lt;Transition&gt;</code> கூறுகள் இருந்தால், ஆனால் குறைந்தபட்சம் ஒரு <code>&lt;Transition&gt;</code> கூறு வேறுபட்ட அனிமேஷனைக் கொண்டிருக்க வேண்டும் என்றால், அவற்றை வேறுபடுத்திக் காட்ட வெவ்வேறு பெயர்கள் தேவை.</p>
+            
+            <p>name prop உடன் ஒரு <code>&lt;Transition&gt;</code> கூறின் பெயரைத் தேர்ந்தெடுக்கலாம், மேலும் அது transition வகுப்புகளின் பெயரையும் மாற்றுகிறது, இதனால் அந்த கூறுக்கு வெவ்வேறு CSS animation விதிகளை அமைக்கலாம்.</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;Transition name="swirl"&gt;</code></pre>
+            </div>
+            
+            <p>transition name prop மதிப்பு 'swirl' என அமைக்கப்பட்டால், தானாகவே கிடைக்கும் வகுப்புகள் இப்போது 'v-' க்குப் பதிலாக 'swirl-' என்று தொடங்கும்:</p>
+            
+            <div class="code-example">
+                <pre><code>swirl-enter-from
+swirl-enter-active
+swirl-enter-to
+swirl-leave-from
+swirl-leave-active
+swirl-leave-to</code></pre>
+            </div>
+        </section>
+
+        <!-- JavaScript Transition Hooks -->
+        <section class="content-section" id="js-hooks">
+            <h2>JavaScript Transition Hooks</h2>
+            
+            <p>ஒவ்வொரு Transition வகுப்பும் குறிப்பிடப்பட்டுள்ளபடி சில JavaScript குறியீட்டை இயக்க எங்களால் hook செய்யக்கூடிய ஒரு நிகழ்வுக்கு ஒத்திருக்கிறது.</p>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Transition வகுப்பு</th>
+                            <th>JavaScript நிகழ்வு</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>v-enter-from</code></td>
+                            <td><code>before-enter</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>v-enter-active</code></td>
+                            <td><code>enter</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>v-enter-to</code></td>
+                            <td><code>after-enter</code></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>enter-cancelled</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>v-leave-from</code></td>
+                            <td><code>before-leave</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>v-leave-active</code></td>
+                            <td><code>leave</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>v-leave-to</code></td>
+                            <td><code>after-leave</code></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><code>leave-cancelled</code> (v-show மட்டும்)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- The 'appear' Prop -->
+        <section class="content-section" id="appear-prop">
+            <h2>'appear' Prop</h2>
+            
+            <p>பக்கம் ஏற்றப்படும் போது அனிமேஷன் செய்ய விரும்பும் ஒரு உறுப்பு இருந்தால், <code>&lt;Transition&gt;</code> கூறில் appear prop ஐப் பயன்படுத்த வேண்டும்.</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;Transition appear&gt;
+  ...
+&lt;/Transition&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Transition Between Elements -->
+        <section class="content-section" id="transition-between">
+            <h2>உறுப்புகளுக்கு இடையே Transition</h2>
+            
+            <p><code>&lt;Transition&gt;</code> கூறு பல உறுப்புகளுக்கு இடையில் மாற்றவும் பயன்படுத்தப்படலாம், <code>&lt;v-if&gt;</code> மற்றும் <code>&lt;v-else-if&gt;</code> பயன்படுத்தி ஒரே நேரத்தில் ஒரே ஒரு உறுப்பு மட்டுமே காட்டப்படுவதை உறுதி செய்தால்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Transition Between Elements&lt;/h1&gt;
+  &lt;button @click="newImg"&gt;Next image&lt;/button&gt;&lt;br&gt;
+  &lt;Transition&gt;
+    &lt;img src="/img_pizza.svg" v-if="imgActive === 'pizza'"&gt;
+    &lt;img src="/img_apple.svg" v-else-if="imgActive === 'apple'"&gt;
+    &lt;img src="/img_cake.svg" v-else-if="imgActive === 'cake'"&gt;
+    &lt;img src="/img_fish.svg" v-else-if="imgActive === 'fish'"&gt;
+    &lt;img src="/img_rice.svg" v-else-if="imgActive === 'rice'"&gt;
+  &lt;/Transition&gt;
+&lt;/template&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- mode="out-in" -->
+        <section class="content-section" id="mode-out-in">
+            <h2><code>mode="out-in"</code></h2>
+            
+            <p>மேலே உள்ள எடுத்துக்காட்டில், முந்தைய படம் அகற்றப்படுவதற்கு முன்பே அடுத்த படம் சேர்க்கப்படுகிறது.</p>
+            
+            <p>ஒரு உறுப்பின் நீக்குதல் முடிவடைவதற்கு முன்பு அடுத்த உறுப்பு சேர்க்கப்படாமல் இருப்பதற்கு <code>&lt;Transition&gt;</code> கூறில் <code>mode="out-in"</code> prop மற்றும் prop மதிப்பைப் பயன்படுத்துகிறோம்.</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;Transition mode="out-in"&gt;
+  &lt;img src="/img_pizza.svg" v-if="imgActive === 'pizza'"&gt;
+  &lt;img src="/img_apple.svg" v-else-if="imgActive === 'apple'"&gt;
+  &lt;img src="/img_cake.svg" v-else-if="imgActive === 'cake'"&gt;
+&lt;/Transition&gt;</code></pre>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">💡</span> mode விருப்பங்கள்:</h4>
+                <p><strong>mode="out-in":</strong> முந்தைய உறுப்பு முழுமையாக வெளியேறிய பிறகு புதிய உறுப்பு நுழைகிறது<br>
+                <strong>mode="in-out":</strong> புதிய உறுப்பு முதலில் நுழைகிறது, பின்னர் முந்தைய உறுப்பு வெளியேறுகிறது<br>
+                <strong>இல்லை mode:</strong> இரண்டும் ஒரே நேரத்தில் நடக்கும் (இயல்புநிலை)</p>
+            </div>
+        </section>
+
+        <!-- Transition with Dynamic Components -->
+        <section class="content-section" id="transition-dynamic">
+            <h2>டைனமிக் கூறுகளுடன் Transition</h2>
+            
+            <p>டைனமிக் கூறுகளுக்கு இடையில் மாறுவதை அனிமேட் செய்ய <code>&lt;Transition&gt;</code> கூறைப் பயன்படுத்தலாம்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Transition with Dynamic Components&lt;/h1&gt;
+  &lt;button @click="toggleValue = !toggleValue"&gt;Switch component&lt;/button&gt;
+  &lt;Transition mode="out-in"&gt;
+    &lt;component :is="activeComp"&gt;&lt;/component&gt;
+  &lt;/Transition&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data () {
+      return {
+        toggleValue: true
+      }
+    },
+    computed: {
+      activeComp() {
+        if(this.toggleValue) {
+          return 'comp-one'
+        }
+        else {
+          return 'comp-two'
+        }
+      }
+    }
+  }
+&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Animation Best Practices -->
+        <section class="content-section" id="best-practices">
+            <h2>அனிமேஷன் சிறந்த நடைமுறைகள்</h2>
+            
+            <div class="best-practice-list">
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>CSS transitions பயன்படுத்தவும்:</strong> எளிமையான அனிமேஷன்களுக்கு CSS transitions பயன்படுத்தவும், அவை மிகவும் செயல்திறன் வாய்ந்தவை</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>hardware acceleration பயன்படுத்தவும்:</strong அனிமேஷன்களுக்கு transform மற்றும் opacity ஐப் பயன்படுத்தவும், அவை GPU ஐப் பயன்படுத்துகின்றன</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>அனிமேஷன் கால அளவுகளை கவனிக்கவும்:</strong> 100-300ms க்கு இடையில் வைக்கவும், மிக நீண்ட அனிமேஷன்கள் பயனர் பொறுமையை இழக்கச் செய்யும்</div>
+                </div>
+                
+                <div class="practice-item negative">
+                    <i class="fas fa-times-circle"></i>
+                    <div><strong>layout-changing properties தவிர்க்கவும்:</strong> top, left, width, height போன்ற பண்புகள் மறுஅளவிடுதலைத் தூண்டும்</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>easing செயல்பாடுகளைப் பயன்படுத்தவும்:</strong> ease-in-out, cubic-bezier() போன்ற easing செயல்பாடுகள் இயற்கையான இயக்கத்தை உருவாக்குகின்றன</div>
+                </div>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;!-- Good: Hardware accelerated --&gt;
+.v-enter-active {
+  animation: slideIn 0.3s ease-out;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+}
+
+&lt;!-- Avoid: Causes layout reflow --&gt;
+.v-enter-active {
+  animation: slideIn 0.3s;
+  left: 0;
+}
+
+@keyframes slideIn {
+  from {
+    left: -100px;
+  }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Common Animation Patterns -->
+        <section class="content-section" id="common-patterns">
+            <h2>பொதுவான அனிமேஷன் வடிவங்கள்</h2>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-slide"></i>
+                        <h4>Slide In/Out</h4>
+                    </div>
+                    <p>பக்கத்திலிருந்து உறுப்புகள் நகரும்</p>
+                    <code>transform: translateX()</code>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-expand"></i>
+                        <h4>Fade In/Out</h4>
+                    </div>
+                    <p>உறுப்புகள் மெதுவாகத் தோன்றி மறைகின்றன</p>
+                    <code>opacity: 0 → 1</code>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-spinner"></i>
+                        <h4>Scale & Rotate</h4>
+                    </div>
+                    <p>உறுப்புகள் அளவிடப்படுகின்றன மற்றும் சுழல்கின்றன</p>
+                    <code>scale(), rotate()</code>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-bounce"></i>
+                        <h4>Bounce</h4>
+                    </div>
+                    <p>உறுப்புகள் எலாஸ்டிக் இயக்கத்துடன் நகர்கின்றன</p>
+                    <code>cubic-bezier()</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20Form%20Inputs.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20Animations%20with%20v-for.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">Vue Animations</a></li>
+                    <li><a href="#css-intro">CSS அறிமுகம்</a></li>
+                    <li><a href="#transition-component">&lt;Transition&gt; கூறு</a></li>
+                    <li><a href="#transition-classes">6 Transition வகுப்புகள்</a></li>
+                    <li><a href="#exercise">பயிற்சிகள்</a></li>
+                    <li><a href="#transition-name">name Prop</a></li>
+                    <li><a href="#js-hooks">JavaScript Hooks</a></li>
+                    <li><a href="#mode-out-in">mode="out-in"</a></li>
+                    <li><a href="#transition-dynamic">டைனமிக் கூறுகள்</a></li>
+                    <li><a href="#best-practices">சிறந்த நடைமுறைகள்</a></li>
+                    <li><a href="#common-patterns">பொதுவான வடிவங்கள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+        
+        // Animation demo interaction
+        const demoBox = document.querySelector('.demo-box');
+        if(demoBox) {
+            // Reset animation after it completes
+            demoBox.addEventListener('animationend', function() {
+                this.classList.remove('move');
+            });
+        }
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

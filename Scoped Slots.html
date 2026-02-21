@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoped Slots - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+        
+        .scoped-flow {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .flow-steps {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .flow-step {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            min-width: 200px;
+            text-align: center;
+        }
+        
+        .flow-step i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: #ffd700;
+        }
+        
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .flow-steps {
+                flex-direction: column;
+            }
+            
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+        
+        .data-flow-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .data-example {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .data-example.component {
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .data-example.parent {
+            border-left: 4px solid #27ae60;
+        }
+        
+        .data-example h4 {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .data-example.component h4 {
+            color: #e74c3c;
+        }
+        
+        .data-example.parent h4 {
+            color: #27ae60;
+        }
+        
+        @media (max-width: 768px) {
+            .data-flow-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20v-slot.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Dynamic%20Components.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Scoped Slots</h2>
+            <p>Vue.js இல் கூறுகளிலிருந்து பெற்றோருக்கு தரவை அனுப்ப கற்றுக்கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Scoped Slots</h2>
+            
+            <p>ஒரு Scoped slot கூறிலிருந்து உள்ளூர் தரவை வழங்குகிறது, இதனால் பெற்றோர் அதை எவ்வாறு render செய்வது எனத் தேர்வு செய்யலாம்.</p>
+        </section>
+
+        <!-- Scoped Slot Flow -->
+        <section class="content-section" id="flow">
+            <h2>Scoped Slot தரவுப் பாய்வு</h2>
+            
+            <div class="scoped-flow">
+                <h3><i class="fas fa-exchange-alt"></i> தரவுப் பாய்வு வரைபடம்</h3>
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <i class="fas fa-database"></i>
+                        <h4>கூறு தரவு</h4>
+                        <p>கூறில் உள்ளூர் தரவு</p>
+                    </div>
+                    
+                    <div class="flow-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <i class="fas fa-code"></i>
+                        <h4>v-bind</h4>
+                        <p>தரவைப் பைண்ட் செய்கிறது</p>
+                    </div>
+                    
+                    <div class="flow-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <i class="fas fa-code-branch"></i>
+                        <h4>v-slot</h4>
+                        <p>தரவைப் பெறுகிறது</p>
+                    </div>
+                    
+                    <div class="flow-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <i class="fas fa-file-alt"></i>
+                        <h4>பெற்றோர்</h4>
+                        <p>தரவை render செய்கிறது</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Send Data to Parent -->
+        <section class="content-section" id="send-data">
+            <h2>பெற்றோருக்கு தரவை அனுப்புதல்</h2>
+            
+            <p>உள்ளூர் தரவைப் பெற்றோருக்கு அனுப்ப கூறு slot இல் v-bind ஐப் பயன்படுத்துகிறோம்:</p>
+            
+            <div class="data-flow-grid">
+                <div class="data-example component">
+                    <h4>கூறு (SlotComp.vue)</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;template&gt;
+  &lt;slot v-bind:lclData="data"&gt;&lt;/slot&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data() {
+      return {
+        data: 'This is local data'
+      }
+    }
+  }
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="data-example parent">
+                    <h4>பெற்றோர் (App.vue)</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;slot-comp v-slot="dataFromSlot"&gt;
+  &lt;h2&gt;{{ dataFromSlot.lclData }}&lt;/h2&gt;
+&lt;/slot-comp&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🔒</span> உள்ளூர் தரவு:</h4>
+                <p>கூறின் உள்ளே இருக்கும் தரவு 'உள்ளூர்' என்று குறிப்பிடப்படலாம், ஏனெனில் இது v-bind உடன் பெற்றோருக்கு அனுப்பப்படாத வரை பெற்றோருக்கு அணுகக்கூடியதல்ல.</p>
+            </div>
+        </section>
+
+        <!-- Receive Data from Scoped Slot -->
+        <section class="content-section" id="receive-data">
+            <h2>Scoped Slot இலிருந்து தரவைப் பெறுதல்</h2>
+            
+            <p>கூறில் உள்ள உள்ளூர் தரவு v-bind உடன் அனுப்பப்படுகிறது, மேலும் அது பெற்றோரில் v-slot உடன் பெறப்படலாம்:</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            <p>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</p>
+            
+            <div class="code-example">
+                <pre><code>// App.vue:
+&lt;slot-comp v-slot="dataFromSlot"&gt;
+  &lt;h2&gt;{{ dataFromSlot.lclData }}&lt;/h2&gt;
+&lt;/slot-comp&gt;</code></pre>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🏷️</span> பெயரிடல்:</h4>
+                <p>மேலே உள்ள எடுத்துக்காட்டில், 'dataFromSlot' என்பது Scoped slot இலிருந்து நாம் பெறும் தரவுப் பொருளைக் குறிக்க நாமே தேர்ந்தெடுக்கக்கூடிய ஒரு பெயர். 'lclData' பண்புகளைப் பயன்படுத்தி slot இலிருந்து உரை சரத்தைப் பெறுகிறோம், மேலும் இறுதியாக உரையை ஒரு &lt;h2&gt; டேக்கில் render செய்ய இடைச்செருகலைப் பயன்படுத்துகிறோம்.</p>
+            </div>
+        </section>
+
+        <!-- Scoped Slot with an Array -->
+        <section class="content-section" id="array-slot">
+            <h2>வரிசையுடன் Scoped Slot</h2>
+            
+            <p>ஒரு Scoped slot v-for ஐப் பயன்படுத்தி ஒரு வரிசையிலிருந்து தரவை அனுப்பலாம், ஆனால் App.vue இல் உள்ள குறியீடு அடிப்படையில் ஒரே மாதிரியாக உள்ளது:</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            <div class="data-flow-grid">
+                <div class="data-example component">
+                    <h4>கூறு (SlotComp.vue)</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;template&gt;
+  &lt;slot
+    v-for="x in foods"
+    :key="x"
+    :foodName="x"
+  &gt;&lt;/slot&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data() {
+      return {
+        foods: ['Apple','Pizza','Rice','Fish','Cake']
+      }
+    }
+  }
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="data-example parent">
+                    <h4>பெற்றோர் (App.vue)</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;slot-comp v-slot="food"&gt;
+  &lt;h2&gt;{{ food.foodName }}&lt;/h2&gt;
+&lt;/slot-comp&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scoped Slot with an Array of Objects -->
+        <section class="content-section" id="object-array-slot">
+            <h2>பொருள்களின் வரிசையுடன் Scoped Slot</h2>
+            
+            <p>ஒரு Scoped slot v-for ஐப் பயன்படுத்தி பொருள்களின் வரிசையிலிருந்து தரவை அனுப்பலாம்:</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            <div class="data-flow-grid">
+                <div class="data-example component">
+                    <h4>கூறு (SlotComp.vue)</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;template&gt;
+  &lt;slot
+    v-for="x in foods"
+    :key="x.name"
+    :foodName="x.name"
+    :foodDesc="x.desc"
+    :foodUrl="x.url"
+  &gt;&lt;/slot&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data() {
+      return {
+        foods: [
+          { name: 'Apple', desc: 'Apples are a type of fruit that grow on trees.', url: 'img_apple.svg' },
+          { name: 'Pizza', desc: 'Pizza has a bread base with tomato sauce, cheese, and toppings on top.', url: 'img_pizza.svg' },
+          { name: 'Rice', desc: 'Rice is a type of grain that people like to eat.', url: 'img_rice.svg' },
+          { name: 'Fish', desc: 'Fish is an animal that lives in water.', url: 'img_fish.svg' },
+          { name: 'Cake', desc: 'Cake is something sweet that tastes good but is not considered healthy.', url: 'img_cake.svg' }
+       ]
+      }
+    }
+  }
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="data-example parent">
+                    <h4>பெற்றோர் (App.vue)</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;slot-comp v-slot="food"&gt;
+  &lt;hr&gt;
+  &lt;h2&gt;{{ food.foodName }}&lt;img :src=food.foodUrl&gt;&lt;/h2&gt;
+  &lt;p&gt;{{ food.foodDesc }}&lt;/p&gt;
+&lt;/slot-comp&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Static Data from a Scoped Slot -->
+        <section class="content-section" id="static-data">
+            <h2>Scoped Slot இலிருந்து நிலையான தரவு</h2>
+            
+            <p>ஒரு Scoped slot நிலையான தரவையும் அனுப்பலாம், அதாவது Vue நிகழ்வின் தரவுப் பண்புக்கு சொந்தமில்லாத தரவு.</p>
+            
+            <p>நிலையான தரவை அனுப்பும் போது v-bind ஐப் பயன்படுத்துவதில்லை.</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            <div class="data-flow-grid">
+                <div class="data-example component">
+                    <h4>கூறு (SlotComp.vue)</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;template&gt;
+  &lt;slot
+    staticText="This text is static"
+    :dynamicText="text"
+  &gt;&lt;/slot&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data() {
+      return {
+        text: 'This text is from the data property'
+      }
+    }
+  }
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="data-example parent">
+                    <h4>பெற்றோர் (App.vue)</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;slot-comp v-slot="texts"&gt;
+  &lt;h2&gt;{{ texts.staticText }}&lt;/h2&gt;
+  &lt;p&gt;{{ texts.dynamicText }}&lt;/p&gt;
+&lt;/slot-comp&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">📝</span> நிலையான vs டைனமிக்:</h4>
+                <p>கீழே உள்ள எடுத்துக்காட்டில், தரவு நிகழ்வுக்கு டைனமிக் முறையில் பைண்ட் செய்யப்படும் ஒரு உரையுடன் ஒரு நிலையான உரையை அனுப்புகிறோம், இதனால் வித்தியாசத்தைக் காணலாம்.</p>
+            </div>
+        </section>
+
+        <!-- Named Scoped Slots -->
+        <section class="content-section" id="named-scoped-slots">
+            <h2>பெயரிடப்பட்ட Scoped Slots</h2>
+            
+            <p>Scoped slots பெயரிடப்படலாம்.</p>
+            
+            <p>பெயரிடப்பட்ட Scoped slots ஐப் பயன்படுத்த, கூறுக்குள் உள்ள slots களை 'name' பண்புக்கூறுடன் பெயரிட வேண்டும்.</p>
+            
+            <p>மேலும் பெயரிடப்பட்ட slot இலிருந்து தரவைப் பெற, v-slot உத்தியுடன் அல்லது சுருக்கெழுத்து # உடன் கூறைப் பயன்படுத்தும் பெற்றோரில் அந்தப் பெயரைக் குறிப்பிட வேண்டும்.</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            <p>இந்த எடுத்துக்காட்டில், கூறு "leftSlot" ஐக் குறிப்பிடும் ஒரு முறையும், "rightSlot" ஐக் குறிப்பிடும் ஒரு முறையும் உருவாக்கப்படுகிறது.</p>
+            
+            <div class="data-flow-grid">
+                <div class="data-example component">
+                    <h4>கூறு (SlotComp.vue)</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;template&gt;
+  &lt;slot
+    name="leftSlot"
+    :text="leftText"
+  &gt;&lt;/slot&gt;
+  &lt;slot
+    name="rightSlot"
+    :text="rightText"
+  &gt;&lt;/slot&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data() {
+      return {
+        leftText: 'This text belongs to the LEFT slot.',
+        rightText: 'This text belongs to the RIGHT slot.'
+      }
+    }
+  }
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="data-example parent">
+                    <h4>பெற்றோர் (App.vue)</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;slot-comp #leftSlot="leftProps"&gt;
+  &lt;div&gt;{{ leftProps.text }}&lt;/div&gt;
+&lt;/slot-comp&gt;
+&lt;slot-comp #rightSlot="rightProps"&gt;
+  &lt;div&gt;{{ rightProps.text }}&lt;/div&gt;
+&lt;/slot-comp&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alternative: Single Component with Multiple Templates -->
+        <section class="content-section" id="single-component">
+            <h2>மாற்று: பல டெம்ப்ளேட்டுகளுடன் ஒற்றைக் கூறு</h2>
+            
+            <p>மாற்றாக, கூறை ஒரு முறை மட்டும் உருவாக்கலாம், இரண்டு வெவ்வேறு "template" டேக்குகளுடன், ஒவ்வொரு "template" டேக்கும் வெவ்வேறு slot ஐக் குறிக்கிறது.</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            <p>இந்த எடுத்துக்காட்டில், கூறு ஒரு முறை மட்டுமே உருவாக்கப்படுகிறது, ஆனால் இரண்டு "template" டேக்குகளுடன், ஒவ்வொன்றும் வெவ்வேறு slot ஐக் குறிக்கிறது.</p>
+            
+            <p>SlotComp.vue முந்தைய எடுத்துக்காட்டில் உள்ளதைப் போலவே உள்ளது.</p>
+            
+            <div class="code-example">
+                <pre><code>// App.vue:
+&lt;slot-comp&gt;
+
+  &lt;template #leftSlot="leftProps"&gt;
+    &lt;div&gt;{{ leftProps.text }}&lt;/div&gt;
+  &lt;/template&gt;
+
+  &lt;template #rightSlot="rightProps"&gt;
+    &lt;div&gt;{{ rightProps.text }}&lt;/div&gt;
+  &lt;/template&gt;
+
+&lt;/slot-comp&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Vue Exercises -->
+        <section class="content-section" id="exercises">
+            <h2>Vue பயிற்சிகள்</h2>
+            
+            <p>பயிற்சிகளுடன் உங்களை சோதிக்கவும்</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> கூறின் slot இலிருந்து பெற்றோருக்கு தரவை வழங்க என்ன உத்திகள் தேவை?</h4>
+                
+                <p style="color: white; margin: 1rem 0;">கூறில் உள்ள உள்ளூர் தரவு ஒரு slot இலிருந்து ____ உடன் அனுப்பப்படுகிறது, மேலும் அது பெற்றோரில் ____ உடன் பெறப்படலாம்.</p>
+                
+                <div class="data-flow-grid">
+                    <div class="data-example component">
+                        <h4>CompOne.vue</h4>
+                        <div class="code-example">
+                            <pre><code>&lt;slot 
+:lclData="data"&gt;&lt;/slot&gt;</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="data-example parent">
+                        <h4>App.vue</h4>
+                        <div class="code-example">
+                            <pre><code>&lt;comp-one 
+:"dataFromSlot"&gt;
+  &lt;h2&gt;{{ dataFromSlot.lclData }}&lt;/h2&gt;
+&lt;/comp-one&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-model, v-receive</div>
+                            <div class="option-feedback incorrect">✗ தவறு! v-model இருதரப்பு தரவு பைண்டிங்கிற்கு, v-receive என்பது Vue இல் இல்லை</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-on, v-catch</div>
+                            <div class="option-feedback incorrect">✗ தவறு! v-on நிகழ்வுகளுக்கு, v-catch என்பது Vue இல் இல்லை</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">v-bind, v-slot</div>
+                            <div class="option-feedback correct">✓ சரி! v-bind தரவை slot இலிருந்து அனுப்புகிறது, v-slot பெற்றோரில் அதைப் பெறுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-send, v-get</div>
+                            <div class="option-feedback incorrect">✗ தவறு! v-send மற்றும் v-get என்பவை Vue இல் இல்லை</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20v-slot.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Dynamic%20Components.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">Scoped Slots</a></li>
+                    <li><a href="#flow">தரவுப் பாய்வு</a></li>
+                    <li><a href="#send-data">பெற்றோருக்கு தரவு அனுப்புதல்</a></li>
+                    <li><a href="#receive-data">Scoped Slot இலிருந்து தரவு பெறுதல்</a></li>
+                    <li><a href="#array-slot">வரிசையுடன் Scoped Slot</a></li>
+                    <li><a href="#object-array-slot">பொருள்களின் வரிசையுடன் Scoped Slot</a></li>
+                    <li><a href="#static-data">நிலையான தரவுடன் Scoped Slot</a></li>
+                    <li><a href="#named-scoped-slots">பெயரிடப்பட்ட Scoped Slots</a></li>
+                    <li><a href="#single-component">ஒற்றைக் கூறு மாற்று</a></li>
+                    <li><a href="#exercises">Vue பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

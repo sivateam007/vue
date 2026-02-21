@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siva Team Tutorials - Vue.js பாடநெறி</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Fix logo size */
+        .logo-image {
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Simple index styles */
+        .tutorial-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .category-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #42b883;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .category-title {
+            color: #42b883;
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tutorial-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .tutorial-list li {
+            margin: 5px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .tutorial-list li:before {
+            content: '›';
+            color: #42b883;
+            position: absolute;
+            left: 0;
+        }
+        
+        .tutorial-list a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+        }
+        
+        .tutorial-list a:hover {
+            color: #42b883;
+            padding-left: 5px;
+        }
+        
+        .welcome-banner {
+            background: linear-gradient(135deg, #42b883, #35495e);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .featured-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .featured-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .featured-item i {
+            font-size: 40px;
+            color: #42b883;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .tutorial-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1 style="font-size: 20px;">Siva Team <span style="font-size: 16px;">Vue.js Courses</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+            <h2 style="margin-bottom: 10px;">சிவா டீம் Vue.js டுடோரியல்கள்</h2>
+            <p>தமிழில் Vue.js மற்றும் வலை அபிவிருத்தி டுடோரியல்கள்</p>
+        </div>
+
+        <!-- Featured Tutorials -->
+        <div class="featured-box">
+            <a href="Vue%20Tutorial.html" style="text-decoration: none;">
+                <div class="featured-item">
+                    <i class="fab fa-vuejs"></i>
+                    <h3>Vue Tutorial</h3>
+                    <p>Vue.js அடிப்படைகள்</p>
+                </div>
+            </a>
+            <a href="Vue%20Introduction.html" style="text-decoration: none;">
+                <div class="featured-item">
+                    <i class="fas fa-code"></i>
+                    <h3>Vue Introduction</h3>
+                    <p>Vue.js அறிமுகம்</p>
+                </div>
+            </a>
+            <a href="Vue%20Components.html" style="text-decoration: none;">
+                <div class="featured-item">
+                    <i class="fas fa-puzzle-piece"></i>
+                    <h3>Vue Components</h3>
+                    <p>கூறுகள் (Components)</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- All Tutorials Grid -->
+        <section class="content-section">
+            <h2>அனைத்து Vue.js டுடோரியல்கள்</h2>
+            <p>60+ டுடோரியல்கள் இலவசமாக கிடைக்கின்றன</p>
+            
+            <div class="tutorial-container">
+                <!-- Vue.js Basics -->
+                <div class="category-box">
+                    <h3 class="category-title"><i class="fab fa-vuejs"></i> Vue.js அடிப்படைகள்</h3>
+                    <ul class="tutorial-list">
+                        <li><a href="Vue%20Tutorial.html">Vue Tutorial</a></li>
+                        <li><a href="Vue%20Introduction.html">Vue Introduction</a></li>
+                        <li><a href="Vue%20Components.html">Vue Components</a></li>
+                        <li><a href="Vue%20Templates.html">Vue Templates</a></li>
+                        <li><a href="Vue%20Forms.html">Vue Forms</a></li>
+                        <li><a href="Vue%20Examples.html">Vue Examples</a></li>
+                    </ul>
+                </div>
+
+                <!-- Vue.js Directives -->
+                <div class="category-box" style="border-left-color: #3498db;">
+                    <h3 class="category-title" style="color: #3498db;"><i class="fas fa-code"></i> Vue.js Directives</h3>
+                    <ul class="tutorial-list">
+                        <li><a href="Vue%20Directive.html">Vue Directive</a></li>
+                        <li><a href="Vue%20Directives.html">Vue Directives</a></li>
+                        <li><a href="Vue%20v-bind%20Directive.html">Vue v-bind Directive</a></li>
+                        <li><a href="Vue%20v-bind%20Directives.html">Vue v-bind Directives</a></li>
+                        <li><a href="Vue%20v-if%20Directive.html">Vue v-if Directive</a></li>
+                        <li><a href="Vue%20v-if%20Directives.html">Vue v-if Directives</a></li>
+                        <li><a href="Vue%20v-for%20Directive.html">Vue v-for Directive</a></li>
+                        <li><a href="Vue%20v-for%20Directives.html">Vue v-for Directives</a></li>
+                        <li><a href="Vue%20v-model%20Directive.html">Vue v-model Directive</a></li>
+                        <li><a href="Vue%20v-model%20Directives.html">Vue v-model Directives</a></li>
+                        <li><a href="Vue%20v-on%20Directive.html">Vue v-on Directive</a></li>
+                        <li><a href="Vue%20v-on%20Directives.html">Vue v-on Directives</a></li>
+                        <li><a href="Vue%20v-show%20Directive.html">Vue v-show Directive</a></li>
+                        <li><a href="Vue%20v-show%20Directives.html">Vue v-show Directives</a></li>
+                        <li><a href="Vue%20v-slot%20Directive.html">Vue v-slot Directive</a></li>
+                        <li><a href="Vue%20v-slot.html">Vue v-slot</a></li>
+                        <li><a href="Vue%20v-text%20Directive.html">Vue v-text Directive</a></li>
+                        <li><a href="Vue%20v-html%20Directive.html">Vue v-html Directive</a></li>
+                        <li><a href="Vue%20v-cloak%20Directive.html">Vue v-cloak Directive</a></li>
+                        <li><a href="Vue%20v-else%20Directive.html">Vue v-else Directive</a></li>
+                        <li><a href="Vue%20v-else-if%20Directive.html">Vue v-else-if Directive</a></li>
+                        <li><a href="Vue%20v-memo%20Directive.html">Vue v-memo Directive</a></li>
+                        <li><a href="Vue%20v-once%20Directive.html">Vue v-once Directive</a></li>
+                        <li><a href="Vue%20v-pre%20Directive.html">Vue v-pre Directive</a></li>
+                    </ul>
+                </div>
+
+                <!-- Vue.js Components -->
+                <div class="category-box" style="border-left-color: #9b59b6;">
+                    <h3 class="category-title" style="color: #9b59b6;"><i class="fas fa-puzzle-piece"></i> Vue.js Components</h3>
+                    <ul class="tutorial-list">
+                        <li><a href="Vue%20component%20Element.html">Vue component Element</a></li>
+                        <li><a href="Vue%20template%20Element.html">Vue template Element</a></li>
+                        <li><a href="Local%20Components.html">Local Components</a></li>
+                        <li><a href="Dynamic%20Components.html">Dynamic Components</a></li>
+                        <li><a href="Vue%20v-for%20Components.html">Vue v-for Components</a></li>
+                        <li><a href="Vue%20Built-in%20Components.html">Vue Built-in Components</a></li>
+                        <li><a href="Vue%20KeepAlive%20Component.html">Vue KeepAlive Component</a></li>
+                        <li><a href="Vue%20Teleport%20Component.html">Vue Teleport Component</a></li>
+                        <li><a href="Vue%20Transition%20Component.html">Vue Transition Component</a></li>
+                        <li><a href="Vue%20TransitionGroup%20Component.html">Vue TransitionGroup Component</a></li>
+                    </ul>
+                </div>
+
+                <!-- Vue.js Instance & Options -->
+                <div class="category-box" style="border-left-color: #e74c3c;">
+                    <h3 class="category-title" style="color: #e74c3c;"><i class="fas fa-cog"></i> Vue.js Instance & Options</h3>
+                    <ul class="tutorial-list">
+                        <li><a href="Vue%20Instance%20Options.html">Vue Instance Options</a></li>
+                        <li><a href="Vue%20Component%20Instance.html">Vue Component Instance</a></li>
+                        <li><a href="Vue%20'data'%20Option.html">Vue 'data' Option</a></li>
+                        <li><a href="Vue%20'computed'%20Option.html">Vue 'computed' Option</a></li>
+                        <li><a href="Vue%20'methods'%20Option.html">Vue 'methods' Option</a></li>
+                        <li><a href="Vue%20'props'%20Option.html">Vue 'props' Option</a></li>
+                        <li><a href="Vue%20'emits'%20Option.html">Vue 'emits' Option</a></li>
+                        <li><a href="Vue%20'watch'%20Option.html">Vue 'watch' Option</a></li>
+                        <li><a href="Vue%20'expose'%20Option.html">Vue 'expose' Option</a></li>
+                    </ul>
+                </div>
+
+                <!-- Vue.js Lifecycle Hooks -->
+                <div class="category-box" style="border-left-color: #f39c12;">
+                    <h3 class="category-title" style="color: #f39c12;"><i class="fas fa-recycle"></i> Lifecycle Hooks</h3>
+                    <ul class="tutorial-list">
+                        <li><a href="Vue%20Lifecycle%20Hooks.html">Vue Lifecycle Hooks</a></li>
+                        <li><a href="Vue%20Lifecycle%20Hook.html">Vue Lifecycle Hook</a></li>
+                        <li><a href="Vue%20Lifecycle%20Hooks%20Detail.html">Vue Lifecycle Hooks Detail</a></li>
+                        <li><a href="Vue%20'beforeCreate'%20Lifecycle%20Hook.html">Vue 'beforeCreate' Hook</a></li>
+                        <li><a href="Vue%20'created'%20Lifecycle%20Hook.html">Vue 'created' Hook</a></li>
+                        <li><a href="Vue%20'beforeMount'%20Lifecycle%20Hook.html">Vue 'beforeMount' Hook</a></li>
+                        <li><a href="Vue%20'mounted'%20Lifecycle%20Hook.html">Vue 'mounted' Hook</a></li>
+                        <li><a href="Vue%20'beforeUpdate'%20Lifecycle%20Hook.html">Vue 'beforeUpdate' Hook</a></li>
+                        <li><a href="Vue%20'updated'%20Lifecycle%20Hook.html">Vue 'updated' Hook</a></li>
+                        <li><a href="Vue%20'beforeUnmount'%20Lifecycle%20Hook.html">Vue 'beforeUnmount' Hook</a></li>
+                        <li><a href="Vue%20'unmounted'%20Lifecycle%20Hook.html">Vue 'unmounted' Hook</a></li>
+                        <li><a href="Vue%20'activated'%20Lifecycle%20Hook.html">Vue 'activated' Hook</a></li>
+                        <li><a href="Vue%20'deactivated'%20Lifecycle%20Hook.html">Vue 'deactivated' Hook</a></li>
+                        <li><a href="Vue%20'errorCaptured'%20Lifecycle%20Hook.html">Vue 'errorCaptured' Hook</a></li>
+                        <li><a href="Vue%20'renderTracked'%20Lifecycle%20Hook.html">Vue 'renderTracked' Hook</a></li>
+                        <li><a href="Vue%20'renderTriggered'%20Lifecycle%20Hook.html">Vue 'renderTriggered' Hook</a></li>
+                        <li><a href="Vue%20'serverPrefetch'%20Lifecycle%20Hook.html">Vue 'serverPrefetch' Hook</a></li>
+                    </ul>
+                </div>
+
+                <!-- Vue.js Properties & Methods -->
+                <div class="category-box" style="border-left-color: #1abc9c;">
+                    <h3 class="category-title" style="color: #1abc9c;"><i class="fas fa-cogs"></i> Properties & Methods</h3>
+                    <ul class="tutorial-list">
+                        <li><a href="Vue%20Methods.html">Vue Methods</a></li>
+                        <li><a href="Vue%20Computed%20Properties.html">Vue Computed Properties</a></li>
+                        <li><a href="Vue%20Watchers.html">Vue Watchers</a></li>
+                        <li><a href="Vue%20Props.html">Vue Props</a></li>
+                        <li><a href="Vue%20Slots.html">Vue Slots</a></li>
+                        <li><a href="Scoped%20Slots.html">Scoped Slots</a></li>
+                        <li><a href="Vue%20Events.html">Vue Events</a></li>
+                        <li><a href="Vue%20Event%20Modifiers.html">Vue Event Modifiers</a></li>
+                        <li><a href="Vue%20$emit()%20Method.html">Vue $emit() Method</a></li>
+                        <li><a href="Vue%20$emit()%20Methods.html">Vue $emit() Methods</a></li>
+                    </ul>
+                </div>
+
+                <!-- Vue.js Advanced Topics -->
+                <div class="category-box" style="border-left-color: #34495e;">
+                    <h3 class="category-title" style="color: #34495e;"><i class="fas fa-rocket"></i> மேம்பட்ட தலைப்புகள்</h3>
+                    <ul class="tutorial-list">
+                        <li><a href="Vue%20Composition%20API.html">Vue Composition API</a></li>
+                        <li><a href="Vue%20Routing.html">Vue Routing</a></li>
+                        <li><a href="Vue%20Provide%20Inject.html">Vue Provide Inject</a></li>
+                        <li><a href="Vue%20Teleport.html">Vue Teleport</a></li>
+                        <li><a href="Vue%20Animations.html">Vue Animations</a></li>
+                        <li><a href="Vue%20Animations%20with%20v-for.html">Vue Animations with v-for</a></li>
+                        <li><a href="Vue%20Form%20Inputs.html">Vue Form Inputs</a></li>
+                        <li><a href="Vue%20HTTP%20Requests.html">Vue HTTP Requests</a></li>
+                        <li><a href="Vue%20CSS%20Binding.html">Vue CSS Binding</a></li>
+                        <li><a href="Scoped%20Styling.html">Scoped Styling</a></li>
+                        <li><a href="Vue%20Template%20Refs.html">Vue Template Refs</a></li>
+                        <li><a href="Vue%20Fallthrough%20Attributes.html">Vue Fallthrough Attributes</a></li>
+                        <li><a href="Scaling%20up%20Vue.html">Scaling up Vue</a></li>
+                        <li><a href="Our%20First%20SFC%20Web%20Page.html">Our First SFC Web Page</a></li>
+                        <li><a href="Build%20Your%20Project.html">Build Your Project</a></li>
+                    </ul>
+                </div>
+
+                <!-- Vue.js Instance Properties -->
+                <div class="category-box" style="border-left-color: #8e44ad;">
+                    <h3 class="category-title" style="color: #8e44ad;"><i class="fas fa-box"></i> Instance Properties</h3>
+                    <ul class="tutorial-list">
+                        <li><a href="Vue%20$attrs%20Object.html">Vue $attrs Object</a></li>
+                        <li><a href="Vue%20$data%20Object.html">Vue $data Object</a></li>
+                        <li><a href="Vue%20$el%20Object.html">Vue $el Object</a></li>
+                        <li><a href="Vue%20$parent%20Object.html">Vue $parent Object</a></li>
+                        <li><a href="Vue%20$props%20Object.html">Vue $props Object</a></li>
+                        <li><a href="Vue%20$refs%20Object.html">Vue $refs Object</a></li>
+                        <li><a href="Vue%20$root%20Object.html">Vue $root Object</a></li>
+                        <li><a href="Vue%20$slots%20Object.html">Vue $slots Object</a></li>
+                        <li><a href="Vue%20$forceUpdate()%20Method.html">Vue $forceUpdate() Method</a></li>
+                        <li><a href="Vue%20$nextTick()%20Method.html">Vue $nextTick() Method</a></li>
+                        <li><a href="Vue%20$watch()%20Method.html">Vue $watch() Method</a></li>
+                    </ul>
+                </div>
+
+                <!-- Vue.js Attributes -->
+                <div class="category-box" style="border-left-color: #27ae60;">
+                    <h3 class="category-title" style="color: #27ae60;"><i class="fas fa-tags"></i> Attributes</h3>
+                    <ul class="tutorial-list">
+                        <li><a href="Vue%20Built-in%20Attributes.html">Vue Built-in Attributes</a></li>
+                        <li><a href="Vue%20Built-in%20Elements.html">Vue Built-in Elements</a></li>
+                        <li><a href="Vue%20'is'%20Attribute.html">Vue 'is' Attribute</a></li>
+                        <li><a href="Vue%20'key'%20Attribute.html">Vue 'key' Attribute</a></li>
+                        <li><a href="Vue%20'ref'%20Attribute.html">Vue 'ref' Attribute</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="content-section" style="background: #f8f9fa; border-radius: 10px; padding: 25px;">
+            <h2 style="text-align: center; color: #42b883;">சிவா டீம் Vue.js பாடநெறி</h2>
+            <p style="text-align: center; line-height: 1.6;">
+                தமிழில் Vue.js நிரலாக்கத்தை கற்றுக்கொள்ள முழுமையான வழிகாட்டி.<br>
+                ஆரம்பநிலை மாணவர்கள் முதல் மேம்பட்ட Vue.js அபிவிருத்தியாளர்கள் வரை அனைவருக்கும் பொருந்தும்.<br>
+                <strong style="color: #42b883;">அனைத்து Vue.js டுடோரியல்களும் இலவசம்! பதிவு தேவையில்லை.</strong>
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Vue.js Courses</h3>
+                <p>தமிழில் Vue.js நிரலாக்க கல்வி</p>
+            </div>
+            <div class="footer-column">
+                <h3>விரைவு இணைப்புகள்</h3>
+                <ul>
+                    <li><a href="Vue%20Tutorial.html">Vue Tutorial</a></li>
+                    <li><a href="Vue%20Introduction.html">Vue Introduction</a></li>
+                    <li><a href="Vue%20Components.html">Vue Components</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>தொடர்பு</h3>
+                <ul>
+                    <li><a href="#">எங்களைப் பற்றி</a></li>
+                    <li><a href="#">தொடர்பு கொள்ள</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.</p>
+        </div>
+    </footer>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your Project - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+        
+        .code-example {
+            background-color: #2d2d2d;
+            color: white !important;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            overflow-x: auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .code-example pre,
+        .code-example code {
+            color: white !important;
+        }
+        
+        .image-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--git-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .image-box h4 {
+            color: var(--dark) !important;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .image-caption {
+            color: #666 !important;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 0.8rem;
+            font-style: italic;
+        }
+        
+        .image-box img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20Animations%20with%20v-for.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20Composition%20API.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Build Your Project</h2>
+            <p>உங்கள் Vue ப்ராஜெக்ட்டை பில்ட் செய்வது கற்றுக்கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>உங்கள் ப்ராஜெக்ட்டை பில்ட் செய்யுங்கள்</h2>
+            
+            <p>ஒரு Vue ப்ராஜெக்ட் முடிந்ததும், அது "டெவலப்மென்ட் மோட்" இலிருந்து "பில்ட்" மோட்டுக்கு நகர வேண்டும்.</p>
+            
+            <p>பில்ட் கட்டளை எங்கள் Vue ப்ராஜெக்ட்டை .html, .js மற்றும் .css கோப்புகளாக தொகுக்கிறது, அவை பிரௌசரில் நேரடியாக இயக்குவதற்கு ஓப்டிமைஸ் செய்யப்பட்டவை.</p>
+            
+            <p>மற்றவர்கள் அணுகுவதற்கு ஒரு சர்வரில் கோப்புகளை உருவாக்க எங்கள் Vue ப்ராஜெக்ட்டை நாங்கள் பில்ட் செய்கிறோம்.</p>
+        </section>
+
+        <!-- To 'Build' The Web Page -->
+        <section class="content-section" id="build-webpage">
+            <h2>வலைப் பக்கத்தை 'பில்ட்' செய்ய</h2>
+            
+            <p>இந்த டுடோரியலில் இதுவரை, எங்கள் ப்ராஜெக்ட்கள் டெவலப்மென்ட் மோட்டில் இயங்கிக்கொண்டிருக்கின்றன, அதாவது Vite பில்ட் கருவி ஒரு டெவலப்மென்ட் சேவையகத்தை இயக்குகிறது. நீங்கள் டெவலப்மென்டின் போது மாற்றங்களைச் செய்து அவற்றைச் சேமிக்கும்போது, Vite உடனடியாக பக்கத்தைப் புதுப்பிக்கும். இதற்கு கணினியில் இருந்து நிறைய வளங்கள் தேவை.</p>
+            
+            <p>பக்கத்தை பொது மக்களுக்கு வெளியிட தயாராக இருக்கும் போது, டெவலப்மென்ட் கட்டத்திற்குப் பிறகு பில்ட் படி வருகிறது. பின்னர் Vite ஐ டெவலப்மென்ட் மோட்டில் இயக்காமல், எங்கள் ப்ராஜெக்ட்டை பிரௌசர் புரிந்துகொள்ளும் கோப்புகளாக பில்ட் செய்ய வேண்டும். சர்வர் வள பயன்பாட்டைக் குறைக்கவும் செயல்திறனை மேம்படுத்தவும் பில்ட் படி செய்யப்படுகிறது.</p>
+            
+            <p>உங்கள் Vue பயன்பாட்டை பில்ட் செய்ய, டெவலப்மென்ட் சேவையகம் இயங்கிக்கொண்டிருந்தால், 'Q' அல்லது 'ctrl'+'C' ஐ அழுத்துவதன் மூலம் நிறுத்தவும், பின்னர் எழுதவும்:</p>
+            
+            <div class="code-example">
+                <pre><code>npm run build</code></pre>
+            </div>
+            
+            <p>உங்கள் ப்ராஜெக்ட் பில்ட் செய்யப்படும்போது, Vite ஒரு dist என்ற கோப்புறையை உருவாக்குகிறது, பொது சேவையகத்தில் உங்கள் ப்ராஜெக்ட்டை இயக்க தேவையான அனைத்து கோப்புகளுடன், பிரௌசர் புரிந்துகொள்ளும் *.html, *.css மற்றும் *.js கோப்புகளுடன், டெவலப்மென்டின் போது நாம் பயன்படுத்தும் *.vue கோப்புகளுக்கு பதிலாக.</p>
+            
+            <div class="image-box">
+                <h4><span class="tip-icon">📁</span> படம் 30: Dist கோப்புறை</h4>
+                <img src="30.png" alt="Dist folder structure after Vue project build" style="max-width: 100%; border-radius: 8px; border: 2px solid #ddd;">
+                <p class="image-caption">Vue ப்ராஜெக்ட் பில்ட் செய்த பிறகு Dist கோப்புறை அமைப்பு</p>
+            </div>
+            
+            <p>பிரௌசரில் உங்கள் பில்ட் செய்யப்பட்ட ப்ராஜெக்ட்டைப் பார்க்க, கட்டளையைப் பயன்படுத்தவும்:</p>
+            
+            <div class="code-example">
+                <pre><code>npm run preview</code></pre>
+            </div>
+            
+            <p>இந்த கட்டளை dist கோப்புறையில் இருந்து பில்ட் செய்யப்பட்ட ப்ராஜெக்ட்டைக் காட்டும் ஒரு பிரௌசர் விண்டோவைத் திறக்க வேண்டும்.</p>
+        </section>
+
+        <!-- Vue Exercises -->
+        <section class="content-section" id="exercises">
+            <h2>Vue பயிற்சிகள்</h2>
+            
+            <p>பயிற்சிகளுடன் உங்களை சோதிக்கவும்</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> பயிற்சி:</h4>
+                <p>______ கட்டளை எங்கள் Vue ப்ராஜெக்ட்டை .html, .js மற்றும் .css கோப்புகளாக தொகுக்கிறது, அவை பிரௌசரில் நேரடியாக இயக்குவதற்கு ஓப்டிமைஸ் செய்யப்பட்டவை.</p>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">npm run dev</div>
+                            <div class="option-feedback incorrect">✗ தவறு! npm run dev டெவலப்மென்ட் மோட்டில் பயன்பாட்டை இயக்க பயன்படுகிறது, பில்ட் செய்ய அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">npm start</div>
+                            <div class="option-feedback incorrect">✗ தவறு! npm start பயன்பாட்டைத் தொடங்க பயன்படுகிறது, பில்ட் செய்ய அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">npm run build</div>
+                            <div class="option-feedback correct">✓ சரி! npm run build கட்டளை Vue ப்ராஜெக்ட்டை பில்ட் செய்யும் கோப்புகளாக தொகுக்கிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">npm compile</div>
+                            <div class="option-feedback incorrect">✗ தவறு! npm compile என்பது செல்லுபடியாகும் npm கட்டளை அல்ல</div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20Animations%20with%20v-for.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20Composition%20API.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">ப்ராஜெக்ட்டை பில்ட் செய்ய</a></li>
+                    <li><a href="#build-webpage">வலைப் பக்கத்தை பில்ட் செய்ய</a></li>
+                    <li><a href="#exercises">பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

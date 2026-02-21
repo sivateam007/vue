@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue $attrs Object - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+        
+        .attrs-visual {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        
+        .attrs-flow {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .flow-step {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            min-width: 150px;
+            text-align: center;
+        }
+        
+        .flow-step i {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .attrs-flow {
+                flex-direction: column;
+            }
+            
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+        
+        .example-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .example-title {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .example-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .example-card {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .example-card h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .example-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .attrs-properties {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .property-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 4px solid #27ae60;
+        }
+        
+        .property-card h4 {
+            color: #27ae60;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20Component%20Instance.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20%24data%20Object.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue $attrs Object</h2>
+            <p>Vue.js இல் பாழ்விழும் பண்புக்கூறுகளைக் கையாள $attrs பொருளைக் கற்றுக்கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Main Example -->
+        <section class="content-section" id="main-example">
+            <h2>Vue $attrs Object</h2>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            <p>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</p>
+            <p>id பாழ்விழும் பண்புக்கூறை &lt;p&gt; டேக்குக்கு இயக்க $attrs பொருளைப் பயன்படுத்துதல்.</p>
+            
+                </div>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h3&gt;Tigers&lt;/h3&gt;
+  &lt;img src="/img_tiger_small.jpg" alt="tiger"&gt;
+  &lt;p v-bind="$attrs"&gt;Tigers eat meat and not plants, so they are called carnivores.&lt;/p&gt;
+&lt;/template&gt;</code></pre>
+            </div>
+            
+            <p>கீழே மேலும் எடுத்துக்காட்டுகளைப் பார்க்கவும்.</p>
+        </section>
+
+        <!-- Definition and Usage -->
+        <section class="content-section" id="definition">
+            <h2>வரையறை மற்றும் பயன்பாடு</h2>
+            
+            <p>$attrs பொருள் கூறு டேக்கில் அமைக்கப்பட்ட பாழ்விழும் பண்புக்கூறுகள் மற்றும் நிகழ்வு கேட்பான்களைக் குறிக்கிறது.</p>
+            
+            <p>கூறு டேக்கில் அமைக்கப்பட்ட பாழ்விழும் பண்புக்கூறுகள் மற்றும் நிகழ்வு கேட்பான்களை ஒரு ரூட் உறுப்பு பெற வேண்டும் போது, அந்த உறுப்பில் v-bind="$attrs" பயன்படுத்துகிறோம்.</p>
+            
+            <div class="attrs-properties">
+                <div class="property-card">
+                    <h4><i class="fas fa-book-reader"></i> படிக்க மட்டும்</h4>
+                    <p>$attrs பொருள் படிக்க மட்டும் (read only) ஆகும். நீங்கள் அதை மாற்ற முடியாது.</p>
+                </div>
+                
+                <div class="property-card">
+                    <h4><i class="fas fa-arrow-down"></i> பாழ்விழும் பண்புக்கூறுகள்</h4>
+                    <p>புரொப்ஸ் அல்லாத பண்புக்கூறுகள் கூறு டேக்கில் அமைக்கப்பட்டு, கூறின் ரூட் உறுப்புக்கு விழுந்து செல்லும்.</p>
+                </div>
+                
+                <div class="property-card">
+                    <h4><i class="fas fa-code-branch"></i> பல ரூட் உறுப்புகள்</h4>
+                    <p>கூறில் ஒன்றுக்கு மேற்பட்ட ரூட் உறுப்புகள் இருந்தால், எந்த உறுப்பு பாழ்விழும் பண்புக்கூறுகளைப் பெற வேண்டும் என்பதைக் குறிப்பிட $attrs பொருளைப் பயன்படுத்துகிறோம்.</p>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🎯</span> முக்கிய குறிப்பு:</h4>
+                <p>பாழ்விழும் பண்புக்கூறுகள் என்பது கூறு டேக்கில் அமைக்கப்பட்ட பண்புக்கூறுகள் (புரொப்ஸ் அல்ல), இது கூறின் ரூட் உறுப்புக்கு விழுந்து செல்லும். கூறில் ஒன்றுக்கு மேற்பட்ட ரூட் உறுப்புகள் இருந்தால், எந்த உறுப்பு பாழ்விழும் பண்புக்கூறுகளைப் பெற வேண்டும் என்பதைக் குறிப்பிட $attrs பொருளைப் பயன்படுத்துகிறோம். டுடோரியலில் பாழ்விழும் பண்புக்கூறுகள் பற்றி மேலும் அறிக.</p>
+            </div>
+        </section>
+
+        <!-- More Examples -->
+        <section class="content-section" id="more-examples">
+            <h2>மேலும் எடுத்துக்காட்டுகள்</h2>
+            
+            <!-- Example 1 -->
+            <div class="example-container">
+                <h3 class="example-title">எடுத்துக்காட்டு 1</h3>
+                <p>பாழ்விழும் பண்புக்கூறுகள் id மற்றும் title, மற்றும் அவற்றின் மதிப்புகளைக் காண்பிக்க $attrs பொருளைப் பயன்படுத்துதல்.</p>
+                
+                <div class="code-example">
+                    <pre><code>&lt;template&gt;
+  &lt;h3&gt;Tigers&lt;/h3&gt;
+  &lt;img src="/img_tiger_small.jpg" alt="tiger"&gt;
+  &lt;p v-bind="$attrs"&gt;Tigers eat meat and not plants, so they are called carnivores.&lt;/p&gt;
+  &lt;hr&gt;
+  &lt;p&gt;&lt;strong&gt;Below is the content of the $attrs object:&lt;/strong&gt;&lt;/p&gt;
+  &lt;pre&gt;{{ attrsObject }}&lt;/pre&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      attrsObject: null
+    }
+  },
+  mounted() {
+    console.log(this.$attrs);
+    this.attrsObject = this.$attrs;
+  }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+#pink {
+  background-color: pink;
+  border-radius: 15px;
+  padding: 10px;
+}
+img {
+  width: 100%;
+  border-radius: 15px;
+}
+&lt;/style&gt;</code></pre>
+                </div>
+                
+                <div class="example-grid">
+                    <div class="example-card">
+                        <h4>பெற்றோர் பயன்பாடு:</h4>
+                        <div class="code-example">
+                            <pre>&lt;tiger-component 
+  id="pink"
+  title="Tiger Information"
+&gt;&lt;/tiger-component&gt;</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <h4>$attrs உள்ளடக்கம்:</h4>
+                        <div class="code-example">
+                            <pre>{
+  "id": "pink",
+  "title": "Tiger Information"
+}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Example 2 -->
+            <div class="example-container">
+                <h3 class="example-title">எடுத்துக்காட்டு 2</h3>
+                <p>பெற்றோர் கூறிலிருந்து நிகழ்வு கேட்பானைப் பெற &lt;img&gt; டேக்கில் $attrs பொருளைப் பயன்படுத்துதல்.</p>
+                
+                <div class="example-grid">
+                    <div class="example-card">
+                        <h4>குழந்தை கூறு (TigerComponent.vue):</h4>
+                        <div class="code-example">
+                            <pre><code>&lt;template&gt;
+  &lt;h3&gt;Toggle Image Size&lt;/h3&gt;
+  &lt;p&gt;Click the image to toggle the image size.&lt;/p&gt;
+  &lt;img v-bind="$attrs" src="/img_tiger_small.jpg" class="imgSmall"&gt;
+&lt;/template&gt;
+
+&lt;style&gt;
+.imgSmall {
+  width: 60%;
+}
+.imgLarge {
+  width: 100%;
+}
+img {
+  border-radius: 15px;
+  cursor: pointer;
+}
+&lt;/style&gt;</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <h4>பெற்றோர் கூறு (App.vue):</h4>
+                        <div class="code-example">
+                            <pre><code>&lt;template&gt;
+  &lt;tiger-component @click="toggleImageSize" /&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  methods: {
+    toggleImageSize(event) {
+      const img = event.target;
+      img.classList.toggle('imgSmall');
+      img.classList.toggle('imgLarge');
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <h4><span class="tip-icon">🔗</span> நிகழ்வு கேட்பான் பங்கீடு:</h4>
+                    <p>இந்த எடுத்துக்காட்டில், பெற்றோர் கூறிலிருந்து @click நிகழ்வு கேட்பான் குழந்தை கூறின் &lt;img&gt; உறுப்புக்கு $attrs மூலம் பங்கீடு செய்யப்படுகிறது.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Common Use Cases -->
+        <section class="content-section" id="use-cases">
+            <h2>பொதுவான பயன்பாட்டு வழக்குகள்</h2>
+            
+            <div class="best-practice-list">
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>பல ரூட் உறுப்புகள்:</strong> ஒன்றுக்கு மேற்பட்ட ரூட் உறுப்புகள் இருக்கும்போது பாழ்விழும் பண்புக்கூறுகளைக் கையாள</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>நிகழ்வு கேட்பான்கள்:</strong> பெற்றோரிடமிருந்து குழந்தை உறுப்புகளுக்கு நிகழ்வு கேட்பான்களைப் பங்கீடு செய்ய</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>CSS வர்க்கங்கள்/ஐடிகள்:</strong> பெற்றோரிடமிருந்து குழந்தை கூறு உறுப்புகளுக்கு வடிவமைப்புப் பண்புக்கூறுகளை அனுப்ப</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>தரவு பண்புக்கூறுகள்:</strong> பெற்றோரிடமிருந்து குழந்தை உறுப்புகளுக்கு தரவு-* பண்புக்கூறுகளை அனுப்ப</div>
+                </div>
+                
+                <div class="practice-item negative">
+                    <i class="fas fa-times-circle"></i>
+                    <div><strong>புரொப்ஸ் மாற்றீடு:</strong> புரொப்ஸ் பயன்படுத்த வேண்டிய இடங்களில் $attrs பயன்படுத்த வேண்டாம்</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- $attrs vs Props Comparison -->
+        <section class="content-section" id="comparison">
+            <h2>$attrs vs புரொப்ஸ் ஒப்பீடு</h2>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>அம்சம்</th>
+                            <th>$attrs</th>
+                            <th>புரொப்ஸ்</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>நோக்கம்</strong></td>
+                            <td>பாழ்விழும் பண்புக்கூறுகள்/நிகழ்வுகள்</td>
+                            <td>கூறுக்கு தரவு அனுப்ப</td>
+                        </tr>
+                        <tr>
+                            <td><strong>அறிவிப்பு</strong></td>
+                            <td>தானாக (அறிவிக்கத் தேவையில்லை)</td>
+                            <td>கூறில் வெளிப்படையாக அறிவிக்க வேண்டும்</td>
+                        </tr>
+                        <tr>
+                            <td><strong>மாற்றுத்திறன்</strong></td>
+                            <td>படிக்க மட்டும்</td>
+                            <td>பெற்றோரால் மாற்றப்படலாம்</td>
+                        </tr>
+                        <tr>
+                            <td><strong>வகைச் சரிபார்ப்பு</strong></td>
+                            <td>இல்லை</td>
+                            <td>TypeScript/வெளிப்படை வகைகள்</td>
+                        </tr>
+                        <tr>
+                            <td><strong>பயன்பாடு</strong></td>
+                            <td>v-bind="$attrs"</td>
+                            <td>:prop-name="value"</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Vue Exercises -->
+        <section class="content-section" id="exercises">
+            <h2>Vue பயிற்சிகள்</h2>
+            
+            <p>பயிற்சிகளுடன் உங்களை சோதிக்கவும்</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> கூறு டேக்கில் அமைக்கப்பட்ட பாழ்விழும் பண்புக்கூறுகள் மற்றும் நிகழ்வு கேட்பான்களைக் குறிக்க எந்த கூறு நிகழ்வு பொருள் பயன்படுகிறது?</h4>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">$data</div>
+                            <div class="option-feedback incorrect">✗ தவறு! $data பொருள் கூறு தரவுப் பண்புகளைக் குறிக்கிறது, பாழ்விழும் பண்புக்கூறுகளை அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">$props</div>
+                            <div class="option-feedback incorrect">✗ தவறு! $props பொருள் பெறப்பட்ட புரொப்ஸ் களைக் குறிக்கிறது, பாழ்விழும் பண்புக்கூறுகளை அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">$attrs</div>
+                            <div class="option-feedback correct">✓ சரி! $attrs பொருள் கூறு டேக்கில் அமைக்கப்பட்ட பாழ்விழும் பண்புக்கூறுகள் மற்றும் நிகழ்வு கேட்பான்களைக் குறிக்கிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">$slots</div>
+                            <div class="option-feedback incorrect">✗ தவறு! $slots பொருள் பெற்றோர் வழங்கிய slots களைக் குறிக்கிறது, பாழ்விழும் பண்புக்கூறுகளை அல்ல</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20Component%20Instance.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20%24data%20Object.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#main-example">முக்கிய எடுத்துக்காட்டு</a></li>
+                    <li><a href="#definition">வரையறை மற்றும் பயன்பாடு</a></li>
+                    <li><a href="#more-examples">மேலும் எடுத்துக்காட்டுகள்</a></li>
+                    <li><a href="#use-cases">பொதுவான பயன்பாட்டு வழக்குகள்</a></li>
+                    <li><a href="#comparison">$attrs vs புரொப்ஸ் ஒப்பீடு</a></li>
+                    <li><a href="#exercises">Vue பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

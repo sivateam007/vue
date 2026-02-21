@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue $emit() Method - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+        
+        .code-files {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .code-file {
+            background: #2d2d2d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .code-header {
+            background: #3d3d3d;
+            padding: 0.8rem 1rem;
+            color: white !important;
+            font-family: monospace;
+            font-weight: bold;
+            border-bottom: 1px solid #555;
+        }
+        
+        .code-content {
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        
+        /* Make ALL code text white */
+        .code-content pre,
+        .code-content code,
+        .code-example pre,
+        .code-example code {
+            color: white !important;
+        }
+        
+        /* Make sure code examples also have white text */
+        .code-example {
+            background-color: #2d2d2d;
+            color: white !important;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            overflow-x: auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .definition-table {
+            margin: 2rem 0;
+            overflow-x: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .definition-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        .definition-table th {
+            background: var(--git-color);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .definition-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+        
+        .definition-table tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20%24slots%20Object.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20%24forceUpdate%28%29%20Method.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue $emit() Method</h2>
+            <p>Vue $emit() மெத்தடைக் கற்றுக்கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Example -->
+        <section class="content-section" id="example">
+            <h2>Vue $emit() மெத்தட்</h2>
+            
+            <div class="code-example">
+                <pre><code>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்
+பொத்தான் கிளிக் செய்யப்படும் போது பேரென்ட் கம்போனென்டுக்கு ஒரு கஸ்டம் இவெண்டைத் தூண்ட $emit() மெத்தடைப் பயன்படுத்துதல்.</code></pre>
+            </div>
+            
+            <div class="code-files">
+                <div class="code-file">
+                    <div class="code-header">ChildComp.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h3&gt;ChildComp.vue&lt;/h3&gt;
+    &lt;p&gt;Click the button to trigger the custom event up to the parent component using the $emit() method.&lt;/p&gt;
+    &lt;button v-on:click="this.$emit('custom-event')"&gt;Trigger&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <p>கீழே மேலும் எடுத்துக்காட்டுகளைப் பார்க்கவும்.</p>
+        </section>
+
+        <!-- Definition and Usage -->
+        <section class="content-section" id="definition">
+            <h2>வரையறை மற்றும் பயன்பாடு</h2>
+            
+            <p>பில்ட்-இன் $emit() மெத்தட் ஒரு கஸ்டம் இவெண்டைத் தூண்டுகிறது, இது பேரென்ட் கம்போனென்டுக்கு தொடர்புகொள்வதற்குப் பயன்படுகிறது.</p>
+            
+            <div class="definition-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>வாதம்</th>
+                            <th>விளக்கம்</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>கஸ்டம் இவெண்ட் பெயர்</strong></td>
+                            <td>டிஃபால்ட். இந்த முதல் வாதம் $emit() மெத்தட் மூலம் தூண்டப்படும் கஸ்டம் இவெண்டின் பெயர்.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>மேலும் வாதங்கள்</strong></td>
+                            <td>ஆப்ஷனல். கஸ்டம் இவெண்டுடன் ஒன்று அல்லது அதற்கு மேற்பட்ட வாதங்கள் ஒரு பேலோடாக அனுப்பப்படலாம். (கீழே உள்ள எடுத்துக்காட்டு 1 மற்றும் 2 ஐப் பார்க்கவும்.)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p>emits ஆப்ஷன் கம்போனென்ட் எதை emit செய்கிறது என்பதை ஆவணப்படுத்த பயன்படுத்தப்படலாம். emits ஆப்ஷனைப் பயன்படுத்துவது வாசிப்புத்திறனை மேம்படுத்துகிறது, ஆனால் இது தேவையில்லை. (கீழே உள்ள எடுத்துக்காட்டு 3 ஐப் பார்க்கவும்.)</p>
+            
+            <p>Props எதிர் திசையில் தொடர்புகொள்வதற்குப் பயன்படுகிறது: பேரென்ட் கம்போனென்டிலிருந்து குழந்தை கம்போனென்டுக்கு கீழே. டுடோரியலில் props பற்றி மேலும் படிக்கவும்.</p>
+        </section>
+
+        <!-- More Examples -->
+        <section class="content-section" id="more-examples">
+            <h2>மேலும் எடுத்துக்காட்டுகள்</h2>
+            
+            <h3>எடுத்துக்காட்டு 1</h3>
+            <p>'message-sent' கஸ்டம் இவெண்டுடன், பேரென்ட் கம்போனென்டுக்கு ஒரு செய்தியை அனுப்ப $emit() மெத்தடைப் பயன்படுத்துதல்.</p>
+            
+            <div class="code-files">
+                <div class="code-file">
+                    <div class="code-header">ChildComp.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h3&gt;ChildComp.vue&lt;/h3&gt;
+    &lt;p&gt;Write something, and send the message up to the parent component using the $emit() method.&lt;/p&gt;
+    &lt;input type="text" v-model="message" placeholder="write something.."&gt;
+    &lt;button v-on:click="send"&gt;Send&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      message: null
+    }
+  },
+  methods: {
+    send() {
+      this.$emit('message-sent',this.message);
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+div {
+  border: solid black 1px;
+  padding: 10px;
+  max-width: 350px;
+  margin-top: 20px;
+}
+input {
+  display: block;
+  margin-bottom: 15px;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>எடுத்துக்காட்டு 2</h3>
+            <p>பேரென்ட் கம்போனென்டுக்கு ஒரு தயாரிப்பு பெயர் மற்றும் ரேட்டிங்கை அனுப்ப $emit() மெத்தடைப் பயன்படுத்துதல்.</p>
+            
+            <div class="code-files">
+                <div class="code-file">
+                    <div class="code-header">ChildComp.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h3&gt;ChildComp.vue&lt;/h3&gt;
+    &lt;p&gt;Rate a product:&lt;/p&gt;
+    &lt;input type="text" v-model="productName" placeholder="Product name.." ref="inpName"&gt;
+    &lt;input type="number" v-model="productRating" placeholder="Rating 1 to 10.."&gt;
+    &lt;button v-on:click="send"&gt;Register&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      productName: null,
+      productRating: null
+    }
+  },
+  methods: {
+    send() {
+      this.$emit('message-sent',this.productName,this.productRating);
+      this.productName = null;
+      this.productRating = null;
+      this.$refs.inpName.focus();
+    }
+  },
+  mounted() {
+    this.$refs.inpName.focus();
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+div {
+  border: solid black 1px;
+  padding: 10px;
+  max-width: 350px;
+  margin-top: 20px;
+}
+input {
+  display: block;
+  margin-bottom: 15px;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>எடுத்துக்காட்டு 3</h3>
+            <p>கம்போனென்ட் $emit() மெத்தட் மூலம் எதை emit செய்கிறது என்பதை ஆவணப்படுத்த emits ஆப்ஷனைப் பயன்படுத்துதல். இது தேவையில்லை, ஆனால் இது வாசிப்புத்திறனை மேம்படுத்துகிறது.</p>
+            
+            <div class="code-files">
+                <div class="code-file">
+                    <div class="code-header">ChildComp.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h3&gt;ChildComp.vue&lt;/h3&gt;
+    &lt;p&gt;Click the button to trigger the custom event up to the parent component using the $emit() method.&lt;/p&gt;
+    &lt;button v-on:click="this.$emit('custom-event')"&gt;Trigger&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  emits: ['custom-event']
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+div {
+  border: solid black 1px;
+  padding: 10px;
+  max-width: 350px;
+  margin-top: 20px;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Pages -->
+        <section class="content-section" id="related">
+            <h2>தொடர்புடைய பக்கங்கள்</h2>
+            
+            <div class="best-practice-list">
+                <div class="practice-item positive">
+                    <i class="fas fa-book"></i>
+                    <div><strong>Vue டுடோரியல்:</strong> Vue $emit() மெத்தட்</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-book"></i>
+                    <div><strong>Vue டுடோரியல்:</strong> Vue Props</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-book"></i>
+                    <div><strong>Vue டுடோரியல்:</strong> Vue Events</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-book"></i>
+                    <div><strong>Vue டுடோரியல்:</strong> Vue v-on டைரக்டிவ்</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-book"></i>
+                    <div><strong>Vue டுடோரியல்:</strong> Scoped ஸ்டைலிங்</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vue Exercises -->
+        <section class="content-section" id="exercises">
+            <h2>Vue பயிற்சிகள்</h2>
+            
+            <p>பயிற்சிகளுடன் உங்களை சோதிக்கவும்</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> பயிற்சி:</h4>
+                <p>பேரென்ட் கம்போனென்டுக்கு கஸ்டம் இவெண்டைத் தூண்ட பயன்படுத்தப்படும் Vue இன் பில்ட்-இன் மெத்தட் எது?</p>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">$on()</div>
+                            <div class="option-feedback incorrect">✗ தவறு! $on() மெத்தட் இவெண்டுகளைக் கேட்கப் பயன்படுகிறது, தூண்ட அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">$props()</div>
+                            <div class="option-feedback incorrect">✗ தவறு! $props() மெத்தட் props ஐ அணுகப் பயன்படுகிறது, இவெண்டுகளைத் தூண்ட அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">$emit()</div>
+                            <div class="option-feedback correct">✓ சரி! $emit() மெத்தட் பேரென்ட் கம்போனென்டுக்கு கஸ்டம் இவெண்டுகளைத் தூண்டப் பயன்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">$trigger()</div>
+                            <div class="option-feedback incorrect">✗ தவறு! Vue இல் $trigger() என்ற பில்ட்-இன் மெத்தட் இல்லை</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20%24slots%20Object.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20%24forceUpdate%28%29%20Method.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#example">$emit() மெத்தட் எடுத்துக்காட்டு</a></li>
+                    <li><a href="#definition">வரையறை மற்றும் பயன்பாடு</a></li>
+                    <li><a href="#more-examples">மேலும் எடுத்துக்காட்டுகள்</a></li>
+                    <li><a href="#related">தொடர்புடைய பக்கங்கள்</a></li>
+                    <li><a href="#exercises">பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

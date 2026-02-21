@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue $refs Object - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20$props%20Object.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20$root%20Object.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue $refs Object</h2>
+            <p>Vue $refs பொருளைப் பற்றி அறிந்து கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue $refs பொருள்</h2>
+            
+            <p>$refs பொருள் ref பண்புடன் குறிக்கப்பட்ட DOM உறுப்புகளை சேமிக்கிறது.</p>
+            
+            <p>$refs பொருளுக்குள் உள்ள உறுப்புகளை this கீ வொர்ட் மூலம் அணுகலாம்.</p>
+        </section>
+
+        <!-- Example Get your own Vue Server -->
+        <section class="content-section" id="example">
+            <h2>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</h2>
+            
+            <p>&lt;p&gt; குறிக்குள் உள்ள உரையை மாற்ற ஒரு முறைக்குள் $refs பொருளைப் பயன்படுத்துவது.</p>
+            
+            <div class="code-example">
+                <h3>Example</h3>
+                <pre><code>methods: {
+  changeVal() {
+    this.$refs.pEl.innerHTML = "Hello!";
+  }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Definition and Usage -->
+        <section class="content-section" id="definition">
+            <h2>வரையறை மற்றும் பயன்பாடு</h2>
+            
+            <p>உள்ளமைக்கப்பட்ட ref பண்புடன் குறிக்கப்பட்ட DOM உறுப்புகள் $refs பொருளில் சேமிக்கப்படுகின்றன.</p>
+            
+            <p>$refs பொருளுக்குள் உள்ள உறுப்புகளை this கீ வொர்ட் மூலம் அணுகலாம்.</p>
+            
+            <p>DOM உறுப்புகளைப் படிக்க அல்லது மாற்றியமைக்க $refs பொருள் பயன்படுத்தப்படுகிறது, இது plain JavaScript இல் querySelector() மற்றும் getElementById() பயன்படுத்தப்படுவது போன்றது.</p>
+        </section>
+
+        <!-- More Examples -->
+        <section class="content-section" id="more-examples">
+            <h2>மேலும் எடுத்துக்காட்டுகள்</h2>
+            
+            <div class="example-section">
+                <h3>Example 1</h3>
+                <p>முதல் &lt;p&gt; குறியிலிருந்து உரை இரண்டாவது &lt;p&gt; குறிக்கு நகலெடுக்கப்படுகிறது.</p>
+                
+                <div class="code-example">
+                    <h4>Template</h4>
+                    <pre><code>&lt;template&gt;
+  &lt;h1&gt;Example&lt;/h1&gt;
+  &lt;p ref="p1"&gt;Click the button to copy this text into the paragraph below.&lt;/p&gt;
+  &lt;button @click="transferText"&gt;Transfer text&lt;/button&gt;
+  &lt;p ref="p2"&gt;...&lt;/p&gt;
+&lt;/template&gt;</code></pre>
+                </div>
+                
+                <div class="code-example">
+                    <h4>Script</h4>
+                    <pre><code>&lt;script&gt;
+  export default {
+    methods: {
+      transferText() { 
+        this.$refs.p2.innerHTML = this.$refs.p1.innerHTML;
+      }
+    }
+  };
+&lt;/script&gt;</code></pre>
+                </div>
+            </div>
+            
+            <div class="example-section">
+                <h3>Example 2</h3>
+                <p>ஒரு &lt;p&gt; உறுப்பு உள்ளீட்டுப் புலத்தில் எழுதப்படுவதைப் போலவே உள்ளடக்கத்தைப் பெறுகிறது.</p>
+                
+                <div class="code-example">
+                    <h4>Template</h4>
+                    <pre><code>&lt;template&gt;
+  &lt;h1&gt;Example&lt;/h1&gt;
+  &lt;p&gt;Start writing inside the input element, and the text will be copied into the last paragraph by the use of the '$refs' object.&lt;/p&gt;
+  &lt;input ref="inputEl" @input="getRefs" placeholder="Write something.."&gt;
+  &lt;p ref="pEl"&gt;&lt;/p&gt;
+&lt;/template&gt;</code></pre>
+                </div>
+                
+                <div class="code-example">
+                    <h4>Script</h4>
+                    <pre><code>&lt;script&gt;
+  export default {
+    methods: {
+      getRefs() { 
+        this.$refs.pEl.innerHTML = this.$refs.inputEl.value;
+      }
+    }
+  };
+&lt;/script&gt;</code></pre>
+                </div>
+            </div>
+            
+            <div class="example-section">
+                <h3>Example 3</h3>
+                <p>பொத்தான் $refs பொருளுக்குள் ஒரு வரிசை உறுப்பாக சேமிக்கப்பட்ட மூன்றாவது பட்டியல் உறுப்பை வெளிப்படுத்துகிறது.</p>
+                
+                <div class="code-example">
+                    <h4>Template</h4>
+                    <pre><code>&lt;template&gt;
+  &lt;h1&gt;Example&lt;/h1&gt;
+  &lt;p&gt;Click the button to reveal the 3rd list element stored as an array element in the $refs object.&lt;/p&gt;
+  &lt;button @click="getValue"&gt;Get the 3rd list element&lt;/button&gt;&lt;br&gt;
+  &lt;ul&gt;
+    &lt;li v-for="x in liTexts" ref="liEl"&gt;{{ x }}&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;pre&gt;{{ thirdEl }}&lt;/pre&gt;
+&lt;/template&gt;</code></pre>
+                </div>
+                
+                <div class="code-example">
+                    <h4>Script</h4>
+                    <pre><code>&lt;script&gt;
+  export default {
+    data() {
+      return {
+        thirdEl: ' ',
+        liTexts: ['Apple','Banana','Kiwi','Tomato','Lichi']
+      }
+    },
+    methods: {
+      getValue() { 
+        this.thirdEl = this.$refs.liEl[2].innerHTML;
+        console.log("this.$refs.liEl = ",this.$refs.liEl);
+      }
+    }
+  };
+&lt;/script&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercise Section -->
+        <section class="content-section" id="exercise">
+            <h2>பயிற்சி</h2>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> Vue $refs பொருள் எதற்காக பயன்படுத்தப்படுகிறது?</h4>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">பெற்றோர் கூறை அணுக</div>
+                            <div class="option-feedback incorrect">✗ தவறு! பெற்றோர் கூறை அணுக $parent பொருள் பயன்படுத்தப்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">DOM உறுப்புகளை அணுக மற்றும் மாற்ற</div>
+                            <div class="option-feedback correct">✓ சரி! $refs பொருள் ref பண்புடன் குறிக்கப்பட்ட DOM உறுப்புகளை அணுகவும் மாற்றவும் பயன்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">கூறு props ஐக் காண்பிக்க</div>
+                            <div class="option-feedback incorrect">✗ தவறு! props ஐக் காண்பிக்க $props பொருள் பயன்படுத்தப்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">ரூட் DOM முனையை அணுக</div>
+                            <div class="option-feedback incorrect">✗ தவறு! ரூட் DOM முனையை அணுக $el பொருள் பயன்படுத்தப்படுகிறது</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Pages -->
+        <section class="content-section" id="related">
+            <h2>தொடர்புடைய பக்கங்கள்</h2>
+            
+            <div class="best-practice-list">
+                <div class="practice-item positive">
+                    <i class="fas fa-book"></i>
+                    <div>Vue டுடோரியல்: Vue டெம்ப்ளேட் Refs</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-code"></i>
+                    <div>Vue குறிப்பு: Vue 'ref' பண்பு</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20$props%20Object.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20$root%20Object.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Tamil இல் தரமான நிரலாக்க கல்வியை வழங்கும் முன்னணி கல்வி நிறுவனம்.</p>
+            </div>
+            <div class="footer-column">
+                <h3>விரைவு இணைப்புகள்</h3>
+                <ul>
+                    <li><a href="#introduction">Vue $refs பொருள்</a></li>
+                    <li><a href="#example">எடுத்துக்காட்டுகள்</a></li>
+                    <li><a href="#definition">வரையறை மற்றும் பயன்பாடு</a></li>
+                    <li><a href="#more-examples">மேலும் எடுத்துக்காட்டுகள்</a></li>
+                    <li><a href="#exercise">பயிற்சி</a></li>
+                    <li><a href="#related">தொடர்புடைய பக்கங்கள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>தொடர்பு</h3>
+                <ul>
+                    <li><a href="#">எங்களைப் பற்றி</a></li>
+                    <li><a href="#">தொடர்பு கொள்ளுங்கள்</a></li>
+                    <li><a href="#">இடம் மற்றும் நேரங்கள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>எங்களைப் பின்தொடருங்கள்</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

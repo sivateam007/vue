@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Composition API - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+        
+        /* API comparison visualization */
+        .api-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .api-card {
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 5px solid;
+        }
+        
+        .options-api {
+            border-top-color: #28a745;
+            background: linear-gradient(135deg, #f0fff4 0%, #e6ffe6 100%);
+        }
+        
+        .composition-api {
+            border-top-color: #007bff;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f7ff 100%);
+        }
+        
+        .api-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .api-header i {
+            font-size: 2rem;
+        }
+        
+        .options-api .api-header i {
+            color: #28a745;
+        }
+        
+        .composition-api .api-header i {
+            color: #007bff;
+        }
+        
+        .code-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .code-column h4 {
+            text-align: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid;
+        }
+        
+        .options-code h4 {
+            color: #28a745;
+            border-bottom-color: #28a745;
+        }
+        
+        .composition-code h4 {
+            color: #007bff;
+            border-bottom-color: #007bff;
+        }
+        
+        @media (max-width: 768px) {
+            .api-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .code-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .composition-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            border-left: 5px solid var(--git-color);
+        }
+        
+        .flow-step {
+            text-align: center;
+            flex: 1;
+            padding: 1rem;
+        }
+        
+        .flow-step i {
+            font-size: 2rem;
+            color: var(--git-color);
+            margin-bottom: 1rem;
+        }
+        
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Build%20Your%20Project.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20Built-in%20Attributes.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue Composition API</h2>
+            <p>Options API க்கு மாற்றாக Vue பயன்பாடுகளை எழுதுவதற்கான ஒரு வழி</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue Composition API</h2>
+            
+            <p>Composition API என்பது இந்த டுடோரியலின் மற்ற இடங்களில் பயன்படுத்தப்படும் Options API க்கு மாற்றாக Vue பயன்பாடுகளை எழுதுவதற்கான ஒரு வழியாகும்.</p>
+            
+            <p>Composition API இல் நாம் குறியீட்டை மிகவும் சுதந்திரமாக எழுதலாம், ஆனால் அதற்கு ஆழமான புரிதல் தேவைப்படுகிறது, மேலும் அது தொடக்கநிலையாளர்களுக்கு குறைவாகப் பயன்படுத்தக்கூடியதாகக் கருதப்படுகிறது.</p>
+            
+            <div class="composition-flow">
+                <div class="flow-step">
+                    <i class="fas fa-puzzle-piece"></i>
+                    <h4>Functions</h4>
+                    <p>கூறு செயல்பாடுகள்</p>
+                    <code>ref(), computed()</code>
+                </div>
+                
+                <div class="flow-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                
+                <div class="flow-step">
+                    <i class="fas fa-code"></i>
+                    <h4>Logic</h4>
+                    <p>தர்க்கரீதியான குழு</p>
+                    <code>script setup</code>
+                </div>
+                
+                <div class="flow-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                
+                <div class="flow-step">
+                    <i class="fas fa-rocket"></i>
+                    <h4>Reactivity</h4>
+                    <p>தானாக புதுப்பிப்பு</p>
+                    <code>.value</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Composition API Overview -->
+        <section class="content-section" id="composition-overview">
+            <h2>Composition API</h2>
+            
+            <p>Composition API உடன், நாம் Options API இலிருந்து பழக்கமான Vue நிகழ்வு கட்டமைப்பைப் பயன்படுத்துவதற்குப் பதிலாக இறக்குமதி செய்யப்பட்ட Vue செயல்பாடுகளைப் பயன்படுத்தி தர்க்கம் எழுதப்படுகிறது.</p>
+            
+            <p>ஒரு பொத்தானுடன் சேமிப்பகத்தில் உள்ள தட்டச்சுப்பொறிகளின் எண்ணிக்கையைக் குறைக்கும் ஒரு Vue பயன்பாட்டை எழுத Composition API எவ்வாறு பயன்படுத்தப்படலாம்:</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🎯</span> எடுத்துக்காட்டு</h4>
+                <p>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</p>
+                <p>App.vue:</p>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Example&lt;/h1&gt;
+  &lt;img src="/img_typewriter.jpeg" alt="Typewriter"&gt;
+  &lt;p&gt;Typewriters left in storage: {{ typeWriters }}&lt;/p&gt;
+  &lt;button @click="remove"&gt;Remove one&lt;/button&gt;
+  &lt;p style="font-style: italic;"&gt;"{{ storageComment }}"&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+  import { ref, computed } from 'vue'
+
+  const typeWriters = ref(10);
+
+  function remove(){
+    if(typeWriters.value>0){
+      typeWriters.value--;
+    }
+  }
+
+  const storageComment = computed(
+    function(){
+      if(typeWriters.value > 5) {
+        return "Many left"
+      }
+      else if(typeWriters.value > 0){
+        return "Very few left"
+      }
+      else {
+        return "No typewriters left"
+      }
+    }
+  )
+&lt;/script&gt;</code></pre>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🔑</span> Composition API முக்கிய புள்ளிகள்:</h4>
+                <p><strong>வரி 9:</strong> setup பண்புக்கூறு Composition API பயன்படுத்துவதை எளிதாக்குகிறது. எடுத்துக்காட்டாக, setup பண்புக்கூறைப் பயன்படுத்துவதன் மூலம், மாறிகள் மற்றும் செயல்பாடுகளை நேரடியாக <code>&lt;template&gt;</code> க்குள் பயன்படுத்தலாம்.</p>
+                <p><strong>வரி 10:</strong> ref மற்றும் computed பயன்படுத்தப்படுவதற்கு முன்பு இறக்குமதி செய்யப்பட வேண்டும். Options API இல், reactive மாறிகளை அறிவிக்க அல்லது computed பண்புகளைப் பயன்படுத்த எதையும் இறக்குமதி செய்ய தேவையில்லை.</p>
+                <p><strong>வரி 12:</strong> ref ஆரம்ப மதிப்பாக '10' உடன் 'typewriters' பண்பை reactive ஆக அறிவிக்கப் பயன்படுகிறது.</p>
+            </div>
+        </section>
+
+        
+        </section>
+
+        <!-- Options API -->
+        <section class="content-section" id="options-api">
+            <h2>Options API</h2>
+            
+            <p>Options API இந்த டுடோரியலின் மற்ற இடங்களில் பயன்படுத்தப்படுவது.</p>
+            
+            <p>இந்த டுடோரியலுக்கு Options API தேர்ந்தெடுக்கப்பட்டது, ஏனெனில் அதற்கு அடையாளம் காணக்கூடிய கட்டமைப்பு உள்ளது மற்றும் தொடக்கநிலையாளர்களுடன் தொடங்குவதற்கு எளிதானதாகக் கருதப்படுகிறது.</p>
+            
+            <p>ஒரு எடுத்துக்காட்டாக, Options API இல் உள்ள கட்டமைப்பு தரவு பண்புகள், முறைகள் மற்றும் computed பண்புகள் அனைத்தையும் தெளிவாக பிரிக்கப்பட்ட Vue நிகழ்வின் வெவ்வேறு பகுதிகளில் வைக்கிறது.</p>
+            
+            <p>இங்கே Options API உடன் எழுதப்பட்ட மேலே உள்ள எடுத்துக்காட்டு உள்ளது:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Example&lt;/h1&gt;
+  &lt;img src="/img_typewriter.jpeg" alt="Typewriter"&gt;
+  &lt;p&gt;Typewriters left in storage: {{ typeWriters }}&lt;/p&gt;
+  &lt;button @click="remove"&gt;Remove one&lt;/button&gt;
+  &lt;p style="font-style: italic;"&gt;"{{ storageComment }}"&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() { 
+    return {
+      typeWriters: 10
+    };
+  },
+  methods: {
+    remove(){
+      if(this.typeWriters>0){
+        this.typeWriters--;
+      }
+    }
+  },
+  computed: {
+    storageComment(){
+      if(this.typeWriters > 5) {
+        return "Many left"
+      }
+      else if(this.typeWriters > 0){
+        return "Very few left"
+      }
+      else {
+        return "No typewriters left"
+      }
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Exercise Section (ONLY ONE) -->
+        <section class="content-section" id="exercise">
+            <h2>Vue Composition API பயிற்சி</h2>
+            
+            <p>Composition API Options API க்கு மாற்றாக Vue பயன்பாடுகளை எழுதுவதற்கான ஒரு வழியாகும்.</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> Composition API இல் reactive மாறியை உருவாக்க எந்த Vue செயல்பாடு பயன்படுத்தப்படுகிறது?</h4>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">reactive()</div>
+                            <div class="option-feedback incorrect">✗ தவறு! reactive() பொருள்களுக்குப் பயன்படுத்தப்படுகிறது, ஆனால் ஒற்றை மதிப்புகளுக்கு ref() பரிந்துரைக்கப்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">ref()</div>
+                            <div class="option-feedback correct">✓ சரி! ref() Composition API இல் reactive மாறிகளை உருவாக்கப் பயன்படுகிறது. இது ஒரு .value பண்புடன் ஒரு reactive குறிப்பை உருவாக்குகிறது. எடுத்துக்காட்டு: const count = ref(0); count.value++</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">computed()</div>
+                            <div class="option-feedback incorrect">✗ தவறு! computed() computed பண்புகளுக்குப் பயன்படுகிறது, சாதாரண reactive மாறிகளுக்கு அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">data()</div>
+                            <div class="option-feedback incorrect">✗ தவறு! data() Options API இல் பயன்படுத்தப்படுகிறது, Composition API இல் அல்ல</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Build%20Your%20Project.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20Built-in%20Attributes.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">Composition API</a></li>
+                    <li><a href="#composition-overview">Composition API மேலோட்டம்</a></li>
+                    <li><a href="#options-api">Options API</a></li>
+                    <li><a href="#exercise">பயிற்சிகள்</a></li>
+                    <li><a href="#api-comparison">API ஒப்பீடு</a></li>
+                    <li><a href="#code-comparison">குறியீட்டு ஒப்பீடு</a></li>
+                    <li><a href="#composition-functions">Composition செயல்பாடுகள்</a></li>
+                    <li><a href="#when-to-use">எப்போது பயன்படுத்துவது</a></li>
+                    <li><a href="#composables">Composables</a></li>
+                    <li><a href="#migration">மாற்றுதல்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

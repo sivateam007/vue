@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 'expose' Option - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important;
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue 'emits' Option.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue Lifecycle Hooks.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue 'expose' Option</h2>
+            <p>பெற்றோர் கூறு பயன்படுத்துவதற்கு ஒரு முறையைக் கிடைக்கச் செய்ய expose விருப்பத்தைப் பயன்படுத்துதல்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue 'expose' Option</h2>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🏁</span> உதவிக்குறிப்பு:</h4>
+                <p>உங்கள் Vue சேவையகத்தைப் பெறுங்கள்</p>
+            </div>
+            
+            <p>பெற்றோர் கூறு பயன்படுத்துவதற்கு ஒரு முறையைக் கிடைக்கச் செய்ய expose விருப்பத்தைப் பயன்படுத்துதல்.</p>
+        </section>
+
+        <!-- Example Section -->
+        <section class="content-section" id="example">
+            <h2>Example</h2>
+            
+            <div class="code-example">
+                <pre><code>export default {
+  expose: ['createMessage'],
+  data() {
+    return {
+      message: ' '
+    }
+  },
+  methods: {
+    createMessage(msg) {
+      this.message += msg + ' '
+    }
+  }
+}</code></pre>
+            </div>
+            
+            <p>கீழே மேலும் எடுத்துக்காட்டுகளைப் பார்க்கவும்</p>
+        </section>
+
+        <!-- Definition and Usage -->
+        <section class="content-section" id="definition">
+            <h2>வரையறை மற்றும் பயன்பாடு</h2>
+            
+            <p>expose விருப்பம் டெம்ப்ளேட் refs மூலம் பெற்றோர் கூறுக்குக் கிடைக்கும் பண்புகளைப் பட்டியலிட பயன்படுகிறது.</p>
+            
+            <p>இயல்பாக, அனைத்து குழந்தை கூறு பண்புகளும் டெம்ப்ளேட் refs பயன்பாட்டின் மூலம் பெற்றோர் கூறுக்குக் கிடைக்கும்.</p>
+            
+            <p>இதன் பொருள் குழந்தை கூறுக்கு expose விருப்பம் இல்லையென்றால், மற்றும் பெற்றோர் கூறு குழந்தை கூறில் உள்ளமைக்கப்பட்ட பண்பு ref="childComp" ஐப் பயன்படுத்தினால், பெற்றோர் கூறு குழந்தை கூறில் உள்ள தரவு பண்பு 'message' ஐக் குறியீடு this.$refs.childComp.message உடன் அணுக முடியும். (எடுத்துக்காட்டு 1 ஐப் பார்க்கவும்)</p>
+            
+            <p>ஆனால், expose விருப்பத்தைப் பயன்படுத்தும் போது, expose விருப்பத்தில் பட்டியலிடப்பட்ட பண்புகள் மட்டுமே பெற்றோருக்குக் கிடைக்கும். (எடுத்துக்காட்டு 2 ஐப் பார்க்கவும்)</p>
+        </section>
+
+        <!-- More Examples -->
+        <section class="content-section" id="more-examples">
+            <h2>மேலும் எடுத்துக்காட்டுகள்</h2>
+            
+            <h3>Example 1</h3>
+            <p>குழந்தை கூறில் expose விருப்பம் பயன்படுத்தப்படவில்லை, எனவே குழந்தை கூறில் உள்ள அனைத்து பண்புகளும் பெற்றோர் கூறுக்குக் கிடைக்கும்.</p>
+            
+            <div class="code-comparison">
+                <div class="code-column">
+                    <h4>ChildComp.vue:</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h3&gt;ChildComp.vue&lt;/h3&gt;
+    &lt;p&gt;Message from parent component:&lt;/p&gt;
+    &lt;p id="pEl"&gt;{{ message }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      message: ' '
+    }
+  },
+  methods: {
+    createAlert() {
+      alert('This is an alert, from the child component')
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+div {
+  border: solid black 1px;
+  padding: 10px;
+  max-width: 350px;
+  margin-top: 20px;
+}
+#pEl {
+  background-color: lightgreen;
+  font-family: 'Courier New', Courier, monospace;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-column">
+                    <h4>App.vue:</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;template&gt;
+  &lt;h2&gt;Example expose Option&lt;/h2&gt;
+  &lt;p&gt;The 'expose' option is not used, so all child properties are available to the parent by default, both the 'message' data property, and the 'createAlert()' method:&lt;/p&gt;
+  &lt;button v-on:click="{ this.$refs.childComp.message += 'Hello! '; }"&gt;Write 'Hello!'&lt;/button&gt;
+  &lt;button v-on:click="{ this.$refs.childComp.createAlert(); }"&gt;Create alert&lt;/button&gt;
+  &lt;child-comp ref="childComp"/&gt;
+&lt;/template&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Example 2</h3>
+            <p>பெற்றோர் கூறிலிருந்து குழந்தை கூறில் உள்ள 'createMessage' முறையைப் பயன்படுத்துவது வேலை செய்யாது, ஏனெனில் 'message' தரவு பண்பு மட்டுமே குழந்தை கூறின் expose விருப்பத்தில் பட்டியலிடப்பட்டுள்ளது.</p>
+            
+            <div class="code-comparison">
+                <div class="code-column">
+                    <h4>ChildComp.vue:</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;h3&gt;ChildComp.vue&lt;/h3&gt;
+    &lt;p&gt;Message from parent component:&lt;/p&gt;
+    &lt;p id="pEl"&gt;{{ message }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  expose: ['message'],
+  data() {
+    return {
+      message: ' '
+    }
+  },
+  methods: {
+    createMessage(msg) {
+      this.message += msg + ' '
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+div {
+  border: solid black 1px;
+  padding: 10px;
+  max-width: 350px;
+  margin-top: 20px;
+}
+#pEl {
+  background-color: lightgreen;
+  font-family: 'Courier New', Courier, monospace;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-column">
+                    <h4>App.vue:</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;template&gt;
+  &lt;h2&gt;Example expose Option&lt;/h2&gt;
+  &lt;p&gt;Only the 'message' data property is listed in the 'expose' option, so the 'createMessage' method from the child component is not available, and will not work:&lt;/p&gt;
+  &lt;input type="text" v-model="inpText" placeholder="Write something"&gt;
+  &lt;button v-on:click="useMet"&gt;Use exposed method&lt;/button&gt;
+  &lt;child-comp ref="childComp"/&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      inpText: ''
+    }
+  },
+  methods: {
+    useMet() {
+      this.$refs.childComp.createMessage(this.inpText);
+    }
+  },
+  mounted() {
+    this.$refs.childComp.message = 'Initial message!';
+  }
+}
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercise Section -->
+        <section class="content-section" id="exercise">
+            <h2>Vue Expose பயிற்சி</h2>
+            
+            <p>இந்த டுடோரியலில் உள்ள விளக்கங்களைச் சரிபார்க்கக்கூடிய பயிற்சி.</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> Vue கூறுகளில் expose விருப்பத்தின் சரியான விளக்கம் எது?</h4>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">கூறை வெளிப்புற API க்கு வெளிப்படுத்த</div>
+                            <div class="option-feedback incorrect">✗ தவறு! expose விருப்பம் வெளிப்புற API உடன் தொடர்பில்லாதது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">கூறின் CSS ஸ்டைல்களை கட்டுப்படுத்த</div>
+                            <div class="option-feedback incorrect">✗ தவறு! expose விருப்பம் ஸ்டைல்களுடன் தொடர்பில்லாதது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">பெற்றோர் கூறிலிருந்து அனைத்து பண்புகளையும் மறைக்க</div>
+                            <div class="option-feedback incorrect">✗ தவறு! expose விருப்பம் மட்டுப்படுத்துகிறது மற்றும் மறைக்காது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">டெம்ப்ளேட் refs மூலம் பெற்றோர் கூறுக்குக் கிடைக்கும் பண்புகளை மட்டுப்படுத்த</div>
+                            <div class="option-feedback correct">✓ சரி! expose விருப்பம் பெற்றோர் கூறுக்குக் கிடைக்கும் பண்புகளை கட்டுப்படுத்துகிறது</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Pages -->
+        <section class="content-section" id="related">
+            <h2>தொடர்புடைய பக்கங்கள்</h2>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h4>Vue டுடோரியல்: Vue Template Refs</h4>
+                    <p>Vue டெம்ப்ளேட் refs பற்றிய முழுமையான டுடோரியல்</p>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-icon">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h4>Vue டுடோரியல்: Vue Components</h4>
+                    <p>Vue கூறுகள் பற்றிய முழுமையான டுடோரியல்</p>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h4>Vue குறிப்பு: Vue 'ref' Attribute</h4>
+                    <p>Vue 'ref' பண்பின் முழுமையான குறிப்பு</p>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-icon">
+                        <i class="fas fa-object-group"></i>
+                    </div>
+                    <h4>Vue குறிப்பு: Vue $refs Object</h4>
+                    <p>Vue $refs பொருளின் முழுமையான குறிப்பு</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue 'emits' Option.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue Lifecycle Hooks.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">Vue 'expose' Option</a></li>
+                    <li><a href="#example">எடுத்துக்காட்டு</a></li>
+                    <li><a href="#definition">வரையறை மற்றும் பயன்பாடு</a></li>
+                    <li><a href="#more-examples">மேலும் எடுத்துக்காட்டுகள்</a></li>
+                    <li><a href="#exercise">Vue Expose பயிற்சி</a></li>
+                    <li><a href="#related">தொடர்புடைய பக்கங்கள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

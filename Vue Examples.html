@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Vue Examples - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+        
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .example-category {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border-left: 4px solid var(--git-color);
+        }
+        
+        .example-category:hover {
+            transform: translateY(-5px);
+        }
+        
+        .example-category h3 {
+            color: var(--git-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .example-item {
+            margin: 0.8rem 0;
+            padding: 0.8rem;
+            background: #f9f9f9;
+            border-radius: 5px;
+            border-left: 3px solid #667eea;
+            transition: background 0.3s;
+        }
+        
+        .example-item:hover {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20'serverPrefetch'%20Lifecycle%20Hook.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="certificate.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Detailed Vue Examples</h2>
+            <p>Vue.js இன் விரிவான எடுத்துக்காட்டுகளை அறிந்து கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Introduction to Vue</h2>
+            
+            <p>Vue.js என்பது பயனர் இடைமுகங்களை உருவாக்குவதற்கான ஒரு முன்னேற்ற ஜாவாஸ்கிரிப்ட் கட்டமைப்பாகும்.</p>
+            
+            <div class="examples-grid">
+                <div class="example-category">
+                    <h3>அடிப்படை எடுத்துக்காட்டுகள்</h3>
+                    <div class="example-item">ஒரு எளிய "Hello World" நிரலை உருவாக்கவும்</div>
+                    <div class="example-item">உரை இடைச்செருகல் மூலம் ஒரு நிரலை உருவாக்கவும்</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>The v-bind Directive</h3>
+                    <div class="example-item">ஒரு &lt;div&gt; உறுப்பை ஒரு வகுப்போடு இணைக்கவும்</div>
+                    <div class="example-item">ஒரு &lt;img&gt; உறுப்பை ஒரு பட கோப்போடு இணைக்கவும்</div>
+                    <div class="example-item">எழுத்துரு அளவை மாற்றவும்</div>
+                    <div class="example-item">வேறு வழியில் எழுத்துரு அளவை மாற்றவும்</div>
+                    <div class="example-item">மற்றொரு வழியில் எழுத்துரு அளவை மாற்றவும்</div>
+                    <div class="example-item">பின்புப்பக்க வண்ணத்தை மாற்றவும்</div>
+                    <div class="example-item">பின்புப்பக்க வண்ணத்தை மாற்ற v-bind மற்றும் ஒரு JavaScript நிபந்தனையைப் பயன்படுத்தவும்</div>
+                    <div class="example-item">ஒரு &lt;div&gt; உறுப்பை ஒரு வகுப்போடு, நிபந்தனையுடன் இணைக்கவும்</div>
+                    <div class="example-item">ஒரு &lt;div&gt; உறுப்பை ஒரு வகுப்போடு, நிபந்தனையுடன், தரவுப் பண்புடன் இணைக்கவும்</div>
+                    <div class="example-item">v-bind சுருக்க எழுத்தைப் பயன்படுத்தவும்</div>
+                    <div class="example-item">உள்ளீட்டு வரம்பு உறுப்பைப் பயன்படுத்தி ஒரு படத்தை வெளிப்படுத்த உடைப்பை மாற்றவும்</div>
+                    <div class="example-item">v-for உடன் உருவாக்கப்பட்ட படங்கள் கிளிக் செய்யப்படும் போது ஒரு வகுப்பை ஒதுக்கவும்</div>
+                    <div class="example-item">வகுப்பு மற்றும் v-bind:class உடன் அமைக்கப்பட்ட CSS விதிகள் இணைக்கப்படுகின்றன</div>
+                    <div class="example-item">v-bind:class உடன் ஒன்றுக்கு மேற்பட்ட வகுப்புகளை கமாவுடன் பிரித்து அமைக்கலாம்</div>
+                    <div class="example-item">camel case மற்றும் kebab case குறியீட்டைப் பயன்படுத்தி v-bind:style உடன் CSS விதிகள் வரையறுக்கப்படுகின்றன</div>
+                    <div class="example-item">வரிசை தொடரியல் மூலம் வகுப்புகள் ஒதுக்கப்படுகின்றன</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>The v-if Directive</h3>
+                    <div class="example-item">ஒரு தரவுப் பண்பின் அடிப்படையில் நிபந்தனையுடன் உரையைக் காண்பிக்கவும்</div>
+                    <div class="example-item">ஒரு ஒப்பீட்டின் அடிப்படையில் நிபந்தனையுடன் உரையைக் காண்பிக்கவும்</div>
+                    <div class="example-item">v-if, v-else-if மற்றும் v-else உடன் நிபந்தனையுடன் உரையைக் காண்பிக்கவும்</div>
+                    <div class="example-item">ஒரு குறிப்பிட்ட உரையில் 'pizza' என்ற சொல் இருந்தால் ஒரு செய்தியைக் காண்பிக்கவும்</div>
+                    <div class="example-item">ஒரு குறிப்பிட்ட உரையில் 'pizza' என்ற சொல் இருந்தால் ஒரு செய்தி மற்றும் படத்தைக் காண்பிக்கவும்</div>
+                    <div class="example-item">ஒரு குறிப்பிட்ட உரையில் 'pizza' அல்லது 'burrito' என்ற சொல் இருந்தால் வெவ்வேறு செய்திகள் மற்றும் படங்களைக் காண்பிக்கவும்</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>The v-show Directive</h3>
+                    <div class="example-item">ஒரு தரவுப் பண்பின் அடிப்படையில் ஒரு &lt;div&gt; உறுப்பைக் காண்பிக்கவும் அல்லது மறைக்கவும்</div>
+                    <div class="example-item">v-show மற்றும் v-if இடையே உள்ள வேறுபாடுகளை ஆராயவும்</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>The v-for Directive</h3>
+                    <div class="example-item">ஒரு வரிசையின் அடிப்படையில் ஒரு பட்டியலை வழங்கவும்</div>
+                    <div class="example-item">ஒரு வரிசையின் அடிப்படையில் படங்களை வழங்கவும்</div>
+                    <div class="example-item">ஒரு வரிசையின் அடிப்படையில் படங்கள் மற்றும் உரையை வழங்கவும்</div>
+                    <div class="example-item">ஒரு வரிசையின் அடிப்படையில் உரையை வழங்கும் போது குறியீட்டைப் பெறவும்</div>
+                    <div class="example-item">வரிசையில் உள்ள பொருள்களின் அடிப்படையில் உரையை வழங்கும் போது குறியீட்டைப் பெறவும்</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>The v-on Directive</h3>
+                    <div class="example-item">ஒரு எண்ணிக்கையை அதிகரிக்க பொத்தானைக் கிளிக் செய்யவும்</div>
+                    <div class="example-item">ஒரு விளக்கை இயக்க மற்றும் அணைக்க பொத்தானைக் கிளிக் செய்யவும்</div>
+                    <div class="example-item">ஒரு உரை உள்ளீட்டு நிகழ்வு பதிவு செய்யப்படும் ஒவ்வொரு முறையும் ஒரு எண்ணிக்கை அதிகரிக்கிறது</div>
+                    <div class="example-item">சுட்டி சுட்டிக்காட்டி இயக்க நிகழ்வு பதிவு செய்யப்படும் ஒவ்வொரு முறையும் ஒரு சீரற்ற பின்புப்பக்க வண்ணம் உருவாக்கப்படுகிறது</div>
+                    <div class="example-item">v-for உடன் உருவாக்கப்பட்ட உறுப்புகளுக்கு v-on:click உடன் கிளிக் நிகழ்வு அமைக்கப்பட்டுள்ளது</div>
+                    <div class="example-item">v-on சுருக்கம் @ பயன்படுத்தப்படுகிறது</div>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">💡</span> கற்றல் உதவிக்குறிப்பு:</h4>
+                <p>இந்த விரிவான எடுத்துக்காட்டுகள் Vue.js இன் அனைத்து முக்கிய அம்சங்களையும் உள்ளடக்குகின்றன. ஒவ்வொரு எடுத்துக்காட்டையும் நடைமுறையில் பயிற்சி செய்வது உங்கள் Vue.js திறமைகளை கணிசமாக மேம்படுத்தும்.</p>
+            </div>
+        </section>
+        
+        <!-- More Examples Sections -->
+        <section class="content-section" id="more-examples">
+            <h2>மேலும் Vue எடுத்துக்காட்டுகள்</h2>
+            
+            <div class="examples-grid">
+                <div class="example-category">
+                    <h3>Methods</h3>
+                    <div class="example-item">ஒரு முறை "Hello World!" என்று எழுதுகிறது</div>
+                    <div class="example-item">ஒரு முறை நிகழ்வு பொருளிலிருந்து சுட்டி சுட்டிக்காட்டி நிலையைப் பெறுகிறது</div>
+                    <div class="example-item">சுட்டி சுட்டிக்காட்டி நிலையின் அடிப்படையில் பின்புப்பக்க வண்ணத்தை மாற்றும் ஒரு முறை</div>
+                    <div class="example-item">ஒரு உள்ளீட்டுப் புலத்திலிருந்து உரையை ஒரு நோட்புக்கு பக்கத்தின் படத்தில் எழுதும் ஒரு முறை</div>
+                    <div class="example-item">வெவ்வேறு பொத்தான்கள் கிளிக் செய்யப்படும் போது வெவ்வேறு வாத மதிப்புகளுடன் ஒரு முறை அழைக்கப்படுகிறது</div>
+                    <div class="example-item">ஒரு உரை மற்றும் நிகழ்வு பொருள் இரண்டும் வாதங்களாக இருக்கும் போது ஒரு முறை அழைக்கப்படுகிறது</div>
+                    <div class="example-item">பல பொத்தான்கள் வெவ்வேறு வாதங்களுடன் ஒரே முறையை அழைக்கின்றன</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>Event Modifiers</h3>
+                    <div class="example-item">.once மாற்றி ஒரு பொத்தான் கிளிக் செய்யப்படும் போது எச்சரிக்கை ஒரு முறை மட்டும் தோன்றும்</div>
+                    <div class="example-item">keydown விசைப்பலகை நிகழ்வு திரைக்கு விசையை எழுதும் ஒரு முறையை அழைக்கிறது</div>
+                    <div class="example-item">'S' விசை அழுத்தப்படும் போது .s மாற்றி ஒரு எச்சரிக்கையைத் தூண்டுகிறது</div>
+                    <div class="example-item">'S' மற்றும் 'ctrl' விசைகள் ஒரே நேரத்தில் அழுத்தப்படும் போது .s மற்றும் .ctrl மாற்றிகள் ஒரு எச்சரிக்கையைத் தூண்டுகின்றன</div>
+                    <div class="example-item">&lt;div&gt; உறுப்பு வலது கிளிக் செய்யப்படும் போது பின்புப்பக்க வண்ணம் மாறுகிறது</div>
+                    <div class="example-item">'ctrl' விசை அழுத்தப்படும் போது &lt;div&gt; உறுப்பு வலது கிளிக் செய்யப்படும் போது பின்புப்பக்க வண்ணம் மாறுகிறது</div>
+                    <div class="example-item">வலது கிளிக் துளி கீழ் மெனுவை .prevent மாற்றி தடுக்கிறது</div>
+                    <div class="example-item">'shift' விசை அழுத்தப்படும் போது இடது கிளிக் படத்தை மாற்றுகிறது</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>The v-model Directive</h3>
+                    <div class="example-item">v-model ஐப் பயன்படுத்தி புதிய ஷாப்பிங் பொருட்களை ஷாப்பிங் பட்டியலில் சேர்க்கலாம்</div>
+                    <div class="example-item">v-model வழங்கும் இரு-வழி பிணைப்பு அம்சத்தை ஆராயவும்</div>
+                    <div class="example-item">ஒரு சரிபார்க்கும் பெட்டி ஒரு பூலியன் தரவுப் பண்பை மாற்றுகிறது</div>
+                    <div class="example-item">ஒரு ஷாப்பிங் பட்டியல்</div>
+                    <div class="example-item">பொருட்கள் கண்டுபிடிக்கப்பட்டதாகக் குறிக்கப்படக்கூடிய ஒரு ஷாப்பிங் பட்டியல்</div>
+                    <div class="example-item">ஒரு டைனமிக் உணவக ஆர்டர் படிவம்</div>
+                    <div class="example-item">ரேடியோ பொத்தான்களுடன் ஒரு பிடித்த விலங்கைத் தேர்ந்தெடுக்கவும்</div>
+                    <div class="example-item">சரிபார்க்கும் பெட்டிகளுடன் உங்களுக்குப் பிடித்த உணவைத் தேர்ந்தெடுக்கவும்</div>
+                    <div class="example-item">துளி-கீழ் பட்டியலில் இருந்து ஒரு காரைத் தேர்ந்தெடுக்கவும்</div>
+                    <div class="example-item">பல கார்களைத் தேர்ந்தெடுக்கவும்</div>
+                    <div class="example-item">படிக்க மட்டுமே உள்ள படிவ உள்ளீடு (&lt;input type="file"&gt;)</div>
+                    <div class="example-item">உயரத்தைப் பதிவு செய்யவும் (&lt;input type="range"&gt;)</div>
+                    <div class="example-item">ஒரு வண்ணத்தைத் தேர்ந்தெடுக்கவும் (&lt;input type="color"&gt;)</div>
+                    <div class="example-item">ஒரு பொருள் மதிப்பாய்வை எழுதவும் (&lt;textarea&gt;)</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>Computed Properties</h3>
+                    <div class="example-item">தற்போதைய நிலையை உரை பிரதிபலிக்கும் வகையில் ஒரு சரிபார்க்கும் பெட்டி டைனமிக் ஆக்கப்படுகிறது</div>
+                    <div class="example-item">தற்போதைய சரிபார்க்கும் பெட்டி நிலை உரை 'yes' அல்லது 'no' ஆகும்</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>Watchers</h3>
+                    <div class="example-item">20 மற்றும் 60 க்கு இடையே உள்ள மதிப்புகளைத் தேர்ந்தெடுக்க முடியாதவாறு ஒரு பார்வையாளர் பயன்படுத்தப்படுகிறது</div>
+                    <div class="example-item">ஒரு பார்வையாளர் புதிய மற்றும் பழைய மதிப்புகளை உள்ளீட்டு வாதங்களாக எடுக்கும்</div>
+                    <div class="example-item">சரியான மின்னஞ்சல் முகவரியை உறுதிப்படுத்த புதிய மற்றும் பழைய மதிப்புகள் பயன்படுத்தப்படுகின்றன</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>Templates</h3>
+                    <div class="example-item">டெம்ப்ளேட் கட்டமைப்பு விருப்பத்தைப் பயன்படுத்தி "Hello World!" காட்டப்படுகிறது</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Advanced Examples -->
+        <section class="content-section" id="advanced-examples">
+            <h2>மேம்பட்ட Vue எடுத்துக்காட்டுகள்</h2>
+            
+            <div class="examples-grid">
+                <div class="example-category">
+                    <h3>SFC Pages & Components</h3>
+                    <div class="example-item">மிகவும் அடிப்படை SFC பக்கம்</div>
+                    <div class="example-item">ஒரு கூறு மூன்று முறை பயன்படுத்தப்படுகிறது</div>
+                    <div class="example-item">ஒவ்வொரு கூறுக்கும் அதன் சொந்த எண்ணிக்கை உள்ளது</div>
+                    <div class="example-item">props உள்ள கூறுகள் v-for உடன் உருவாக்கப்படுகின்றன</div>
+                    <div class="example-item">props உள்ள கூறுகள் v-for மற்றும் key பண்புடன் உருவாக்கப்படுகின்றன</div>
+                    <div class="example-item">key பண்பு தேவை என்பதை நிரூபிக்கும் தவறான எடுத்துக்காட்டு</div>
+                    <div class="example-item">key பண்பு சிக்கல்களை சரிசெய்ய முடியும் என்பதை நிரூபிக்கும் எடுத்துக்காட்டு</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>Props & Emit</h3>
+                    <div class="example-item">கூறில் props ஒரு வரிசையாக வரையறுக்கப்படுகின்றன</div>
+                    <div class="example-item">கூறில் இரண்டு prop பண்புகள் வரையறுக்கப்படுகின்றன</div>
+                    <div class="example-item">ஒரு உணவு பிடித்தமானதா இல்லையா என வரையறுக்க ஒரு பூலியன் prop பயன்படுத்தப்படுகிறது</div>
+                    <div class="example-item">props கட்டமைப்பு விருப்பம் ஒரு பொருளாக வரையறுக்கப்படுகிறது</div>
+                    <div class="example-item">'foodIsFavorite' தரவுப் பண்பை ஒரு பொத்தானுடன் மாற்றலாம்</div>
+                    <div class="example-item">கூறு பூலியன் பிடித்த நிலையை வெளியிடுகிறது</div>
+                    <div class="example-item">வெளியிடப்பட்ட பூலியன் பிடித்த நிலை App.vue ஆல் பெறப்படுகிறது</div>
+                    <div class="example-item">வெளியிடப்பட்ட பூலியன் பிடித்த நிலை App.vue இல் பெறப்பட்டு புதுப்பிக்கப்படுகிறது</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>Fallthrough Attributes & Scoped Styling</h3>
+                    <div class="example-item">style பண்பு கூறுக்கு விழுகிறது</div>
+                    <div class="example-item">style பண்பு கூறுக்கு விழுகிறது, மற்றும் உள்நாட்டு ஸ்டைலிங்குடன் இணைக்கப்படுகிறது</div>
+                    <div class="example-item">விழும் பண்புகள் எங்கு சொந்தமானது என வரையறுக்க $attrs பொருள் பயன்படுத்தப்படுகிறது</div>
+                    <div class="example-item">வரையறுக்கப்பட்ட ஸ்டைல் மாற்றாக வரையறுக்கப்படாத வரை உலகளாவியதாகும்</div>
+                    <div class="example-item">ஸ்டைல் உள்ளூர் என்று வரையறுக்கப்படுகிறது, scoped பண்புடன்</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>Local Components & Slots</h3>
+                    <div class="example-item">main.js இல் வரையறுக்கப்பட்ட கூறுகள் உலகளாவிய கிடைக்கும்</div>
+                    <div class="example-item">மற்றொரு கூறுக்குள் கூறுகளை வரையறுக்க முடியும், இது உள்ளூர் கிடைக்கும்</div>
+                    <div class="example-item">"Hello World!" ஒரு கூறுகளின் slot உள்ளே பெறப்படுகிறது</div>
+                    <div class="example-item">ஒரு கூறுகளின் slot அட்டை போன்ற மூடி உருவாக்க பயன்படுகிறது</div>
+                    <div class="example-item">ஒரு கூறுகளின் slot மற்றொரு அட்டை போன்ற மூடி உருவாக்க பயன்படுகிறது</div>
+                    <div class="example-item">ஒரு slot பின் வாங்கல் உள்ளடக்கத்துடன் பயன்படுத்தப்படுகிறது</div>
+                    <div class="example-item">ஒரே கூறில் இரண்டு slots பயன்படுத்தப்படுகின்றன</div>
+                    <div class="example-item">உள்ளடக்கத்தை சரியான இடத்திற்கு வழிநடத்த slots பெயரிடப்பட்டுள்ளன</div>
+                    <div class="example-item">ஒரு slot க்கு பெயர் இல்லையென்றால், அது இயல்புநிலை slot ஆக இருக்கும்</div>
+                    <div class="example-item">ஒரு slot வெளிப்படையாக இயல்புநிலை slot என்று வரையறுக்கப்படுகிறது</div>
+                    <div class="example-item">உள்ளடக்கத்தை ஒரு குறிப்பிட்ட slot க்கு வழிநடத்த v-slot உத்தரவு பயன்படுகிறது</div>
+                    <div class="example-item">v-slot சுருக்கம் # ஆகும்</div>
+                    <div class="example-item">ஒரு scoped slot இலிருந்து தரவைப் பெறவும்</div>
+                    <div class="example-item">v-for உடன் உருவாக்கப்பட்ட scoped slots அதன் பெற்றோருக்கு தரவை அனுப்புகின்றன</div>
+                    <div class="example-item">பொருள்களின் வரிசையிலிருந்து உருவாக்கப்பட்ட scoped slots அதன் பெற்றோருக்கு தரவை அனுப்புகின்றன</div>
+                    <div class="example-item">ஒரு உரை v-bind உத்தரவு இல்லாமல் ஒரு scoped slot இலிருந்து அனுப்பப்படுகிறது</div>
+                    <div class="example-item">Scoped slots பெயரிடப்பட்டுள்ளன</div>
+                    <div class="example-item">பெயரிடப்பட்ட scoped slots வெவ்வேறு தரவை App.vue க்கு அனுப்புகின்றன</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- More Advanced Examples -->
+        <section class="content-section" id="more-advanced">
+            <h2>மேலும் மேம்பட்ட அம்சங்கள்</h2>
+            
+            <div class="examples-grid">
+                <div class="example-category">
+                    <h3>Dynamic Components & Template Refs</h3>
+                    <div class="example-item">App.vue எந்த கூறைக் காட்டுவது என மாறுகிறது</div>
+                    <div class="example-item">&lt;KeepAlive&gt; கூறு இல்லாமல் கூறுகள் கேச் செய்யப்படுவதில்லை</div>
+                    <div class="example-item">&lt;KeepAlive&gt; கூறு கூறுகளை கேச் செய்கிறது</div>
+                    <div class="example-item">குறிப்பிடப்பட்ட கூறு மட்டுமே கேச் செய்யப்படுகிறது</div>
+                    <div class="example-item">ஒரு &lt;p&gt; உறுப்பில் உரையை மாற்ற $refs பொருள் பயன்படுகிறது</div>
+                    <div class="example-item">ஒரு &lt;p&gt; உறுப்பிலிருந்து மற்றொரு &lt;p&gt; உறுப்பிற்கு உரையை மாற்ற $refs பொருள் பயன்படுகிறது</div>
+                    <div class="example-item">ஒரு &lt;input&gt; உறுப்பிலிருந்து மதிப்பை ஒரு &lt;p&gt; உறுப்பில் வைக்க $refs பொருள் பயன்படுகிறது</div>
+                    <div class="example-item">ref பண்பு உள்ள &lt;li&gt; உறுப்புகள், v-for உடன் உருவாக்கப்பட்டவை, $refs பொருளில் ஒரு வரிசையாக சேகரிக்கப்படுகின்றன</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>Lifecycle Hooks</h3>
+                    <div class="example-item">beforeCreate வாழ்க்கைச் சுழற்சி கொக்கி</div>
+                    <div class="example-item">created வாழ்க்கைச் சுழற்சி கொக்கி</div>
+                    <div class="example-item">beforeMount வாழ்க்கைச் சுழற்சி கொக்கி</div>
+                    <div class="example-item">mounted வாழ்க்கைச் சுழற்சி கொக்கி</div>
+                    <div class="example-item">ஒரு &lt;input&gt; உறுப்புக்குள் கர்சரை வைக்க mounted வாழ்க்கைச் சுழற்சி கொக்கி பயன்படுத்தப்படுகிறது</div>
+                    <div class="example-item">beforeUpdate வாழ்க்கைச் சுழற்சி கொக்கி</div>
+                    <div class="example-item">updated வாழ்க்கைச் சுழற்சி கொக்கி</div>
+                    <div class="example-item">updated வாழ்க்கைச் சுழற்சி கொக்கி எல்லையற்ற வளையத்தை உருவாக்குகிறது</div>
+                    <div class="example-item">beforeUnmount வாழ்க்கைச் சுழற்சி கொக்கி</div>
+                    <div class="example-item">unmounted வாழ்க்கைச் சுழற்சி கொக்கி</div>
+                    <div class="example-item">errorCaptured வாழ்க்கைச் சுழற்சி கொக்கி</div>
+                    <div class="example-item">errorCaptured வாழ்க்கைச் சுழற்சி கொக்கி பிழை பற்றிய தகவலைப் பெறுகிறது</div>
+                    <div class="example-item">renderTracked வாழ்க்கைச் சுழற்சி கொக்கி</div>
+                    <div class="example-item">activated வாழ்க்கைச் சுழற்சி கொக்கி</div>
+                    <div class="example-item">activated, deactivated, மற்றும் பிற வாழ்க்கைச் சுழற்சி கொக்கிகள்</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>Provide/Inject & Routing</h3>
+                    <div class="example-item">App.vue இல் வழங்கப்பட்ட தகவல் ஒரு கூறில் செலுத்தப்பட்டு காட்டப்படுகிறது</div>
+                    <div class="example-item">ஒரு டைனமிக் கூறைப் பயன்படுத்தி கூறுகளுக்கிடையே மாற்றப்படுகிறது</div>
+                    <div class="example-item">ரூட்டிங் பயன்படுத்தி கூறுகளுக்கிடையே மாற்றப்படுகிறது</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>Animations</h3>
+                    <div class="example-item">CSS transition பண்புடன் ஒரு &lt;div&gt; உறுப்பு சுழற்றப்படுகிறது</div>
+                    <div class="example-item">CSS @keyframes பண்புடன் ஒரு வட்ட &lt;div&gt; உறுப்பு இடமிருந்து-வலமாக பவுன்ஸ் செய்கிறது</div>
+                    <div class="example-item">ஒரு பொத்தானுடன் ஒரு &lt;p&gt; உறுப்பு மாற்றப்படுகிறது</div>
+                    <div class="example-item">&lt;Transition&gt; கூறுக்குள் உள்ள ஒரு &lt;p&gt; உறுப்பு அகற்றப்படும் போது மங்கிச் செல்கிறது</div>
+                    <div class="example-item">ஒரு &lt;p&gt; உறுப்பு மாற்றப்படும் போது உள்ளே மற்றும் வெளியே நகர்கிறது</div>
+                    <div class="example-item">ஒரு &lt;p&gt; உறுப்பு 'enter' மற்றும் 'leave' போது தனி பின்புப்பக்க வண்ணங்களைக் கொண்டுள்ளது</div>
+                    <div class="example-item">&lt;p&gt; உறுப்புகள் வித்தியாசமாக அனிமேட் செய்யப்படுகின்றன, name prop ஐப் பயன்படுத்தி &lt;Transition&gt; கூறுகளை வேறுபடுத்துகின்றன</div>
+                    <div class="example-item">after-enter நிகழ்வு ஒரு &lt;div&gt; உறுப்பைக் காட்ட தூண்டுகிறது</div>
+                    <div class="example-item">ஒரு மாற்று பொத்தான் enter-cancelled நிகழ்வைத் தூண்டுகிறது</div>
+                    <div class="example-item">appear prop பக்கம் ஏற்றப்பட்ட உடனேயே &lt;p&gt; உறுப்பு அனிமேஷனைத் தொடங்குகிறது</div>
+                    <div class="example-item">'enter' மற்றும் 'leave' போது அனிமேஷனுடன் படங்கள் வழியாக பிளிப் செய்யுங்கள். பழைய படம் அகற்றப்படுவதற்கு முன் ஒரு புதிய படம் சேர்க்கப்படுகிறது</div>
+                    <div class="example-item">'enter' மற்றும் 'leave' போது அனிமேஷனுடன் படங்கள் வழியாக பிளிப் செய்யுங்கள். mode="out-in" பழைய படம் அகற்றப்படும் வரை புதிய படங்கள் சேர்க்கப்படுவதைத் தடுக்கிறது</div>
+                    <div class="example-item">கூறுகளுக்கிடையே மாற்றுவது அனிமேட் செய்யப்படுகிறது</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Final Examples -->
+        <section class="content-section" id="final-examples">
+            <h2>இறுதி எடுத்துக்காட்டுகள்</h2>
+            
+            <div class="examples-grid">
+                <div class="example-category">
+                    <h3>Animations with v-for</h3>
+                    <div class="example-item">v-for உடன் வழங்கப்பட்ட பட்டியலில் புதிய பட்டியல் உறுப்புகள் சேர்க்கப்படுகின்றன, &lt;TransitionGroup&gt; பயன்படுத்தி</div>
+                    <div class="example-item">பகடைகள் சேர்க்கலாம் அல்லது அகற்றலாம், சேர்க்கப்பட்ட பகடைகள் &lt;TransitionGroup&gt; பயன்படுத்தி அனிமேட் செய்யப்படுகின்றன</div>
+                    <div class="example-item">பகடைகள் சேர்க்கலாம் அல்லது அகற்றலாம், சேர்க்கப்பட்ட மற்றும் அகற்றப்பட்ட பகடைகள் இரண்டும் &lt;TransitionGroup&gt; பயன்படுத்தி அனிமேட் செய்யப்படுகின்றன</div>
+                    <div class="example-item">பகடைகள் சேர்க்கலாம், அகற்றலாம், கலைக்கலாம் அல்லது வரிசைப்படுத்தலாம், அனைத்தும் &lt;TransitionGroup&gt; பயன்படுத்தி அனிமேட் செய்யப்படுகின்றன</div>
+                </div>
+                
+                <div class="example-category">
+                    <h3>The Composition API</h3>
+                    <div class="example-item">Composition API உடன் எழுதப்பட்டது: ஒரு பொத்தானைக் கிளிக் செய்வதன் மூலம் டைப்ரைட்டர்களின் சேமிப்பு எண்ணிக்கை குறைக்கப்படலாம்</div>
+                    <div class="example-item">Options API உடன் எழுதப்பட்டது: ஒரு பொத்தானைக் கிளிக் செய்வதன் மூலம் டைப்ரைட்டர்களின் சேமிப்பு எண்ணிக்கை குறைக்கப்படலாம்</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercise Section -->
+        <section class="content-section" id="exercise">
+            <h2>பயிற்சி</h2>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> Vue.js இல் v-if மற்றும் v-show இடையே உள்ள முக்கிய வேறுபாடு என்ன?</h4>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-if மேம்பட்டது, v-show அடிப்படை</div>
+                            <div class="option-feedback incorrect">✗ தவறு! இரண்டும் வெவ்வேறு நோக்கங்களுக்காக உள்ளன, ஒன்று மற்றொன்றை விட மேம்பட்டது அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">v-if உறுப்பை DOM இலிருந்து நீக்குகிறது, v-show CSS display பண்பை மாற்றுகிறது</div>
+                            <div class="option-feedback correct">✓ சரி! v-if நிபந்தனை தவறானபோது DOM இலிருந்து உறுப்பை முழுமையாக நீக்குகிறது, v-show CSS மூலம் மறைக்கிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-if விரைவானது, v-show மெதுவானது</div>
+                            <div class="option-feedback incorrect">✗ தவறு! வேகம் பயன்பாட்டு சூழ்நிலையைப் பொறுத்தது. v-if தொடர்ந்து மாறும் நிபந்தனைகளுக்கு சிறந்தது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-show மட்டுமே கிளையில் வேலை செய்யும்</div>
+                            <div class="option-feedback incorrect">✗ தவறு! இரண்டும் கிளைகளில் வேலை செய்யும், ஆனால் வெவ்வேறு வழிகளில்</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20'serverPrefetch'%20Lifecycle%20Hook.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="certificate.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Tamil இல் தரமான நிரலாக்க கல்வியை வழங்கும் முன்னணி கல்வி நிறுவனம்.</p>
+            </div>
+            <div class="footer-column">
+                <h3>விரைவு இணைப்புகள்</h3>
+                <ul>
+                    <li><a href="#introduction">Vue அறிமுகம்</a></li>
+                    <li><a href="#more-examples">மேலும் எடுத்துக்காட்டுகள்</a></li>
+                    <li><a href="#advanced-examples">மேம்பட்ட எடுத்துக்காட்டுகள்</a></li>
+                    <li><a href="#more-advanced">மேலும் மேம்பட்ட அம்சங்கள்</a></li>
+                    <li><a href="#final-examples">இறுதி எடுத்துக்காட்டுகள்</a></li>
+                    <li><a href="#exercise">பயிற்சி</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>தொடர்பு</h3>
+                <ul>
+                    <li><a href="#">எங்களைப் பற்றி</a></li>
+                    <li><a href="#">தொடர்பு கொள்ளுங்கள்</a></li>
+                    <li><a href="#">இடம் மற்றும் நேரங்கள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>எங்களைப் பின்தொடருங்கள்</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+        
+        // Add hover effect to example items
+        document.querySelectorAll('.example-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(5px)';
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Fallthrough Attributes - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20$emit()%20Method.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Scoped%20Styling.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue Fallthrough Attributes</h2>
+            <p>Vue பால்த்ரூ அட்ரிப்யூட்ஸ் பற்றி அறிக</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue பால்த்ரூ அட்ரிப்யூட்ஸ்</h2>
+            
+            <p>ஒரு கம்போனெண்டை props ஆக அறிவிக்கப்படாத attributes உடன் அழைக்க முடியும், மேலும் அவை வெறுமனே கம்போனெண்டில் உள்ள root element க்கு fall through ஆகிவிடும்.</p>
+            
+            <p>பால்த்ரூ அட்ரிப்யூட்ஸ் மூலம் நீங்கள் கம்போனெண்ட் உருவாக்கப்படும் parent இலிருந்து சிறந்த overview ஐப் பெறுகிறீர்கள், மேலும் attribute ஐ prop ஆக அறிவிக்க தேவையில்லாததால் எங்கள் குறியீடு எளிமையாகிறது.</p>
+            
+            <p>fall through ஆகப் பயன்படுத்தப்படும் பொதுவான attributes கள் class, style மற்றும் v-on ஆகும்.</p>
+        </section>
+
+        <!-- Fallthrough Attributes -->
+        <section class="content-section" id="fallthrough">
+            <h2>பால்த்ரூ அட்ரிப்யூட்ஸ்</h2>
+            
+            <p>உதாரணமாக, கம்போனெண்டிற்குள் styling மறைந்து விடுவதை விட parent இலிருந்து கம்போனெண்ட் styling ஐ கட்டுப்படுத்துவது நல்லது.</p>
+            
+            <p>Vue இல் ஒரு அடிப்படை to-do list உருவாக்கி, style attribute செய்ய வேண்டிய விஷயங்களைக் குறிக்கும் கம்போனெண்ட்களுக்கு எவ்வாறு fall through ஆகிறது என்பதைப் பார்ப்போம்.</p>
+            
+            <p>எனவே, எங்கள் App.vue செய்ய வேண்டிய விஷயங்களின் பட்டியலைக் கொண்டிருக்க வேண்டும், மேலும் புதிய விஷயங்களைச் சேர்க்க <input> element மற்றும் <button>. ஒவ்வொரு list item ஆனது <todo-item /> கம்போனெண்ட் ஆகும்.</p>
+        </section>
+
+        <!-- App.vue Example -->
+        <section class="content-section" id="app-example">
+            <h3>App.vue:</h3>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h3&gt;Todo List&lt;/h3&gt;  
+  &lt;ul&gt;
+    &lt;todo-item
+      v-for="x in items"
+      :key="x"
+      :item-name="x"
+    /&gt;
+  &lt;/ul&gt;
+  &lt;input v-model="newItem"&gt;
+  &lt;button @click="addItem"&gt;Add&lt;/button&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data() {
+      return {
+        newItem: '',
+        items: ['Buy apples','Make pizza','Mow the lawn']
+      };
+    },
+    methods: {
+      addItem() {
+        this.items.push(this.newItem),
+        this.newItem = '';
+      }
+    }
+  }
+&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- TodoItem.vue Example -->
+        <section class="content-section" id="todoitem-example">
+            <h3>TodoItem.vue:</h3>
+            
+            <p>என்ன செய்ய வேண்டும் என்பதை விவரிக்கும் prop ஆகப் பெறுகிறது:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;li&gt;{{ itemName }}&lt;/li&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    props: ['itemName']
+  }
+&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- main.js Setup -->
+        <section class="content-section" id="mainjs">
+            <h3>main.js:</h3>
+            
+            <div class="code-example">
+                <pre><code>import { createApp } from 'vue'
+  
+import App from './App.vue'
+import TodoItem from './components/TodoItem.vue'
+
+const app = createApp(App)
+app.component('todo-item', TodoItem)
+app.mount('#app')</code></pre>
+            </div>
+        </section>
+
+        <!-- Styling Example -->
+        <section class="content-section" id="styling-example">
+            <h2>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</h2>
+            
+            <p>கம்போனெண்டிற்குள் உள்ள &lt;li&gt; elements க்கு styling கொடுக்க App.vue இலிருந்து:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h3&gt;Todo List&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;todo-item
+      v-for="x in items"
+      :key="x"
+      :item-name="x"
+      style="background-color: lightgreen;"
+    /&gt;
+  &lt;/ul&gt;
+  &lt;input v-model="newItem"&gt;
+  &lt;button @click="addItem"&gt;Add&lt;/button&gt;
+&lt;/template&gt;</code></pre>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🔍</span> சரிபார்த்தல்:</h4>
+                <p>style attribute உண்மையில் fall through ஆகிவிட்டதா என உறுதிப்படுத்த, நமது to-do list இல் உள்ள &lt;li&gt; element மீது browser இல் வலது க்ளிக் செய்து 'Inspect' தேர்வு செய்யலாம், மேலும் style attribute இப்போது &lt;li&gt; element இல் உள்ளதைக் காணலாம்.</p>
+            </div>
+            
+            <div class="image-placeholder">
+                <p><strong>25.png:</strong> style attribute &lt;li&gt; element இல் உள்ளது என்பதைக் காட்டும் படம்</p>
+            </div>
+        </section>
+
+        <!-- Merging Attributes -->
+        <section class="content-section" id="merging">
+            <h2>'class' மற்றும் 'style' Attributes ஐ Merge செய்தல்</h2>
+            
+            <p>'class' அல்லது 'style' attributes ஏற்கனவே அமைக்கப்பட்டிருந்தால், மற்றும் 'class' அல்லது 'style' attributes parent இலிருந்து பால்த்ரூ அட்ரிப்யூட்ஸ் ஆகவும் வந்தால், attributes merge செய்யப்படும்.</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            
+            <p>Parent இலிருந்து இருக்கும் styling க்கு கூடுதலாக, TodoItem.vue கம்போனெண்டிற்குள் &lt;li&gt; elements க்கு margin சேர்க்கிறோம்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;li style="margin: 5px 0;"&gt;{{ itemName }}&lt;/li&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    props: ['itemName']
+  }
+&lt;/script&gt;</code></pre>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🔍</span> சரிபார்த்தல்:</h4>
+                <p>Browser இல் &lt;li&gt; element மீது வலது க்ளிக் செய்தால், attributes merge செய்யப்பட்டிருப்பதைக் காணலாம். Margin நேரடியாக கம்போனெண்டிற்குள் உள்ள &lt;li&gt; element இல் அமைக்கப்பட்டுள்ளது, மேலும் parent இலிருந்து fall through ஆகும் background-color உடன் merge செய்யப்பட்டுள்ளது.</p>
+            </div>
+            
+            <div class="image-placeholder">
+                <p><strong>26.png:</strong> attributes merge செய்யப்பட்டதைக் காட்டும் படம்</p>
+            </div>
+        </section>
+
+        <!-- $attrs Object -->
+        <section class="content-section" id="attrs">
+            <h2>$attrs</h2>
+            
+            <p>கம்போனெண்டின் root level இல் ஒன்றுக்கு மேற்பட்ட element கள் இருந்தால், attributes எந்த element க்கு fall through ஆக வேண்டும் என்பது இனி தெளிவாக இருக்காது.</p>
+            
+            <p>எந்த root element பால்த்ரூ அட்ரிப்யூட்ஸ் பெறுகிறது என வரையறுக்க, built-in $attrs object உடன் element ஐ குறிக்கலாம், இது போல்:</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            
+            <p>TodoItem.vue:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;div class="pinkBall"&gt;&lt;/div&gt;
+  &lt;li v-bind="$attrs"&gt;{{ itemName }}&lt;/li&gt;
+  &lt;div class="pinkBall"&gt;&lt;/div&gt;
+&lt;/template&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Exercise Section -->
+        <section class="content-section" id="exercises">
+            <h2>Vue பயிற்சிகள்</h2>
+            
+            <p>பயிற்சிகளுடன் உங்களை சோதிக்கவும்</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">✏️</span> பயிற்சி:</h4>
+                <p>'fish-type' கம்போனெண்டின் root element 'blue' CSS class க்கு சொந்தமானதாக அமைக்கவும் (ஒரு பால்த்ரூ அட்ரிப்யூட் உருவாக்கவும்).</p>
+                
+                <div class="code-example">
+                    <pre><code>&lt;fish-type 
+  /&gt;</code></pre>
+                </div>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">class: "blue"</div>
+                            <div class="option-feedback incorrect">✗ தவறு! class attribute இல் colon (:) தேவையில்லை</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">:class="blue"</div>
+                            <div class="option-feedback incorrect">✗ தவறு! இது 'blue' என்ற string அல்ல, இது 'blue' variable ஐ reference செய்கிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">class="blue"</div>
+                            <div class="option-feedback correct">✓ சரி! இது 'blue' CSS class ஐ பால்த்ரூ அட்ரிப்யூட் ஆக அமைக்கிறது, இது கம்போனெண்டின் root element க்கு fall through ஆகிவிடும்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-bind:class="'blue'"</div>
+                            <div class="option-feedback incorrect">✗ தவறு! இது வேலை செய்யும், ஆனால் இது எளிய fallthrough attribute க்கு மிகவும் சிக்கலானது</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20$emit()%20Method.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Scoped%20Styling.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">பால்த்ரூ அட்ரிப்யூட்ஸ்</a></li>
+                    <li><a href="#fallthrough">Fallthrough Attributes</a></li>
+                    <li><a href="#app-example">App.vue எடுத்துக்காட்டு</a></li>
+                    <li><a href="#todoitem-example">TodoItem.vue எடுத்துக்காட்டு</a></li>
+                    <li><a href="#merging">Attributes Merge செய்தல்</a></li>
+                    <li><a href="#attrs">$attrs Object</a></li>
+                    <li><a href="#exercises">Vue பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

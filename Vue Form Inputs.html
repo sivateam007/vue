@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Form Inputs - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+        
+        /* Form input visualization */
+        .form-inputs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .input-demo {
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--git-color);
+        }
+        
+        .input-demo h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: var(--git-color);
+        }
+        
+        .input-demo input,
+        .input-demo select,
+        .input-demo textarea {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+        }
+        
+        .input-demo label {
+            display: block;
+            margin: 0.5rem 0;
+        }
+        
+        .input-demo input[type="radio"],
+        .input-demo input[type="checkbox"] {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+        
+        .v-model-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f7ff 100%);
+            border-radius: 10px;
+            border: 2px dashed var(--git-color);
+        }
+        
+        .model-box {
+            padding: 1rem;
+            background: #28a745;
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 150px;
+        }
+        
+        .flow-arrows {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .arrow-icon {
+            color: var(--git-color);
+            font-size: 1.5rem;
+        }
+        
+        .input-box {
+            padding: 1rem;
+            background: #007bff;
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 150px;
+        }
+        
+        .two-way-binding {
+            font-weight: bold;
+            color: #d63384;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20Routing.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20Animations.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue Form Inputs</h2>
+            <p>ரேடியோ பொத்தான்கள், செக்பாக்ஸ்கள், டிராப்-டவுன் பட்டியல் மற்றும் உரை உள்ளீட்டு புலங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue படிவ உள்ளீடுகள்</h2>
+            
+            <p>இந்த டுடோரியலில் முன்பு Vue படிவங்கள் மற்றும் v-model பக்கங்களில் படிவ உள்ளீட்டு எடுத்துக்காட்டுகளைப் பார்த்துள்ளோம்.</p>
+            
+            <p>இந்தப் பக்கம் Vue இல் உள்ள மேலும் படிவ உள்ளீட்டு எடுத்துக்காட்டுகளின் தொகுப்பாகும், ரேடியோ பொத்தான்கள், செக்பாக்ஸ்கள், டிராப்-டவுன் பட்டியல் மற்றும் சாதாரண உரை உள்ளீட்டு புலம் போன்றவை.</p>
+            
+            <div class="v-model-flow">
+                <div class="model-box">
+                    <h4>Vue தரவு</h4>
+                    <div class="data-flow">inpText: "Initial text"</div>
+                </div>
+                
+                <div class="flow-arrows">
+                    <div class="arrow-icon">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="two-way-binding">இரு-வழி பைண்டிங்</div>
+                    <div class="arrow-icon">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                </div>
+                
+                <div class="input-box">
+                    <h4>படிவ உள்ளீடு</h4>
+                    <div class="data-flow">&lt;input v-model="inpText"&gt;</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Radio Buttons -->
+        <section class="content-section" id="radio-buttons">
+            <h2>ரேடியோ பொத்தான்கள்</h2>
+            
+            <p>ஒரே தேர்வைச் சேர்ந்த ரேடியோ பொத்தான்கள் ஒரே பெயரைக் கொண்டிருக்க வேண்டும், இதனால் ஒரே ஒரு ரேடியோ பொத்தான் தேர்ந்தெடுக்கப்பட முடியும்.</p>
+            
+            <p>Vue இல் உள்ள அனைத்து உள்ளீடுகளைப் போலவே, ரேடியோ பொத்தான் உள்ளீட்டு மதிப்பை v-model உடன் பிடிக்கிறோம், ஆனால் value பண்புக்கூறும் <code>&lt;input type="radio"&gt;</code> டேக்கில் வெளிப்படையாக அமைக்கப்பட வேண்டும்.</p>
+            
+            <p>Vue படிவத்தில் ரேடியோ பொத்தான்களை எவ்வாறு பயன்படுத்தலாம்:</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🎯</span> எடுத்துக்காட்டு</h4>
+                <p>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</p>
+                <p>App.vue:</p>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Radio Buttons in Vue&lt;/h1&gt;
+  &lt;form @submit.prevent="registerAnswer"&gt;
+    &lt;p&gt;What is your favorite animal?&lt;/p&gt;
+    &lt;label&gt;
+      &lt;input type="radio" name="favAnimal" v-model="inpVal" value="Cat"&gt; Cat
+    &lt;/label&gt;
+    &lt;label&gt;
+      &lt;input type="radio" name="favAnimal" v-model="inpVal" value="Dog"&gt; Dog
+    &lt;/label&gt;
+    &lt;label&gt;
+      &lt;input type="radio" name="favAnimal" v-model="inpVal" value="Turtle"&gt; Turtle
+    &lt;/label&gt;
+    &lt;label&gt;
+      &lt;input type="radio" name="favAnimal" v-model="inpVal" value="Moose"&gt; Moose
+    &lt;/label&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;div&gt;
+    &lt;h3&gt;Submitted choice:&lt;/h3&gt;
+    &lt;p id="pAnswer"&gt;{{ inpValSubmitted }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      inpVal: '',
+      inpValSubmitted: 'Not submitted yet'
+    }
+  },
+  methods: {
+    registerAnswer() {
+      if(this.inpVal) {
+        this.inpValSubmitted = this.inpVal;
+      }
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+            </div>
+            
+            <div class="form-inputs-grid">
+                <div class="input-demo">
+                    <h4><i class="fas fa-dot-circle"></i> ரேடியோ பொத்தான்கள்</h4>
+                    <label><input type="radio" name="demoAnimal" value="Cat"> பூனை</label>
+                    <label><input type="radio" name="demoAnimal" value="Dog"> நாய்</label>
+                    <label><input type="radio" name="demoAnimal" value="Turtle"> ஆமை</label>
+                    <label><input type="radio" name="demoAnimal" value="Moose"> மூஸ்</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkboxes -->
+        <section class="content-section" id="checkboxes">
+            <h2>செக்பாக்ஸ்கள்</h2>
+            
+            <p>செக்பாக்ஸ் உள்ளீடுகள் (<code>&lt;input type="checkbox"&gt;</code>) v-model உடன் ஒரே வரிசையுடன் இணைக்கப்படும் போது, தேர்ந்தெடுக்கப்பட்ட செக்பாக்ஸ்களின் மதிப்புகள் அந்த வரிசையில் சேகரிக்கப்படுகின்றன:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Checkbox Inputs in Vue&lt;/h1&gt;
+  &lt;form @submit.prevent="registerAnswer"&gt;
+    &lt;p&gt;What kinds of food do you like?&lt;/p&gt;
+    &lt;label&gt;
+      &lt;input type="checkbox" v-model="likeFoods" value="Pizza"&gt; Pizza
+    &lt;/label&gt;
+    &lt;label&gt;
+      &lt;input type="checkbox" v-model="likeFoods" value="Rice"&gt; Rice
+    &lt;/label&gt;
+    &lt;label&gt;
+      &lt;input type="checkbox" v-model="likeFoods" value="Fish"&gt; Fish
+    &lt;/label&gt;
+    &lt;label&gt;
+      &lt;input type="checkbox" v-model="likeFoods" value="Salad"&gt; Salad
+    &lt;/label&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;div&gt;
+    &lt;h3&gt;Submitted answer:&lt;/h3&gt;
+    &lt;p id="pAnswer"&gt;{{ inpValSubmitted }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      likeFoods: [],
+      inpValSubmitted: 'Not submitted yet'
+    }
+  },
+  methods: {
+    registerAnswer() {
+      this.inpValSubmitted = this.likeFoods;
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">💡</span> ரேடியோ vs செக்பாக்ஸ்:</h4>
+                <p><strong>ரேடியோ பொத்தான்கள்:</strong> ஒற்றை தேர்வுக்கு - மதிப்பு ஒரு சரம்<br>
+                <strong>செக்பாக்ஸ்கள்:</strong> பல தேர்வுகளுக்கு - மதிப்புகள் ஒரு வரிசை</p>
+            </div>
+        </section>
+
+        <!-- Drop-down List -->
+        <section class="content-section" id="dropdown-list">
+            <h2>டிராப்-டவுன் பட்டியல்</h2>
+            
+            <p>ஒரு டிராப்-டவுன் பட்டியல் <code>&lt;select&gt;</code> டேக் மற்றும் உள்ளே <code>&lt;option&gt;</code> டேக்குகளைக் கொண்டுள்ளது.</p>
+            
+            <p>Vue இல் டிராப்-டவுன் பட்டியலைப் பயன்படுத்தும் போது, <code>&lt;select&gt;</code> டேக்கை v-model உடன் இணைக்க வேண்டும், மேலும் <code>&lt;option&gt;</code> டேக்குகளுக்கு மதிப்புகளை வழங்க வேண்டும்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Drop-down List in Vue&lt;/h1&gt;
+  &lt;form @submit.prevent="registerAnswer"&gt;
+    &lt;label for="cars"&gt;Choose a car:&lt;/label&gt;
+    &lt;select  v-model="carSelected" id="cars"&gt;
+      &lt;option disabled value=""&gt;Please select one&lt;/option&gt;
+      &lt;option&gt;Volvo&lt;/option&gt;
+      &lt;option&gt;Saab&lt;/option&gt;
+      &lt;option&gt;Opel&lt;/option&gt;
+      &lt;option&gt;Audi&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;br&gt;&lt;br&gt;
+    &lt;input type="submit" value="Submit"&gt;
+  &lt;/form&gt;
+  &lt;div&gt;
+    &lt;h3&gt;Submitted answer:&lt;/h3&gt;
+    &lt;p id="pAnswer"&gt;{{ inpValSubmitted }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      carSelected: '',
+      inpValSubmitted: 'Not submitted yet'
+    }
+  },
+  methods: {
+    registerAnswer() {
+      if(this.carSelected) {
+        this.inpValSubmitted = this.carSelected;
+      }
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- <select multiple> -->
+        <section class="content-section" id="select-multiple">
+            <h2><code>&lt;select multiple&gt;</code></h2>
+            
+            <p><code>&lt;select&gt;</code> டேக்கில் multiple பண்புக்கூறுடன், டிராப்-டவுன் பட்டியல் விரிவடைகிறது, மேலும் ஒன்றுக்கு மேற்பட்ட விருப்பத்தை தேர்வு செய்யலாம்.</p>
+            
+            <p>ஒன்றுக்கு மேற்பட்ட விருப்பத்தைத் தேர்வு செய்ய, விண்டோஸ் பயனர்கள் 'ctrl' விசையை அழுத்த வேண்டும், மேலும் macOS பயனர்கள் 'command' விசையை அழுத்த வேண்டும்.</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Select Multiple in Vue&lt;/h1&gt;
+  &lt;p&gt;Depending on your operating system, use the 'ctrl' or the 'command' key to select multiple options.&lt;/p&gt;
+  &lt;form @submit.prevent="registerAnswer"&gt;
+    &lt;label for="cars"&gt;Choose one or more cars:&lt;/label&gt;&lt;br&gt;
+    &lt;select  v-model="carsSelected" id="cars" multiple&gt;
+      &lt;option&gt;Volvo&lt;/option&gt;
+      &lt;option&gt;Saab&lt;/option&gt;
+      &lt;option&gt;Opel&lt;/option&gt;
+      &lt;option&gt;Audi&lt;/option&gt;
+      &lt;option&gt;Kia&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;div&gt;
+    &lt;h3&gt;Submitted answer:&lt;/h3&gt;
+    &lt;p id="pAnswer"&gt;{{ inpValSubmitted }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      carsSelected: [],
+      inpValSubmitted: 'Not submitted yet'
+    }
+  },
+  methods: {
+    registerAnswer() {
+      if(this.carsSelected) {
+        this.inpValSubmitted = this.carsSelected;
+      }
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Exercise Section (ONLY ONE) -->
+        <section class="content-section" id="exercise">
+            <h2>Vue Form Inputs பயிற்சி</h2>
+            
+            <p>உள்ளீடு 'inpText' தரவு பண்புடன் இரு-வழி பைண்டிங் பெறும் வகையில் விடுபட்ட குறியீட்டை நிரப்பவும்.</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">✏️</span> Vue Form Inputs பயிற்சி</h4>
+                
+                <div class="code-example">
+                    <pre><code>&lt;template&gt;
+  &lt;input type="text" <span style="background-color: yellow;">_____</span>&gt;
+  &lt;p&gt; {{ inpText }} &lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  const app = Vue.createApp({
+    data() {
+      return {
+        inpText: 'Initial text'
+      }
+    }
+  })
+  app.mount('#app')
+&lt;/script&gt;</code></pre>
+                </div>
+                
+                <p>கீழே உள்ள விருப்பங்களிலிருந்து சரியான பதிலைத் தேர்ந்தெடுக்கவும்:</p>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">value="inpText"</div>
+                            <div class="option-feedback incorrect">✗ தவறு! value பண்புக்கூறு நிலையான மதிப்பை அமைக்கிறது, ஆனால் இரு-வழி பைண்டிங் இல்லை</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">v-model="inpText"</div>
+                            <div class="option-feedback correct">✓ சரி! v-model Vue இல் இரு-வழி தரவு பைண்டிங்கிற்கான சரியான வழி. இது உள்ளீடு மற்றும் Vue தரவு பண்புக்கு இடையே இரு-வழி கம்யூனிகேஷனை உருவாக்குகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">:value="inpText"</div>
+                            <div class="option-feedback incorrect">✗ தவறு! :value ஒரு-வழி பைண்டிங்கை உருவாக்குகிறது (தரவிலிருந்து உள்ளீட்டிற்கு), ஆனால் இரு-வழி அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">@input="inpText"</div>
+                            <div class="option-feedback incorrect">✗ தவறு! @input ஒரு நிகழ்வு கேட்பவர், ஆனால் இது தானாகவே இரு-வழி பைண்டிங்கை உருவாக்காது</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Read Only Form Inputs -->
+        <section class="content-section" id="read-only-inputs">
+            <h2>படிக்க மட்டுமே படிவ உள்ளீடுகள்</h2>
+            
+            <p>படிவ உள்ளீடுகளில் v-model ஐப் பயன்படுத்துவது இரு-வழி பைண்டிங்கை உருவாக்குகிறது, அதாவது Vue தரவு நிகழ்வு மாறினால், உள்ளீட்டு value பண்புக்கூறும் மாறுகிறது.</p>
+            
+            <p>படிக்க மட்டுமே படிவ உள்ளீடுகளுக்கு, <code>&lt;input type="file"&gt;</code> போன்றவை, value பண்புக்கூறை Vue தரவு நிகழ்விலிருந்து மாற்ற முடியாது, எனவே நாம் v-model ஐப் பயன்படுத்த முடியாது.</p>
+            
+            <p>படிக்க மட்டுமே படிவ உள்ளீடுகளுக்கு, <code>&lt;input type="file"&gt;</code> போன்றவை, Vue தரவு நிகழ்வைப் புதுப்பிக்க ஒரு முறையை அழைக்க @change ஐப் பயன்படுத்த வேண்டும்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Input Type File&lt;/h1&gt;
+  &lt;form @submit.prevent="registerAnswer"&gt;
+    &lt;label&gt;Choose a file:
+      &lt;input @change="updateVal" type="file"&gt;
+    &lt;/label&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;div&gt;
+    &lt;h3&gt;Submitted answer:&lt;/h3&gt;
+    &lt;p id="pAnswer"&gt;{{ inpValSubmitted }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      fileInp: null,
+      inpValSubmitted: 'Not submitted yet'
+    }
+  },
+  methods: {
+    registerAnswer() {
+      if(this.fileInp) {
+        this.inpValSubmitted = this.fileInp;
+      }
+    },
+    updateVal(e) {
+      this.fileInp = e.target.value;
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+            </div>
+            
+            <div class="warning-box">
+                <h4><span class="warning-icon">ℹ️</span> தகவல்:</h4>
+                <p>மேலே உள்ள எடுத்துக்காட்டில், சமர்ப்பிக்கப்பட்ட கோப்புப் பெயர் அதன் முன் C:\fakepath\ என்ற கோப்புப் பாதையைப் பெறுகிறது. இது பயனரின் கோப்பு கட்டமைப்பை யூகிக்க தீங்கிழைக்கும் மென்பொருளைத் தடுப்பதற்காக.</p>
+            </div>
+        </section>
+
+        <!-- Other Form Inputs -->
+        <section class="content-section" id="other-inputs">
+            <h2>பிற படிவ உள்ளீடுகள்</h2>
+            
+            <p>மேலே குறிப்பிடப்பட்ட படிவ உள்ளீடுகளுடன், value பண்புக்கூறுக்கான மதிப்பை வழங்க வேண்டியிருந்தது, ஆனால் கீழே உள்ள படிவ உள்ளீடுகளுடன், பயனர் மதிப்பை வழங்குகிறார்:</p>
+            
+            <div class="form-inputs-grid">
+                <div class="input-demo">
+                    <h4><i class="fas fa-palette"></i> நிறம்</h4>
+                    <input type="color" value="#3498db">
+                    <code>&lt;input type="color" v-model="colorInp"&gt;</code>
+                </div>
+                
+                <div class="input-demo">
+                    <h4><i class="fas fa-calendar"></i> தேதி</h4>
+                    <input type="date">
+                    <code>&lt;input type="date" v-model="dateInp"&gt;</code>
+                </div>
+                
+                <div class="input-demo">
+                    <h4><i class="fas fa-sliders-h"></i> வரம்பு</h4>
+                    <input type="range" min="0" max="100" value="50">
+                    <code>&lt;input type="range" v-model="rangeInp"&gt;</code>
+                </div>
+                
+                <div class="input-demo">
+                    <h4><i class="fas fa-hashtag"></i> எண்</h4>
+                    <input type="number" value="42">
+                    <code>&lt;input type="number" v-model="numInp"&gt;</code>
+                </div>
+            </div>
+            
+            <div class="form-inputs-grid">
+                <div class="input-demo">
+                    <h4><i class="fas fa-key"></i> கடவுச்சொல்</h4>
+                    <input type="password" value="secret">
+                    <code>&lt;input type="password" v-model="passInp"&gt;</code>
+                </div>
+                
+                <div class="input-demo">
+                    <h4><i class="fas fa-search"></i> தேடல்</h4>
+                    <input type="search" placeholder="தேடல்...">
+                    <code>&lt;input type="search" v-model="searchInp"&gt;</code>
+                </div>
+                
+                <div class="input-demo">
+                    <h4><i class="fas fa-phone"></i> தொலைபேசி</h4>
+                    <input type="tel" value="+1234567890">
+                    <code>&lt;input type="tel" v-model="telInp"&gt;</code>
+                </div>
+                
+                <div class="input-demo">
+                    <h4><i class="fas fa-clock"></i> நேரம்</h4>
+                    <input type="time" value="14:30">
+                    <code>&lt;input type="time" v-model="timeInp"&gt;</code>
+                </div>
+            </div>
+            
+            <p>பயனர் ஏற்கனவே இந்த வகையான படிவ உள்ளீடுகளுக்கு மதிப்பை வழங்குவதால், Vue இல் நாம் செய்ய வேண்டியது உள்ளீட்டை v-model உடன் ஒரு தரவு பண்புடன் இணைப்பதுதான்.</p>
+        </section>
+
+        <!-- Textarea Example -->
+        <section class="content-section" id="textarea">
+            <h2>Textarea உள்ளீடு</h2>
+            
+            <p><code>&lt;textarea&gt;</code> உள்ளீடு பல வரி உரை உள்ளீட்டிற்கு பயன்படுத்தப்படுகிறது:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;form @submit.prevent="registerAnswer"&gt;
+  &lt;label&gt;
+    &lt;p&gt;What do you think about our product?&lt;/p&gt; 
+    &lt;textarea v-model="txtInp" placeholder="Write something.." rows="4" cols="35"&gt;&lt;/textarea&gt;
+  &lt;/label&gt;
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+            </div>
+            
+            <div class="input-demo">
+                <h4><i class="fas fa-align-left"></i> Textarea</h4>
+                <textarea rows="4" placeholder="ஏதாவது எழுதவும்..."></textarea>
+                <code>&lt;textarea v-model="txtInp" rows="4"&gt;&lt;/textarea&gt;</code>
+            </div>
+        </section>
+
+        <!-- Form Input Best Practices -->
+        <section class="content-section" id="best-practices">
+            <h2>படிவ உள்ளீடு சிறந்த நடைமுறைகள்</h2>
+            
+            <div class="best-practice-list">
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>v-model modifiers பயன்படுத்தவும்:</strong> .lazy, .number, .trim மோடிஃபையர்கள் உள்ளீடு செயலாக்கத்தை மேம்படுத்துகின்றன</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>சரியான உள்ளீட்டு வகைகளைப் பயன்படுத்தவும்:</strong> type="email", type="tel", type="number" உள்ளீட்டு சரிபார்ப்பு மற்றும் மொபைல் விசைப்பலகைகளை மேம்படுத்துகின்றன</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>தானியங்கி கவனம் மற்றும் சரிபார்த்தல்:</strong> autofocus மற்றும் required பண்புக்கூறுகளைப் பயன்படுத்தவும்</div>
+                </div>
+                
+                <div class="practice-item negative">
+                    <i class="fas fa-times-circle"></i>
+                    <div><strong>v-model ஐ படிக்க மட்டுமே உள்ளீடுகளில் பயன்படுத்த வேண்டாம்:</strong> file, image போன்ற உள்ளீடுகளுக்கு @change ஐப் பயன்படுத்தவும்</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>உள்ளீட்டு சரிபார்த்தல்:</strong> @blur, @change நிகழ்வுகளுடன் சரிபார்ப்பைச் செயல்படுத்தவும்</div>
+                </div>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;!-- v-model modifiers examples --&gt;
+&lt;input v-model.lazy="text"&gt;      &lt;!-- Updates on change instead of input --&gt;
+&lt;input v-model.number="age"&gt;     &lt;!-- Converts to number --&gt;
+&lt;input v-model.trim="username"&gt;  &lt;!-- Trims whitespace --&gt;
+
+&lt;!-- Form validation example --&gt;
+&lt;input 
+  type="email" 
+  v-model="email"
+  @blur="validateEmail"
+  required
+  :class="{ 'error': emailError }"
+&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Form Input Validation -->
+        <section class="content-section" id="validation">
+            <h2>படிவ உள்ளீட்டு சரிபார்த்தல்</h2>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-user-check"></i>
+                        <h4>கிளையண்ட்-சைட் சரிபார்த்தல்</h4>
+                    </div>
+                    <p>HTML5 உள்ளீட்டு பண்புக்கூறுகளைப் பயன்படுத்துதல்</p>
+                    <code>required, pattern, min, max, minlength, maxlength</code>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-code"></i>
+                        <h4>Vue சரிபார்த்தல்</h4>
+                    </div>
+                    <p>நிகழ்வு கேட்போர்கள் மற்றும் computed பண்புகளைப் பயன்படுத்துதல்</p>
+                    <code>@blur, @input, computed error messages</code>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-server"></i>
+                        <h4>சேவையக-சைட் சரிபார்த்தல்</h4>
+                    </div>
+                    <p>API கோரிக்கைகள் மூலம் சரிபார்த்தல்</p>
+                    <code>async/await with fetch or axios</code>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>மூன்றாம் தரப்பு நூலகங்கள்</h4>
+                    </div>
+                    <p>Vuelidate, Vee-Validate போன்ற சரிபார்த்தல் நூலகங்கள்</p>
+                    <code>npm install vuelidate</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20Routing.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20Animations.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">Form Inputs</a></li>
+                    <li><a href="#radio-buttons">ரேடியோ பொத்தான்கள்</a></li>
+                    <li><a href="#checkboxes">செக்பாக்ஸ்கள்</a></li>
+                    <li><a href="#dropdown-list">டிராப்-டவுன் பட்டியல்</a></li>
+                    <li><a href="#select-multiple">select multiple</a></li>
+                    <li><a href="#exercise">பயிற்சிகள்</a></li>
+                    <li><a href="#read-only-inputs">படிக்க மட்டுமே உள்ளீடுகள்</a></li>
+                    <li><a href="#other-inputs">பிற உள்ளீடுகள்</a></li>
+                    <li><a href="#textarea">Textarea</a></li>
+                    <li><a href="#best-practices">சிறந்த நடைமுறைகள்</a></li>
+                    <li><a href="#validation">சரிபார்த்தல்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+        
+        // Demo form inputs interaction
+        document.querySelectorAll('.input-demo input, .input-demo select, .input-demo textarea').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.backgroundColor = '#f0f8ff';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.backgroundColor = 'white';
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

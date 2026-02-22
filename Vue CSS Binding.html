@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue CSS Binding - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important;
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important;
+        }
+        
+        /* Exercise hover effects */
+        .option-card:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            transform: translateX(5px) !important;
+        }
+        
+        .exercise-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue v-model Directive.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue Computed Properties.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue CSS Binding</h2>
+            <p>Vue CSS பைண்டிங்கைக் கற்றுக்கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue CSS Binding</h2>
+            
+            <p>style மற்றும் class பண்புக்கூறுகளுடன் CSS ஐ மாற்ற v-bind ஐ எவ்வாறு பயன்படுத்துவது என்பதைப் பற்றி மேலும் அறிக.</p>
+            
+            <p>v-bind உடன் style மற்றும் class பண்புக்கூறுகளை மாற்றுவதற்கான கருத்து மிகவும் நேரடியானது, ஆனால் தொடரியல் சில பழக்கத்தைத் தேவைப்படுத்தலாம்.</p>
+        </section>
+
+        <!-- Dynamic CSS in Vue -->
+        <section class="content-section" id="dynamic-css">
+            <h2>Dynamic CSS in Vue</h2>
+            
+            <p>style மற்றும் class பண்புக்கூறுகளில் v-bind ஐப் பயன்படுத்துவதன் மூலம் CSS ஐ மாற்ற Vue ஐ எவ்வாறு பயன்படுத்தலாம் என்பதை நீங்கள் ஏற்கனவே பார்த்திருக்கிறீர்கள். இது v-bind கீழ் இந்த டுடோரியலில் சுருக்கமாக விளக்கப்பட்டுள்ளது மற்றும் Vue CSS ஐ மாற்றும் பல எடுத்துக்காட்டுகளும் கொடுக்கப்பட்டுள்ளன.</p>
+            
+            <p>இங்கே Vue உடன் CSS எவ்வாறு டைனமிகலாக மாற்றப்படலாம் என்பதை மேலும் விரிவாக விளக்குவோம். ஆனால் முதலில் இந்த டுடோரியலில் நாம் ஏற்கனவே பார்த்த இரண்டு உதாரணங்களைப் பார்ப்போம்: v-bind:style உடன் இன்-லைன் ஸ்டைலிங் மற்றும் v-bind:class உடன் ஒரு வகுப்பை ஒதுக்குதல்</p>
+        </section>
+
+        <!-- Inline Styling -->
+        <section class="content-section" id="inline-styling">
+            <h2>Inline Styling</h2>
+            
+            <p>Vue இல் இன்-லைன் ஸ்டைலிங் செய்ய v-bind:style ஐப் பயன்படுத்துகிறோம்.</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🎯</span> Example</h4>
+                <p>ஒரு &lt;div&gt; உறுப்பின் ஒளிபுகா தன்மையை மாற்ற இன்-லைன் ஸ்டைலிங் பயன்படுத்தி ஒரு &lt;input type="range"&gt; உறுப்பு பயன்படுத்தப்படுகிறது.</p>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;input type="range" v-model="opacityVal"&gt;
+&lt;div v-bind:style="{ backgroundColor: 'rgba(155,20,20,'+opacityVal+')' }"&gt;
+  Drag the range input above to change opacity here.
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Assign a Class -->
+        <section class="content-section" id="assign-class">
+            <h2>Assign a Class</h2>
+            
+            <p>Vue இல் ஒரு HTML குறிச்சொல்லுக்கு ஒரு வகுப்பை ஒதுக்க v-bind:class ஐப் பயன்படுத்துகிறோம்.</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🎯</span> Example</h4>
+                <p>உணவின் படங்களைத் தேர்ந்தெடுக்கவும். நீங்கள் தேர்ந்தெடுத்ததைக் காட்டுவதற்கு v-bind:class ஐப் பயன்படுத்தி தேர்ந்தெடுக்கப்பட்ட உணவு முன்னிலைப்படுத்தப்படுகிறது.</p>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;div v-for="(img, index) in images"&gt;
+  &lt;img v-bind:src="img.url"
+       v-on:click="select(index)"
+       v-bind:class="{ selClass: img.sel }"&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Other Ways to Assign Classes and Style -->
+        <section class="content-section" id="other-ways">
+            <h2>Other Ways to Assign Classes and Style</h2>
+            
+            <p>v-bind:class மற்றும் v-bind:style பயன்பாடு தொடர்பான வெவ்வேறு அம்சங்கள் இங்கே உள்ளன, அவை இந்த டுடோரியலில் நாம் முன்பு பார்த்ததில்லை:</p>
+            
+            <ul>
+                <li>class="" மற்றும் v-bind:class="" ஆகிய இரண்டிலும் CSS வகுப்புகள் ஒரு HTML குறிச்சொல்லுக்கு ஒதுக்கப்படும்போது Vue வகுப்புகளை இணைக்கிறது.</li>
+                <li>v-bind:class="{}" உடன் ஒன்று அல்லது அதற்கு மேற்பட்ட வகுப்புகளைக் கொண்ட ஒரு பொருள் ஒதுக்கப்படுகிறது. பொருளுக்குள் ஒன்று அல்லது அதற்கு மேற்பட்ட வகுப்புகள் இயக்கப்படலாம் அல்லது முடக்கப்படலாம்.</li>
+                <li>இன்-லைன் ஸ்டைலிங் (v-bind:style) உடன் ஒரு CSS பண்புக்கூறை வரையறுக்கும்போது கேமல் கேஸ் விரும்பப்படுகிறது, ஆனால் அது மேற்கோள்களுக்குள் எழுதப்பட்டால் 'கேபப்-கேஸ்'யும் பயன்படுத்தலாம்.</li>
+                <li>CSS வகுப்புகளை வரிசைகள் / வரிசை குறியீட்டு முறை / தொடரியல் மூலம் ஒதுக்க முடியும்</li>
+            </ul>
+            
+            <p>இந்த புள்ளிகள் கீழே மேலும் விரிவாக விளக்கப்பட்டுள்ளன.</p>
+        </section>
+
+        <!-- 1. Vue Merges 'class' And 'v-bind:class' -->
+        <section class="content-section" id="merge-classes">
+            <h3>1. Vue Merges 'class' And 'v-bind:class'</h3>
+            
+            <p>class="" மூலம் ஒதுக்கப்பட்ட வகுப்பிற்கு ஒரு HTML குறிச்சொல் சொந்தமானது மற்றும் v-bind:class="" மூலம் ஒரு வகுப்பிற்கும் ஒதுக்கப்படும் போது, Vue எங்களுக்கு வகுப்புகளை இணைக்கிறது.</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🎯</span> Example</h4>
+                <p>ஒரு &lt;div&gt; உறுப்பு இரண்டு வகுப்புகளுக்குச் சொந்தமானது: 'impClass' மற்றும் 'yelClass'. 'important' வகுப்பு வகுப்பு பண்புக்கூறுடன் சாதாரண வழியில் அமைக்கப்பட்டுள்ளது, மற்றும் 'yellow' வகுப்பு v-bind:class உடன் அமைக்கப்பட்டுள்ளது.</p>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;div class="impClass" v-bind:class="{yelClass: isYellow}"&gt;
+  This div belongs to both 'impClass' and 'yelClass'.
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- 2. Assign More Than One Class With 'v-bind:class' -->
+        <section class="content-section" id="multiple-classes">
+            <h3>2. Assign More Than One Class With 'v-bind:class'</h3>
+            
+            <p>v-bind:class="{}" உடன் ஒரு HTML உறுப்பை ஒரு வகுப்பிற்கு ஒதுக்கும்போது, பல வகுப்புகளைப் பிரிக்கவும் ஒதுக்கவும் வெறுமனே கமாவைப் பயன்படுத்தலாம்.</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🎯</span> Example</h4>
+                <p>ஒரு &lt;div&gt; உறுப்பு பூலியன் Vue தரவு பண்புகள் 'isYellow' மற்றும் 'isImportant' ஆகியவற்றைப் பொறுத்து 'impClass' மற்றும் 'yelClass' வகுப்புகளுக்குச் சொந்தமானது.</p>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;div v-bind:class="{yelClass: isYellow, impClass: isImportant}"&gt;
+  This tag can belong to both the 'impClass' and 'yelClass' classes.
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- 3. Camel case vs kebab case notation with 'v-bind:style' -->
+        <section class="content-section" id="camel-kebab-case">
+            <h3>3. Camel case vs kebab case notation with 'v-bind:style'</h3>
+            
+            <p>இன்-லைன் ஸ்டைலிங் (v-bind:style) உடன் Vue இல் CSS ஐ மாற்றும்போது, CSS பண்புக்கூறுக்கு கேமல் கேஸ் குறியீட்டைப் பயன்படுத்த பரிந்துரைக்கப்படுகிறது, ஆனால் CSS பண்புக்கூறு மேற்கோள்களுக்குள் இருந்தால் 'கேபப்-கேஸ்'யும் பயன்படுத்தலாம்.</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🎯</span> Example</h4>
+                <p>இங்கே, ஒரு &lt;div&gt; உறுப்பிற்கு CSS பண்புக்கூறுகள் background-color மற்றும் font-weight ஆகியவற்றை இரண்டு வெவ்வேறு வழிகளில் அமைக்கிறோம்: பரிந்துரைக்கப்பட்ட வழியில் கேமல் கேஸ் backgroundColor, மற்றும் பரிந்துரைக்கப்படாத வழியில் மேற்கோள்களில் 'கேபப்-கேஸ்' 'font-weight'. இரண்டு மாற்றுகளும் வேலை செய்கின்றன.</p>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;div v-bind:style="{ backgroundColor: 'lightpink', 'font-weight': 'bolder' }"&gt;
+  This div tag has pink background and bold text.
+&lt;/div&gt;</code></pre>
+            </div>
+            
+            <p>'Camel case' மற்றும் 'kebab case' குறியீட்டு முறைகள் இடைவெளி அல்லது நிறுத்தற்குறிகள் இல்லாமல் தொடர் சொற்களை எழுதும் வழிகளாகும்.</p>
+            
+            <ul>
+                <li>கேமல் கேஸ் குறியீட்டு முறை என்பது முதல் சொல் ஒரு சிறிய எழுத்தில் தொடங்கி, ஒவ்வொரு சொல்லும் ஒரு பெரிய எழுத்தில் தொடங்கும் போது, 'backgroundColor' அல்லது 'camelCaseNotation' போன்றது. ஒவ்வொரு பெரிய எழுத்தும் ஒரு ஒட்டகத்தின் முதுகில் ஒரு குன்றை ஒத்திருப்பதால் இது கேமல் கேஸ் என்று அழைக்கப்படுகிறது.</li>
+                <li>கேபப் கேஸ் குறியீட்டு முறை என்பது சொற்கள் ஒரு கோடு - உடன் பிரிக்கப்படும்போது, 'background-color' அல்லது 'kebab-case-notation' போன்றது. கோடுகள் ஒரு 'ஷிஷ் கேபாபில்' உள்ள கோல்ப் போல் இருக்கும் என்பதால் இது கேபப் கேஸ் என்று அழைக்கப்படுகிறது.</li>
+            </ul>
+        </section>
+
+        <!-- 4. Array Syntax with 'v-bind:class' -->
+        <section class="content-section" id="array-syntax">
+            <h3>4. Array Syntax with 'v-bind:class'</h3>
+            
+            <p>பல வகுப்புகளைச் சேர்க்க v-bind:class உடன் வரிசை தொடரியலைப் பயன்படுத்தலாம். வரிசை தொடரியலுடன் Vue பண்பைப் பொறுத்து இருக்கும் வகுப்புகளையும் Vue பண்பைச் சார்ந்து இல்லாத வகுப்புகளையும் பயன்படுத்தலாம்.</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🎯</span> Example</h4>
+                <p>இங்கே, வரிசை தொடரியலுடன் CSS வகுப்புகள் 'impClass' மற்றும் 'yelClass' ஆகியவற்றை அமைக்கிறோம். 'impClass' வகுப்பு ஒரு Vue பண்பு isImportant ஐச் சார்ந்தது மற்றும் 'yelClass' வகுப்பு எப்போதும் &lt;div&gt; உறுப்புடன் இணைக்கப்பட்டுள்ளது.</p>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;div v-bind:class="[{ impClass: isImportant }, 'yelClass' ]"&gt;
+  This div tag belongs to one or two classes depending on the isImportant property.
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Single Exercise Section -->
+        <section class="content-section" id="exercises">
+            <h2>Vue Exercises</h2>
+            
+            <p>Vue CSS பைண்டிங்கில் உங்கள் அறிவைச் சோதிக்க இந்த பயிற்சியை முயற்சிக்கவும்.</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> Vue.js இல் ஒரு HTML உறுப்புக்கு பல CSS வகுப்புகளை ஒதுக்குவதற்கான சரியான தொடரியல் எது?</h4>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-bind:class="impClass yelClass"</div>
+                            <div class="option-feedback incorrect">✗ தவறு! இந்த தொடரியல் சரியானது அல்ல, பல வகுப்புகள் இந்த வழியில் பிரிக்கப்பட முடியாது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">v-bind:class="{ impClass: isImportant, yelClass: isYellow }"</div>
+                            <div class="option-feedback correct">✓ சரி! இந்த தொடரியல் பல வகுப்புகளை ஒரு பொருள் குறியீட்டு மூலம் ஒதுக்க சரியானது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-bind:class="[impClass, yelClass]"</div>
+                            <div class="option-feedback incorrect">✗ தவறு! வரிசை தொடரியல் சரியானது, ஆனால் வகுப்பு பெயர்கள் மேற்கோள்களில் இருக்க வேண்டும் அல்லது Vue பண்புகளுடன் இணைக்கப்பட வேண்டும்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-bind:style="{ impClass: isImportant, yelClass: isYellow }"</div>
+                            <div class="option-feedback incorrect">✗ தவறு! v-bind:style CSS வகுப்புகளுக்கு அல்ல, CSS ஸ்டைல்களுக்கு மட்டுமே</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue v-model Directive.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue Computed Properties.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">CSS பைண்டிங்</a></li>
+                    <li><a href="#inline-styling">இன்-லைன் ஸ்டைலிங்</a></li>
+                    <li><a href="#assign-class">வகுப்பை ஒதுக்குதல்</a></li>
+                    <li><a href="#merge-classes">வகுப்புகளை இணைத்தல்</a></li>
+                    <li><a href="#multiple-classes">பல வகுப்புகள்</a></li>
+                    <li><a href="#camel-kebab-case">கேமல் vs கேபப் கேஸ்</a></li>
+                    <li><a href="#array-syntax">வரிசை தொடரியல்</a></li>
+                    <li><a href="#exercises">Vue பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

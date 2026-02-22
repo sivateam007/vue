@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 'beforeUpdate' Lifecycle Hook - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20'mounted'%20Lifecycle%20Hook.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20'updated'%20Lifecycle%20Hook.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue 'beforeUpdate' Lifecycle Hook</h2>
+            <p>Vue beforeUpdate லைஃப்சைக்கிள் ஹுக் பற்றி அறிக</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Example Section -->
+        <section class="content-section" id="example">
+            <h2>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</h2>
+            
+            <p>beforeUpdate லைஃப்சைக்கிள் ஹுக் பயன்படுத்தி எத்தனை முறை அப்டேட் டிரிகர் செய்யப்படுகிறது என எண்ண.</p>
+            
+            <div class="code-example">
+                <pre><code>export default {
+  data() {
+    return {
+      sliderVal: 50,
+      renderCount: 0
+    }
+  },
+  beforeUpdate() {
+    this.renderCount++;
+  }
+}</code></pre>
+            </div>
+            
+            <p>இது எவ்வாறு செயல்படுகிறது என்பதைப் பார்க்க "Try it Yourself" பொத்தானைக் கிளிக் செய்யவும்.</p>
+        </section>
+
+        <!-- Definition and Usage -->
+        <section class="content-section" id="definition">
+            <h2>வரையறை மற்றும் பயன்பாடு</h2>
+            
+            <p>beforeUpdate லைஃப்சைக்கிள் ஹுக் Vue இன் ரியாக்டிவ் சிஸ்டம் புதிய ரெண்டரிங் தேவைப்படும் மாற்றத்தை கண்டறிந்த பிறகு நடக்கும், ஆனால் அந்த ரெண்டரிங் நடப்பதற்கு முன்.</p>
+            
+            <p>ஒரு முடிவற்ற லூப்பைத் தவிர்க்க நாம் எப்போதும் updated லைஃப்சைக்கிள் ஹுக்கிற்குப் பதிலாக beforeUpdate லைஃப்சைக்கிள் ஹுக் பயன்படுத்துவதைக் கருத்தில் கொள்ள வேண்டும்.</p>
+        </section>
+
+        <!-- Related Pages -->
+        <section class="content-section" id="related">
+            <h2>தொடர்புடைய பக்கங்கள்</h2>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4>Vue Tutorial</h4>
+                    <p>Vue லைஃப்சைக்கிள் ஹுக்ஸ்</p>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4>Vue Tutorial</h4>
+                    <p>'beforeUpdate' ஹுக்</p>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4>Vue Tutorial</h4>
+                    <p>'updated' ஹுக்</p>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4>Vue Reference</h4>
+                    <p>Vue 'updated' லைஃப்சைக்கிள் ஹுக்</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercise Section -->
+        <section class="content-section" id="exercises">
+            <h2>Vue பயிற்சிகள்</h2>
+            
+            <p>இந்த டுடோரியலில் உள்ள பல அத்தியாயங்கள் உங்கள் அறிவு நிலையைச் சரிபார்க்கக்கூடிய பயிற்சியுடன் முடிகின்றன.</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> beforeUpdate லைஃப்சைக்கிள் ஹுக் பற்றிய சரியான கூற்று எது?</h4>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">beforeUpdate ஹுக் ரெண்டரிங் நடப்பதற்கு முன் நடக்கும்</div>
+                            <div class="option-feedback correct">✓ சரி! beforeUpdate ஹுக் Vue இன் ரியாக்டிவ் சிஸ்டம் மாற்றத்தை கண்டறிந்த பிறகு, ஆனால் புதிய ரெண்டரிங் நடப்பதற்கு முன் நடக்கும்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">beforeUpdate ஹுக்கில் டேட்டா மாற்றங்களை செய்யலாம், இது infinite loop ஏற்படாது</div>
+                            <div class="option-feedback incorrect">✗ தவறு! beforeUpdate ஹுக்கில் டேட்டா மாற்றங்களை செய்தால் infinite loop ஏற்படலாம். ரெண்டரிங் தேவைப்படும் மாற்றங்களைத் தவிர்க்கவும்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">beforeUpdate ஹுக் கம்போனெண்ட் முதல் முறையாக உருவாக்கப்படும் போது நடக்கும்</div>
+                            <div class="option-feedback incorrect">✗ தவறு! beforeUpdate ஹுக் கம்போனெண்ட் முதல் முறையாக உருவாக்கப்படும் போது நடக்காது. இது ரெண்டரிங் தேவைப்படும் மாற்றம் கண்டறியப்பட்ட பிறகு மட்டுமே நடக்கும்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">beforeUpdate ஹுக்கில் DOM எலிமெண்டுகள் இன்னும் புதுப்பிக்கப்படவில்லை</div>
+                            <div class="option-feedback incorrect">✗ தவறு! beforeUpdate ஹுக்கில் DOM எலிமெண்டுகள் ஏற்கனவே புதுப்பிக்கப்பட்டுள்ளன. beforeUpdate ஹுக் ரெண்டரிங் நடப்பதற்கு முன் நடக்கும், ஆனால் DOM புதுப்பித்தல் நடப்பதற்கு முன் அல்ல</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20'mounted'%20Lifecycle%20Hook.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20'updated'%20Lifecycle%20Hook.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#example">எடுத்துக்காட்டு</a></li>
+                    <li><a href="#definition">வரையறை மற்றும் பயன்பாடு</a></li>
+                    <li><a href="#related">தொடர்புடைய பக்கங்கள்</a></li>
+                    <li><a href="#exercises">Vue பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

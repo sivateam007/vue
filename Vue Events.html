@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Events - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important;
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important;
+        }
+        
+        .example-container {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .example-title {
+            color: var(--git-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .event-demo {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+        
+        .moose-icon {
+            font-size: 4rem;
+            color: #8b4513;
+            margin-bottom: 1rem;
+        }
+        
+        .count-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--git-color);
+            margin: 1rem 0;
+        }
+        
+        .event-button {
+            background: linear-gradient(135deg, var(--git-color), #e74c3c);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .event-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .event-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border-left: 4px solid var(--git-color);
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .event-icon {
+            font-size: 2rem;
+            color: var(--git-color);
+            margin-bottom: 1rem;
+        }
+        
+        .event-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20v-for%20Directive.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20v-on%20Directive.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue Events</h2>
+            <p>Vue நிகழ்வுகள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue நிகழ்வுகள்</h2>
+            
+            <p>Vue இல் நிகழ்வு கையாளுதல் v-on வழிமுறையுடன் செய்யப்படுகிறது, இதனால் ஒரு பொத்தான் கிளிக் செய்யப்படும் போது எதையாவது நடக்கச் செய்யலாம்.</p>
+            
+            <p>நிகழ்வு கையாளுதல் என்பது ஒரு குறிப்பிட்ட நிகழ்வு நடக்கும்போது ஒரு குறிப்பிட்ட குறியீட்டை இயக்க HTML உறுப்புகள் அமைக்கப்படும் போது ஆகும்.</p>
+            
+            <p>Vue இல் நிகழ்வுகள் பயன்படுத்த எளிதானவை மற்றும் எங்கள் பக்கத்தை உண்மையில் எதிர்வினையாற்றும் வகையில் ஆக்கும்.</p>
+            
+            <p>Vue முறைகள் ஒரு நிகழ்வு நடக்கும்போது இயக்க அமைக்கப்படும் குறியீடு ஆகும்.</p>
+            
+            <p>v-on திருத்திகளுடன், ஒரு நிகழ்விற்கு எவ்வாறு எதிர்வினை செய்வது என்பதை மேலும் விரிவாக விவரிக்கலாம்.</p>
+        </section>
+
+        <!-- Get started with events -->
+        <section class="content-section" id="get-started">
+            <h2>நிகழ்வுகளுடன் தொடங்குங்கள்</h2>
+            
+            <p>ஒரு காட்டில் மூஸ்களை எண்ண ஒரு பொத்தானைக் கிளிக் செய்வது எப்படி என்பதைக் காட்ட ஒரு எடுத்துக்காட்டுடன் தொடங்குவோம்.</p>
+            
+            <p>எங்களுக்கு தேவை:</p>
+            
+            <ul>
+                <li>ஒரு பொத்தான்</li>
+                <li>'click' நிகழ்வைக் கேட்க &lt;button&gt; குறிச்சொல்லில் v-on</li>
+                <li>மூஸ்களின் எண்ணிக்கையை அதிகரிக்கும் குறியீடு</li>
+                <li>மூஸ்களின் எண்ணிக்கையை வைத்திருக்க Vue நிகழ்வில் ஒரு பண்பு (மாறி)</li>
+                <li>அதிகரித்த மூஸ்களின் எண்ணிக்கையைக் காட்ட இரட்டை சுருள் பிரேஸ்கள் {{}}</li>
+            </ul>
+            
+            <div class="example-container">
+                <div class="example-title">எடுத்துக்காட்டு</div>
+                <p>காட்டில் ஒரு மூஸை எண்ண பொத்தானைக் கிளிக் செய்யவும். பொத்தான் கிளிக் செய்யப்படும் ஒவ்வொரு முறையும் count பண்பு அதிகரிக்கிறது.</p>
+                <div class="code-example">
+                    <pre><code>&lt;div id="app"&gt;
+  &lt;img src="img_moose.jpg"&gt;
+  &lt;p&gt;{{ "Moose count: " + count }}&lt;/p&gt;
+  &lt;button v-on:click="count++"&gt;Count moose&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const app = Vue.createApp({
+    data() {
+      return {
+        count: 0
+      }
+    }
+  })
+ app.mount('#app')
+&lt;/script&gt;</code></pre>
+                </div>
+                <div class="tip-box">
+                    <h4><span class="tip-icon">💻</span> உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</h4>
+                </div>
+            </div>
+            
+            <!-- Interactive Demo -->
+            <div class="event-demo">
+              
+            
+            <div class="warning-box">
+                <h4><span class="tip-icon">📝</span> குறிப்பு:</h4>
+                <p>Vue உடன் வரும் ஒரு நன்மை என்னவென்றால், &lt;p&gt; குறிச்சொல்லில் உள்ள மூஸ்களின் எண்ணிக்கை தானாகவே புதுப்பிக்கப்படுகிறது. வெற்று JavaScript உடன், கூடுதல் குறியீட்டு வரியுடன் பயனர் பார்க்கும் எண்ணைப் புதுப்பிக்க வேண்டும்.</p>
+            </div>
+        </section>
+
+        <!-- Events -->
+        <section class="content-section" id="events">
+            <h2>நிகழ்வுகள்</h2>
+            
+            <p>குறியீட்டை இயக்குவதற்கான தூண்டுதல்களாகப் பயன்படுத்தக்கூடிய பல நிகழ்வுகள் உள்ளன, மிகவும் பொதுவானவற்றில் சில: 'click', 'mouseover', 'mouseout', 'keydown' மற்றும் 'input'.</p>
+            
+            <div class="event-grid">
+                <div class="event-card">
+                    <div class="event-icon">
+                        <i class="fas fa-mouse-pointer"></i>
+                    </div>
+                    <div class="event-name">click</div>
+                    <p>கிளிக் செய்யும் போது</p>
+                </div>
+                <div class="event-card">
+                    <div class="event-icon">
+                        <i class="fas fa-mouse"></i>
+                    </div>
+                    <div class="event-name">mouseover</div>
+                    <p>சுட்டி மேலே செல்லும் போது</p>
+                </div>
+                <div class="event-card">
+                    <div class="event-icon">
+                        <i class="fas fa-mouse"></i>
+                    </div>
+                    <div class="event-name">mouseout</div>
+                    <p>சுட்டி வெளியே செல்லும் போது</p>
+                </div>
+                <div class="event-card">
+                    <div class="event-icon">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <div class="event-name">keydown</div>
+                    <p>விசை அழுத்தும் போது</p>
+                </div>
+                <div class="event-card">
+                    <div class="event-icon">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <div class="event-name">input</div>
+                    <p>உள்ளீடு மாறும் போது</p>
+                </div>
+            </div>
+            
+            <p>பயன்படுத்த நிகழ்வுகளின் முழுமையான பட்டியலுக்கு எங்கள் HTML DOM நிகழ்வுகள் பக்கத்தைப் பார்க்கலாம்.</p>
+        </section>
+
+        <!-- 'v-on' -->
+        <section class="content-section" id="v-on">
+            <h2>'v-on'</h2>
+            
+            <p>v-on வழிமுறை பயனர் என்ன செய்கிறார் என்பதற்கு எதிர்வினையாற்றும் பக்கங்களை உருவாக்க அனுமதிக்கிறது.</p>
+            
+            <p>Vue v-on எந்த நிகழ்வைக் கேட்க வேண்டும், மற்றும் அந்த நிகழ்வு நடக்கும்போது என்ன செய்ய வேண்டும் என்பதை உலாவிக்குச் சொல்வதன் மூலம் வேலை செய்கிறது.</p>
+        </section>
+
+        <!-- Methods -->
+        <section class="content-section" id="methods">
+            <h2>முறைகள்</h2>
+            
+            <p>ஒரு நிகழ்வு நடக்கும்போது மிகவும் சிக்கலான குறியீட்டை இயக்க விரும்பினால், குறியீட்டை ஒரு Vue முறையில் வைத்து, இந்த முறையை HTML பண்பிலிருந்து குறிப்பிடலாம், இது போன்றது:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;p v-on:click="changeColor"&gt;Click me&lt;/p&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Event Modifiers -->
+        <section class="content-section" id="event-modifiers">
+            <h2>நிகழ்வு திருத்திகள்</h2>
+            
+            <p>v-on மற்றும் Vue முறைகளுக்கு கூடுதலாக, நிகழ்வு திருத்திகள் என்று அழைக்கப்படுவதைப் பயன்படுத்தலாம், இது ஒரு நிகழ்வை மாற்றியமைக்கிறது, எடுத்துக்காட்டாக ஒரு பக்கம் ஏற்றப்பட்ட பிறகு ஒரு முறை மட்டுமே நடக்கும், அல்லது 'submit' போன்ற ஒரு நிகழ்வை மாற்றியமைக்க ஒரு படிவத்தை சமர்ப்பிப்பதைத் தடுக்க.</p>
+        </section>
+
+        <!-- Learn More -->
+        <section class="content-section" id="learn-more">
+            <h2>மேலும் அறிக</h2>
+            
+            <p>நாம் பார்க்க முடிந்தால், Vue இல் நிகழ்வுகளைப் பயன்படுத்த கற்றுக்கொள்ள வேண்டிய மூன்று நுட்பங்கள் உள்ளன:</p>
+            
+            <ol>
+                <li>Vue v-on வழிமுறை</li>
+                <li>Vue முறைகள்</li>
+                <li>Vue v-on திருத்திகள்</li>
+            </ol>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🚀</span> உதவிக்குறிப்பு:</h4>
+                <p>இந்த டுடோரியலைத் தொடர்ந்து நிகழ்வு கையாளுதலுக்கான இந்த நுட்பங்களைப் பற்றி மேலும் அறிய 'அடுத்தது' பொத்தானைக் கிளிக் செய்யவும்.</p>
+            </div>
+        </section>
+
+        <!-- Vue Exercises -->
+        <section class="content-section" id="exercises">
+            <h2>Vue பயிற்சிகள்</h2>
+            
+            <p>பயிற்சிகளுடன் உங்களைச் சோதிக்கவும்</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> பயிற்சி:</h4>
+                <p>விடுபட்ட பகுதியை நிரப்பவும்.</p>
+                <p>Vue இல், நிகழ்வுகள் ______ வழிமுறையுடன் கையாளப்படுகின்றன.</p>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-if</div>
+                            <div class="option-feedback incorrect">✗ தவறு! v-if நிபந்தனை ரெண்டரிங்கிற்குப் பயன்படுகிறது, நிகழ்வு கையாளுதலுக்கு அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-bind</div>
+                            <div class="option-feedback incorrect">✗ தவறு! v-bind பண்பு பிணைப்புக்குப் பயன்படுகிறது, நிகழ்வு கையாளுதலுக்கு அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">v-on</div>
+                            <div class="option-feedback correct">✓ சரி! v-on நிகழ்வுகளைக் கையாளப் பயன்படுகிறது, எ.கா. v-on:click</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-for</div>
+                            <div class="option-feedback incorrect">✗ தவறு! v-for வளையங்களுக்குப் பயன்படுகிறது, நிகழ்வு கையாளுதலுக்கு அல்ல</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20v-for%20Directive.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20v-on%20Directive.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">Vue நிகழ்வுகள்</a></li>
+                    <li><a href="#get-started">தொடங்குதல்</a></li>
+                    <li><a href="#events">நிகழ்வு வகைகள்</a></li>
+                    <li><a href="#v-on">v-on வழிமுறை</a></li>
+                    <li><a href="#methods">முறைகள்</a></li>
+                    <li><a href="#event-modifiers">நிகழ்வு திருத்திகள்</a></li>
+                    <li><a href="#learn-more">மேலும் அறிக</a></li>
+                    <li><a href="#exercises">Vue பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+        
+        // Demo functionality
+        let mooseCount = 0;
+        const demoButton = document.getElementById('demoButton');
+        const demoCount = document.getElementById('demoCount');
+        
+        if(demoButton && demoCount) {
+            demoButton.addEventListener('click', function() {
+                mooseCount++;
+                demoCount.textContent = `Moose count: ${mooseCount}`;
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 100);
+            });
+        }
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

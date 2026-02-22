@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Computed Properties - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important;
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important;
+        }
+        
+        /* Exercise hover effects */
+        .option-card:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            transform: translateX(5px) !important;
+        }
+        
+        .exercise-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue CSS Binding.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue Watchers.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue Computed Properties</h2>
+            <p>Vue கம்ப்யூட்டட் ப்ராபர்ட்டீஸ் கற்றுக்கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue Computed Properties</h2>
+            
+            <p>கம்ப்யூட்டட் ப்ராபர்ட்டீஸ் தரவு பண்புகளைப் போன்றவை, அவை மற்ற பண்புகளைச் சார்ந்திருப்பதைத் தவிர.</p>
+            
+            <p>கம்ப்யூட்டட் ப்ராபர்ட்டீஸ் முறைகளைப் போல எழுதப்படுகின்றன, ஆனால் அவை எந்த உள்ளீட்டு வாதங்களையும் ஏற்காது.</p>
+            
+            <p>ஒரு சார்பு மாறும்போது கம்ப்யூட்டட் ப்ராபர்ட்டீஸ் தானாகவே புதுப்பிக்கப்படும், அதேசமயம் முறைகள் ஏதாவது நடக்கும்போது அழைக்கப்படுகின்றன, எடுத்துக்காட்டாக நிகழ்வு கையாளுதலுடன்.</p>
+            
+            <p>வேறொன்றைச் சார்ந்துள்ள ஏதாவது வெளியிடப்படும்போது கம்ப்யூட்டட் ப்ராபர்ட்டீஸ் பயன்படுத்தப்படுகின்றன.</p>
+        </section>
+
+        <!-- Computed Properties are Dynamic -->
+        <section class="content-section" id="dynamic-properties">
+            <h2>Computed Properties are Dynamic</h2>
+            
+            <p>ஒரு கம்ப்யூட்டட் ப்ராபர்ட்டியின் பெரிய நன்மை என்னவென்றால், அது டைனமிக், அதாவது ஒன்று அல்லது அதற்கு மேற்பட்ட தரவு பண்புகளின் மதிப்பைப் பொறுத்து மாறுகிறது.</p>
+            
+            <p>கம்ப்யூட்டட் ப்ராபர்ட்டீஸ் என்பது Vue உதாரணத்தில் மூன்றாவது கட்டமைப்பு விருப்பமாகும், அதை நாம் கற்றுக்கொள்வோம். நாம் ஏற்கனவே பார்த்த முதல் இரண்டு கட்டமைப்பு விருப்பங்கள் 'data' மற்றும் 'methods'.</p>
+            
+            <p>'data' மற்றும் 'methods' போலவே கம்ப்யூட்டட் ப்ராபர்ட்டீஸ்களும் Vue உதாரணத்தில் ஒரு ஒதுக்கப்பட்ட பெயரைக் கொண்டுள்ளன: 'computed'.</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">📝</span> Syntax</h4>
+                <p>கம்ப்யூட்டட் ப்ராபர்ட்டீஸின் தொடரியல்:</p>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>const app = Vue.createApp({
+  data() {
+    ...
+  },
+  computed: {
+    ...
+  },
+  methods: {
+    ...
+  }
+})</code></pre>
+            </div>
+        </section>
+
+        <!-- Computed Property 'yes' or 'no' -->
+        <section class="content-section" id="yes-no-example">
+            <h2>Computed Property 'yes' or 'no'</h2>
+            
+            <p>ஒரு ஷாப்பிங் பட்டியலில் உருப்படிகளை உருவாக்க ஒரு படிவத்தை வைத்திருக்க விரும்புகிறோம் என்று வைத்துக்கொள்வோம், மற்றும் ஒரு புதிய உருப்படி முக்கியமானதா இல்லையா எனக் குறிக்க விரும்புகிறோம். செக்பாக்ஸ் சரிபார்க்கப்படும்போது ஒரு 'true' அல்லது 'false' பின்னூட்டத்தை நாம் சேர்க்கலாம், நாம் முன்பு ஒரு உதாரணத்தில் செய்ததைப் போல:</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🎯</span> Example</h4>
+                <p>உள்ளீடு உறுப்பு டைனமிக் ஆக்கப்படுகிறது, இதனால் உரை நிலையை பிரதிபலிக்கிறது.</p>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;input type="checkbox" v-model="chbxVal"&gt; {{ chbxVal }}
+
+data() {
+  return {
+    chbxVal: false
+  }
+}</code></pre>
+            </div>
+            
+            <p>இருப்பினும், ஏதாவது முக்கியமானதா என்று நீங்கள் யாரையாவது கேட்டால், அவர்கள் 'true' அல்லது 'false' க்கு பதிலாக 'yes' அல்லது 'no' என்று பதிலளிப்பார்கள். எனவே சாதாரண மொழியுடன் (மிகவும் உள்ளுணர்வு) எங்கள் படிவத்தை மிகவும் பொருத்தமாக்க, 'true' அல்லது 'false' க்கு பதிலாக செக்பாக்ஸில் 'yes' அல்லது 'no' பின்னூட்டத்தைக் கொண்டிருக்க வேண்டும்.</p>
+            
+            <p>என்ன யூகிக்கிறீர்கள், ஒரு கம்ப்யூட்டட் ப்ராபர்ட்டி அதற்கு எங்களுக்கு உதவ ஒரு சிறந்த கருவியாகும்.</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🎯</span> Example</h4>
+                <p>ஒரு கம்ப்யூட்டட் ப்ராபர்ட்டி 'isImportant' உடன், செக்பாக்ஸ் இயக்கப்படும்போது மற்றும் அணைக்கப்படும்போது பயனருக்கு உரை பின்னூட்டத்தை இப்போது தனிப்பயனாக்கலாம்.</p>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;input type="checkbox" v-model="chbxVal"&gt; {{ isImportant }}
+
+data() {
+  return {
+    chbxVal: false
+  }
+},
+computed: {
+  isImportant() {
+    if(this.chbxVal){
+      return 'yes'
+    }
+    else {
+      return 'no'
+    }
+  }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Computed Properties vs. Methods -->
+        <section class="content-section" id="computed-vs-methods">
+            <h2>Computed Properties vs. Methods</h2>
+            
+            <p>கம்ப்யூட்டட் ப்ராபர்ட்டீஸ் மற்றும் முறைகள் இரண்டும் செயல்பாடுகளாக எழுதப்பட்டுள்ளன, ஆனால் அவை வெவ்வேறானவை:</p>
+            
+            <ul>
+                <li>முறைகள் HTML இலிருந்து அழைக்கப்படும்போது இயக்கப்படுகின்றன, ஆனால் ஒரு சார்பு மாறும்போது கம்ப்யூட்டட் ப்ராபர்ட்டீஸ் தானாகவே புதுப்பிக்கப்படுகின்றன.</li>
+                <li>கம்ப்யூட்டட் ப்ராபர்ட்டீஸ் தரவு பண்புகளைப் பயன்படுத்தும் அதே வழியில் பயன்படுத்தப்படுகின்றன, ஆனால் அவை டைனமிக் ஆகும்.</li>
+            </ul>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-calculator"></i>
+                        <h4>Computed Properties</h4>
+                    </div>
+                    <p>தானாகவே புதுப்பிக்கப்படுகின்றன, சார்புகள் மாறும்போது</p>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-cogs"></i>
+                        <h4>Methods</h4>
+                    </div>
+                    <p>நிகழ்வுகளால் அல்லது அழைப்புகளால் கையிருப்பு முறையில் அழைக்கப்படுகின்றன</p>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-bolt"></i>
+                        <h4>Performance</h4>
+                    </div>
+                    <p>கம்ப்யூட்டட் ப்ராபர்ட்டீஸ் முடிவுகளைக் கேஷ் செய்கின்றன, மீண்டும் கணக்கிட வேண்டியதில்லை</p>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <i class="fas fa-hand-pointer"></i>
+                        <h4>Usage</h4>
+                    </div>
+                    <p>கம்ப்யூட்டட் ப்ராபர்ட்டீஸ் தரவு போலவே பயன்படுத்தப்படுகின்றன, () இல்லாமல்</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Single Exercise Section -->
+        <section class="content-section" id="exercises">
+            <h2>Vue Exercises</h2>
+            
+            <p>'isImportant' கம்ப்யூட்டட் ப்ராபர்ட்டி திரையில் காட்டப்படும் வகையில் சரியான குறியீட்டை வழங்கவும்.</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> Fill in the missing code:</h4>
+                
+                <div class="code-example" style="background: rgba(255,255,255,0.1); border: 1px dashed white;">
+                    <pre><code>&lt;div id="app"&gt;
+  &lt;form&gt;
+    &lt;p&gt;
+      Important item?
+      &lt;label&gt;
+         &lt;input type="checkbox" v-model="chbxVal"&gt; 
+         <span style="background: yellow; color: black;">______</span>
+      &lt;/label&gt;
+    &lt;/p&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+
+&lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const app = Vue.createApp({
+    data() {
+      return {
+        chbxVal: false
+      }
+    },
+    <span style="background: yellow; color: black;">______</span>: {
+      isImportant() {
+        if(this.chbxVal){
+          return 'yes'
+        }
+        else {
+          return 'no'
+        }
+      }
+    }
+  })
+ app.mount('#app')
+&lt;/script&gt;</code></pre>
+                </div>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">{{ isImportant }}, computed</div>
+                            <div class="option-feedback correct">✓ சரி! {{ isImportant }} கம்ப்யூட்டட் ப்ராபர்ட்டியைக் காட்டுகிறது, மற்றும் 'computed' என்பது சரியான கட்டமைப்பு விருப்பம்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">isImportant(), methods</div>
+                            <div class="option-feedback incorrect">✗ தவறு! கம்ப்யூட்டட் ப்ராபர்ட்டீஸ் () இல்லாமல் பயன்படுத்தப்படுகின்றன, மற்றும் 'methods' இங்கு சரியானது அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">{{ chbxVal }}, computed</div>
+                            <div class="option-feedback incorrect">✗ தவறு! {{ chbxVal }} அசல் தரவு மதிப்பைக் காட்டும், ஆனால் 'yes/no' அல்ல, 'computed' சரிதான்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">{{ isImportant }}, methods</div>
+                            <div class="option-feedback incorrect">✗ தவறு! {{ isImportant }} சரி, ஆனால் கம்ப்யூட்டட் ப்ராபர்ட்டி 'computed' இல் இருக்க வேண்டும், 'methods' இல் அல்ல</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue CSS Binding.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue Watchers.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">கம்ப்யூட்டட் ப்ராபர்ட்டீஸ்</a></li>
+                    <li><a href="#dynamic-properties">டைனமிக் பண்புகள்</a></li>
+                    <li><a href="#yes-no-example">Yes/No உதாரணம்</a></li>
+                    <li><a href="#computed-vs-methods">கம்ப்யூட்டட் vs முறைகள்</a></li>
+                    <li><a href="#exercises">Vue பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

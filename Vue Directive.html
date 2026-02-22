@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Directives - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important;
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue Introduction.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue v-bind Directives.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue Directives</h2>
+            <p>HTML குறிக்கு கூடுதல் செயல்பாட்டை வழங்கும் v- முன்னொட்டுடன் கூடிய சிறப்பு HTML பண்புகள் Vue directives</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue Directives</h2>
+            <p>Vue directives என்பது v- முன்னொட்டுடன் கூடிய சிறப்பு HTML பண்புகள் ஆகும், அவை HTML குறிக்கு கூடுதல் செயல்பாட்டை வழங்குகின்றன.</p>
+            
+            <p>Vue directives மாறும் மற்றும் எதிர்வினை பயனர் இடைமுகங்களை உருவாக்க Vue உதாரணத்துடன் இணைகின்றன.</p>
+            
+            <p>Vue உடன், பாரம்பரிய JavaScript முறைகளுடன் ஒப்பிடும்போது பதிலளிக்கும் பக்கங்களை உருவாக்குவது மிகவும் எளிதானது மற்றும் குறைவான குறியீடு தேவைப்படுகிறது.</p>
+        </section>
+
+        <!-- Different Vue Directives -->
+        <section class="content-section" id="directives-list">
+            <h2>Different Vue Directives</h2>
+            <p>இந்த டுடோரியலில் நாம் பயன்படுத்தும் வெவ்வேறு Vue directives கீழே பட்டியலிடப்பட்டுள்ளன.</p>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Directive</th>
+                            <th>விவரங்கள்</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>v-bind</td>
+                            <td>Vue உதாரணத்திற்குள் ஒரு தரவு மாறிக்கு HTML குறியில் ஒரு பண்பை இணைக்கிறது.</td>
+                        </tr>
+                        <tr>
+                            <td>v-if</td>
+                            <td>ஒரு நிபந்தனையைப் பொறுத்து HTML குறிகளை உருவாக்குகிறது. v-else-if மற்றும் v-else directives v-if directive உடன் சேர்ந்து பயன்படுத்தப்படுகின்றன.</td>
+                        </tr>
+                        <tr>
+                            <td>v-show</td>
+                            <td>ஒரு நிபந்தனையைப் பொறுத்து ஒரு HTML உறுப்பு காணப்பட வேண்டுமா இல்லையா என்பதைக் குறிப்பிடுகிறது.</td>
+                        </tr>
+                        <tr>
+                            <td>v-for</td>
+                            <td>Vue உதாரணத்தில் ஒரு வரிசையின் அடிப்படையில் for-loop ஐப் பயன்படுத்தி குறிகளின் பட்டியலை உருவாக்குகிறது.</td>
+                        </tr>
+                        <tr>
+                            <td>v-on</td>
+                            <td>ஒரு HTML குறியில் ஒரு நிகழ்வை JavaScript வெளிப்பாடு அல்லது Vue உதாரண முறையுடன் இணைக்கிறது. நிகழ்வு-மாற்றிகள் பயன்படுத்துவதன் மூலம் ஒரு குறிப்பிட்ட நிகழ்வுக்கு எங்கள் பக்கம் எவ்வாறு பதிலளிக்க வேண்டும் என்பதையும் நாம் வரையறுக்கலாம்.</td>
+                        </tr>
+                        <tr>
+                            <td>v-model</td>
+                            <td>&lt;form&gt;, &lt;input&gt; மற்றும் &lt;button&gt; போன்ற குறிகளுடன் HTML படிவங்களில் பயன்படுத்தப்படுகிறது. ஒரு உள்ளீட்டு உறுப்புக்கும் Vue உதாரண தரவு பண்புக்கும் இடையே இருதரப்பு பிணைப்பை உருவாக்குகிறது.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Example -->
+        <section class="content-section" id="example">
+            <h2>Example: The v-bind Directive</h2>
+            <p>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</p>
+            <p>&lt;div&gt; உறுப்பை எந்த வகுப்புடன் இணைக்க வேண்டும் என்பதை Vue உதாரணத்திலிருந்து உலாவி கண்டுபிடிக்கிறது.</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;style&gt;
+    .pinkBG {
+      background-color: lightpink;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;div id="app"&gt;
+    &lt;div v-bind:class="vueClass"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;
+  &lt;script&gt;
+    const app = Vue.createApp({
+      data() {
+        return {
+          vueClass: "pinkBG"
+        }
+      }
+    })
+    app.mount('#app')
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">💡</span> குறிப்பு:</h4>
+                <p>மேலே உள்ள எடுத்துக்காட்டு Vue குறியீடு இல்லாமல் மிகவும் எளிமையாக எழுதப்படலாம், ஆனால் பொறுமையாக இருங்கள். பதிலளிக்கும் பக்கங்களை உருவாக்கும் போது Vue இன் உண்மையான நன்மைகள் பிந்தைய எடுத்துக்காட்டுகளில் காணப்படும்.</p>
+            </div>
+        </section>
+
+        <!-- Learning Vue -->
+        <section class="content-section" id="learning-vue">
+            <h2>Learning Vue at Siva Team</h2>
+            <p>Siva Team இல் Vue கற்கும் போது, நீங்கள் எங்கள் "Try it Yourself" கருவியைப் பயன்படுத்தலாம், இது குறியீடு மற்றும் முடிவு இரண்டையும் காட்டுகிறது. நாம் முன்னேறும் போது ஒவ்வொரு பகுதியையும் புரிந்துகொள்வதை இது எளிதாக்கும்.</p>
+            
+            <p>டுடோரியலைத் தொடர 'Next' என்பதைக் கிளிக் செய்யவும்.</p>
+        </section>
+
+        <!-- Exercise Section -->
+        <section class="content-section" id="exercise">
+            <h2>Exercise</h2>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> பயிற்சி:</h4>
+                <p>class பண்பை "myClass" தரவு பண்புடன் இணைக்க குறைந்த பகுதியை நிரப்பவும்.</p>
+                
+                <div class="code-example">
+                    <pre><code>&lt;p 
+:class="myClass"&gt;&lt;/p&gt;</code></pre>
+                </div>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-if</div>
+                            <div class="option-feedback incorrect">✗ தவறு! v-if class பண்பை இணைக்கப் பயன்படுவதில்லை</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">v-bind</div>
+                            <div class="option-feedback correct">✓ சரி! v-bind class பண்பை தரவு பண்புடன் இணைக்கப் பயன்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-for</div>
+                            <div class="option-feedback incorrect">✗ தவறு! v-for பட்டியல்களை வளையமிடப் பயன்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">v-on</div>
+                            <div class="option-feedback incorrect">✗ தவறு! v-on நிகழ்வுகளைக் கையாளப் பயன்படுகிறது</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue Introduction.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue v-bind Directives.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">Vue Directives</a></li>
+                    <li><a href="#directives-list">Different Directives</a></li>
+                    <li><a href="#example">v-bind Example</a></li>
+                    <li><a href="#learning-vue">Learning Vue</a></li>
+                    <li><a href="#exercise">Exercise</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

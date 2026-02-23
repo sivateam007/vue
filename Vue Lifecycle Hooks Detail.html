@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Lifecycle Hooks Detail - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important;
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important;
+        }
+        
+        .hook-example {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .hook-title {
+            color: var(--git-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hook-icon {
+            color: var(--git-color);
+            font-size: 1.2rem;
+        }
+        
+        .component-demo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .component-demo {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .component-code, .component-app {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .component-header {
+            background: var(--git-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px 5px 0 0;
+            margin: -1.5rem -1.5rem 1rem -1.5rem;
+            font-weight: 600;
+        }
+        
+        .note-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        
+        .hook-timeline {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 1rem 0;
+            margin: 2rem 0;
+        }
+        
+        .timeline-step {
+            flex: 0 0 auto;
+            width: 120px;
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--git-color);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: var(--git-color);
+            color: white;
+            border-radius: 50%;
+            line-height: 30px;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hook-diagram {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .diagram-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .diagram-arrow {
+            flex: 1;
+            height: 2px;
+            background: var(--git-color);
+            margin: 0 10px;
+        }
+        
+        .diagram-box {
+            padding: 10px 15px;
+            background: #f8f9fa;
+            border: 2px solid var(--git-color);
+            border-radius: 5px;
+            font-weight: 600;
+            min-width: 150px;
+        }
+        
+        .access-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .access-table th {
+            background: var(--git-color);
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .access-table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+        
+        .access-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .access-yes {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .access-no {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .console-output {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            max-height: 150px;
+            overflow-y: auto;
+            text-align: left;
+        }
+        
+        .console-line {
+            padding: 2px 0;
+            border-bottom: 1px solid #444;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20Template%20Refs.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20Provide%20Inject.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue Lifecycle Hooks Detail</h2>
+            <p>Vue வாழ்க்கைச் சுழற்சி கொக்கிகள் விரிவாக</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue வாழ்க்கைச் சுழற்சி கொக்கிகள்</h2>
+            
+            <p>Vue இல் வாழ்க்கைச் சுழற்சி கொக்கிகள் என்பது ஒரு கூறின் வாழ்க்கைச் சுழற்சியில் குறிப்பிட்ட நிலைகள் ஆகும், அங்கு விஷயங்களைச் செய்ய குறியீட்டைச் சேர்க்கலாம்.</p>
+        </section>
+
+        <!-- Lifecycle Hooks Overview -->
+        <section class="content-section" id="overview">
+            <h2>வாழ்க்கைச் சுழற்சி கொக்கிகள் கண்ணோட்டம்</h2>
+            
+            <p>ஒரு கூறு அதன் வாழ்க்கைச் சுழற்சியில் ஒரு புதிய நிலையை அடையும் ஒவ்வொரு முறையும், ஒரு குறிப்பிட்ட செயல்பாடு இயங்குகிறது, மேலும் அந்த செயல்பாட்டில் குறியீட்டைச் சேர்க்கலாம். அத்தகைய செயல்பாடுகள் வாழ்க்கைச் சுழற்சி கொக்கிகள் என்று அழைக்கப்படுகின்றன, ஏனெனில் அந்த நிலையில் எங்கள் குறியீட்டை "கொக்கி" செய்யலாம்.</p>
+            
+            <p>ஒரு கூறு கொண்டிருக்கும் அனைத்து வாழ்க்கைச் சுழற்சி கொக்கிகள்:</p>
+            
+            <div class="hook-timeline">
+                <div class="timeline-step">
+                    <div class="step-number">1</div>
+                    <div class="hook-name">beforeCreate</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">2</div>
+                    <div class="hook-name">created</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">3</div>
+                    <div class="hook-name">beforeMount</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">4</div>
+                    <div class="hook-name">mounted</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">5</div>
+                    <div class="hook-name">beforeUpdate</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">6</div>
+                    <div class="hook-name">updated</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">7</div>
+                    <div class="hook-name">beforeUnmount</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-number">8</div>
+                    <div class="hook-name">unmounted</div>
+                </div>
+            </div>
+            
+            <p>மேலும் சில கூடுதல் கொக்கிகள்: errorCaptured, renderTracked, renderTriggered, activated, deactivated, serverPrefetch</p>
+        </section>
+
+        <!-- Access Table -->
+        <section class="content-section" id="access-table">
+            <h2>வாழ்க்கைச் சுழற்சி கொக்கிகளில் அணுகல்</h2>
+            
+            <p>வெவ்வேறு வாழ்க்கைச் சுழற்சி கொக்கிகளில் என்ன அணுக முடியும் என்பது இங்கே:</p>
+            
+            <table class="access-table">
+                <thead>
+                    <tr>
+                        <th>கொக்கி</th>
+                        <th>தரவு பண்புகள்</th>
+                        <th>முறைகள்</th>
+                        <th>DOM உறுப்புகள்</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>beforeCreate</strong></td>
+                        <td class="access-no">✗ கிடைக்காது</td>
+                        <td class="access-no">✗ கிடைக்காது</td>
+                        <td class="access-no">✗ கிடைக்காது</td>
+                    </tr>
+                    <tr>
+                        <td><strong>created</strong></td>
+                        <td class="access-yes">✓ கிடைக்கும்</td>
+                        <td class="access-yes">✓ கிடைக்கும்</td>
+                        <td class="access-no">✗ கிடைக்காது</td>
+                    </tr>
+                    <tr>
+                        <td><strong>beforeMount</strong></td>
+                        <td class="access-yes">✓ கிடைக்கும்</td>
+                        <td class="access-yes">✓ கிடைக்கும்</td>
+                        <td class="access-no">✗ கிடைக்காது</td>
+                    </tr>
+                    <tr>
+                        <td><strong>mounted</strong></td>
+                        <td class="access-yes">✓ கிடைக்கும்</td>
+                        <td class="access-yes">✓ கிடைக்கும்</td>
+                        <td class="access-yes">✓ கிடைக்கும்</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- The 'beforeCreate' Hook -->
+        <section class="content-section" id="beforecreate">
+            <div class="hook-title">
+                <i class="fas fa-baby hook-icon"></i>
+                <h2>'beforeCreate' கொக்கி</h2>
+            </div>
+            
+            <p>beforeCreate வாழ்க்கைச் சுழற்சி கொக்கி கூறு துவக்கப்படுவதற்கு முன் நடக்கிறது, எனவே Vue கூறின் தரவு, கணக்கிடப்பட்ட பண்புகள், முறைகள் மற்றும் நிகழ்வு கேட்பவர்களை அமைக்கும் முன் இது.</p>
+            
+            <p>எடுத்துக்காட்டாக உலகளாவிய நிகழ்வு கேட்பவரை அமைக்க beforeCreate கொக்கியைப் பயன்படுத்தலாம், ஆனால் beforeCreate வாழ்க்கைச் சுழற்சி கொக்கியிலிருந்து கூறுக்குச் சொந்தமான உறுப்புகளை அணுக முயற்சிக்க வேண்டாம், ஏனெனில் அவை இந்த கட்டத்தில் இன்னும் உருவாக்கப்படவில்லை.</p>
+            
+            <p>மேலும், beforeCreate வாழ்க்கைச் சுழற்சி கொக்கியிலிருந்து DOM உறுப்புகளை அணுக முயற்சிப்பதில் அர்த்தமில்லை, ஏனெனில் அவை கூறு ஏற்றப்பட்ட பிறகு வரை உருவாக்கப்படாது.</p>
+            
+            <div class="hook-example">
+                <div class="example-title">எடுத்துக்காட்டு</div>
+                <div class="component-demo">
+                    <div class="component-code">
+                        <div class="component-header">CompOne.vue</div>
+                        <div class="code-example">
+                            <pre><code>&lt;template&gt;
+    &lt;h2&gt;Component&lt;/h2&gt;
+    &lt;p&gt;This is the component&lt;/p&gt;
+    &lt;p id="pResult"&gt;{{ text }}&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    data() {
+        return {
+            text: '...'
+        }
+    },
+    beforeCreate() {
+        this.text = 'initial text'; // இந்த வரியால் விளைவு இல்லை
+        console.log("beforeCreate: கூறு இன்னும் உருவாக்கப்படவில்லை.");
+    }
+}
+&lt;/script&gt;</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="component-app">
+                        <div class="component-header">App.vue</div>
+                        <div class="code-example">
+                            <pre><code>&lt;template&gt;
+    &lt;h1&gt;The 'beforeCreate' Lifecycle Hook&lt;/h1&gt;
+    &lt;p&gt;We can see the console.log() message...&lt;/p&gt;
+    &lt;button @click="this.activeComp = !this.activeComp"&gt;
+        Add/Remove Component
+    &lt;/button&gt;
+    &lt;div&gt;
+        &lt;comp-one v-if="activeComp"&gt;&lt;/comp-one&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    data() {
+        return {
+            activeComp: false
+        }
+    }
+}
+&lt;/script&gt;</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="note-box">
+                    <p><strong>குறிப்பு:</strong> மேலே உள்ள எடுத்துக்காட்டில், CompOne.vue இல் வரி 15 க்கு விளைவு இல்லை, ஏனெனில் அந்த வரியில் Vue தரவு பண்புக்குள் உள்ள உரையை மாற்ற முயற்சிக்கிறோம், ஆனால் Vue தரவு பண்பு உண்மையில் இன்னும் உருவாக்கப்படவில்லை. மேலும், console.log() அழைப்பின் முடிவைக் காண உலாவி கன்சோலைத் திறக்க நினைவில் கொள்ளுங்கள்.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The 'created' Hook -->
+        <section class="content-section" id="created">
+            <div class="hook-title">
+                <i class="fas fa-rocket hook-icon"></i>
+                <h2>'created' கொக்கி</h2>
+            </div>
+            
+            <p>created வாழ்க்கைச் சுழற்சி கொக்கி கூறு துவக்கப்பட்ட பிறகு நடக்கிறது, எனவே Vue ஏற்கனவே கூறின் தரவு, கணக்கிடப்பட்ட பண்புகள், முறைகள் மற்றும் நிகழ்வு கேட்பவர்களை அமைத்துள்ளது.</p>
+            
+            <p>created வாழ்க்கைச் சுழற்சி கொக்கியிலிருந்து DOM உறுப்புகளை அணுக முயற்சிக்க வேண்டாம், ஏனெனில் கூறு ஏற்றப்படும் வரை DOM உறுப்புகள் அணுக முடியாது.</p>
+            
+            <p>HTTP கோரிக்கைகளுடன் தரவை எடுக்க அல்லது ஆரம்ப தரவு மதிப்புகளை அமைக்க created வாழ்க்கைச் சுழற்சி கொக்கியைப் பயன்படுத்தலாம்.</p>
+        </section>
+
+        <!-- The 'beforeMount' Hook -->
+        <section class="content-section" id="beforemount">
+            <div class="hook-title">
+                <i class="fas fa-upload hook-icon"></i>
+                <h2>'beforeMount' கொக்கி</h2>
+            </div>
+            
+            <p>beforeMount வாழ்க்கைச் சுழற்சி கொக்கி கூறு ஏற்றப்படுவதற்கு சற்று முன் நடக்கிறது, எனவே கூறு DOM க்கு சேர்க்கப்படுவதற்கு சற்று முன்.</p>
+            
+            <p>beforeMount வாழ்க்கைச் சுழற்சி கொக்கியிலிருந்து DOM உறுப்புகளை அணுக முயற்சிக்க வேண்டாம், ஏனெனில் கூறு ஏற்றப்படும் வரை DOM உறுப்புகள் அணுக முடியாது.</p>
+        </section>
+
+        <!-- The 'mounted' Hook -->
+        <section class="content-section" id="mounted">
+            <div class="hook-title">
+                <i class="fas fa-thumbtack hook-icon"></i>
+                <h2>'mounted' கொக்கி</h2>
+            </div>
+            
+            <p>ஒரு கூறு DOM மரத்தில் சேர்க்கப்பட்ட உடனேயே, mounted() செயல்பாடு அழைக்கப்படுகிறது, மேலும் அந்த கட்டத்தில் எங்கள் குறியீட்டைச் சேர்க்கலாம்.</p>
+            
+            <p>கூறுக்குச் சொந்தமான DOM உறுப்புகள் தொடர்பான விஷயங்களைச் செய்ய இது முதல் வாய்ப்பு.</p>
+            
+            <div class="hook-example">
+                <div class="example-title">எடுத்துக்காட்டு</div>
+                <div class="code-example">
+                    <pre><code>&lt;template&gt;
+    &lt;h2&gt;Form Component&lt;/h2&gt;
+    &lt;p&gt;When this component is added to the DOM tree...&lt;/p&gt;
+    &lt;form @submit.prevent&gt;
+        &lt;label&gt;
+            &lt;p&gt;
+                Name: &lt;br&gt;
+                &lt;input type="text" ref="inpName"&gt;
+            &lt;/p&gt;
+        &lt;/label&gt;
+        &lt;button&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    mounted() {
+        this.$refs.inpName.focus();
+    }
+}
+&lt;/script&gt;</code></pre>
+                </div>
+                <div class="tip-box">
+                    <h4><span class="tip-icon">💻</span> உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</h4>
+                </div>
+            </div>
+            
+            <div class="note-box">
+                <p><strong>குறிப்பு:</strong> mounted கட்டம் கூறு DOM க்கு சேர்க்கப்பட்ட பிறகு நடக்கிறது, ஆனால் மேலே உள்ள எடுத்துக்காட்டில் கூறைக் காணும் முன் alert() தெரியும். இதற்கான காரணம், முதலில் கூறு DOM க்கு சேர்க்கப்படுகிறது, ஆனால் உலாவி கூறைத் திரையில் ரெண்டர் செய்வதற்கு முன், mounted கட்டம் நடக்கிறது மற்றும் alert() தெரியும் மற்றும் கூறை ரெண்டர் செய்வதை உலாவி இடைநிறுத்துகிறது.</p>
+            </div>
+        </section>
+
+        <!-- The 'beforeUpdate' Hook -->
+        <section class="content-section" id="beforeupdate">
+            <div class="hook-title">
+                <i class="fas fa-redo hook-icon"></i>
+                <h2>'beforeUpdate' கொக்கி</h2>
+            </div>
+            
+            <p>beforeUpdate வாழ்க்கைச் சுழற்சி கொக்கி எங்கள் கூறின் தரவில் மாற்றம் ஏற்படும் போதெல்லாம் அழைக்கப்படுகிறது, ஆனால் புதுப்பிப்பு திரையில் ரெண்டர் செய்யப்படுவதற்கு முன். beforeUpdate வாழ்க்கைச் சுழற்சி கொக்கி updated வாழ்க்கைச் சுழற்சி கொக்கிக்கு சற்று முன் நடக்கிறது.</p>
+            
+            <p>beforeUpdate கொக்கியைப் பற்றிய சிறப்பு விஷயம் என்னவென்றால், புதிய புதுப்பிப்பைத் தூண்டாமல் நாம் பயன்பாட்டில் மாற்றங்களைச் செய்யலாம், எனவே இல்லையெனில் முடிவில்லாத வளையத்தைத் தவிர்க்கலாம்.</p>
+        </section>
+
+        <!-- The 'updated' Hook -->
+        <section class="content-section" id="updated">
+            <div class="hook-title">
+                <i class="fas fa-sync-alt hook-icon"></i>
+                <h2>'updated' கொக்கி</h2>
+            </div>
+            
+            <p>updated வாழ்க்கைச் சுழற்சி கொக்கி எங்கள் கூறு அதன் DOM மரத்தைப் புதுப்பித்த பிறகு அழைக்கப்படுகிறது.</p>
+            
+            <div class="warning-box">
+                <h4><span class="tip-icon">⚠️</span> எச்சரிக்கை:</h4>
+                <p>updated வாழ்க்கைச் சுழற்சி கொக்கி அழைக்கப்படும் போது பக்கத்தை மாற்றுவதில் கவனமாக இருக்க வேண்டும், ஏனெனில் பக்கம் மீண்டும் மீண்டும் புதுப்பிக்கப்படும், முடிவில்லாத வளையத்தை உருவாக்கும்.</p>
+            </div>
+            
+            <div class="hook-example">
+                <div class="example-title">எச்சரிக்கை எடுத்துக்காட்டு</div>
+                <div class="code-example">
+                    <pre><code>&lt;template&gt;
+    &lt;h1&gt;The 'updated' Lifecycle Hook&lt;/h1&gt;
+    &lt;button @click="this.activeComp = !this.activeComp"&gt;
+        Add/Remove Component
+    &lt;/button&gt;
+    &lt;div&gt;
+        &lt;comp-one v-if="activeComp"&gt;&lt;/comp-one&gt;
+    &lt;/div&gt;
+    &lt;div&gt;{{ text }}&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    data() {
+        return {
+            activeComp: true,
+            text: "Hello, "
+        }
+    },
+    updated() {
+        this.text += "hi, "; // ⚠️ முடிவில்லாத வளையத்தை உருவாக்குகிறது!
+    }
+}
+&lt;/script&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- The 'beforeUnmount' Hook -->
+        <section class="content-section" id="beforeunmount">
+            <div class="hook-title">
+                <i class="fas fa-trash-alt hook-icon"></i>
+                <h2>'beforeUnmount' கொக்கி</h2>
+            </div>
+            
+            <p>beforeUnmount வாழ்க்கைச் சுழற்சி கொக்கி ஒரு கூறு DOM இலிருந்து நீக்கப்படுவதற்கு சற்று முன் அழைக்கப்படுகிறது.</p>
+            
+            <p>beforeUnmount கொக்கியில் DOM இல் உள்ள கூறு உறுப்புகளை இன்னும் அணுக முடியும் என்பதை கீழே உள்ள எடுத்துக்காட்டில் காணலாம்.</p>
+        </section>
+
+        <!-- The 'unmounted' Hook -->
+        <section class="content-section" id="unmounted">
+            <div class="hook-title">
+                <i class="fas fa-trash hook-icon"></i>
+                <h2>'unmounted' கொக்கி</h2>
+            </div>
+            
+            <p>unmounted வாழ்க்கைச் சுழற்சி கொக்கி ஒரு கூறு DOM இலிருந்து நீக்கப்பட்ட பிறகு அழைக்கப்படுகிறது.</p>
+            
+            <p>இந்த கொக்கியை எடுத்துக்காட்டாக நிகழ்வு கேட்பவர்களை அகற்ற அல்லது நேரமக்கிகள் அல்லது இடைவெளிகளை ரத்து செய்ய பயன்படுத்தலாம்.</p>
+            
+            <div class="note-box">
+                <p><strong>குறிப்பு:</strong> unmounted கட்டம் கூறு DOM இலிருந்து நீக்கப்பட்ட பிறகு நடக்கிறது, ஆனால் மேலே உள்ள எடுத்துக்காட்டில் கூறு மறைவதற்கு முன் alert() தெரியும். இதற்கான காரணம், முதலில் கூறு DOM இலிருந்து நீக்கப்படுகிறது, ஆனால் உலாவி கூறின் நீக்கத்தைத் திரையில் ரெண்டர் செய்வதற்கு முன், unmounted கட்டம் நடக்கிறது மற்றும் alert() தெரியும் மற்றும் கூறைக் காண்பிக்க உலாவி இடைநிறுத்துகிறது.</p>
+            </div>
+        </section>
+
+        <!-- Other Lifecycle Hooks -->
+        <section class="content-section" id="other-hooks">
+            <h2>பிற வாழ்க்கைச் சுழற்சி கொக்கிகள்</h2>
+            
+            <div class="hook-diagram">
+                <h3>முக்கியமான கொக்கிகள்</h3>
+                <div class="diagram-line">
+                    <div class="diagram-box">errorCaptured</div>
+                    <div class="diagram-arrow"></div>
+                    <div class="diagram-box">குழந்தை கூறில் பிழை</div>
+                </div>
+                
+                <div class="diagram-line">
+                    <div class="diagram-box">renderTracked</div>
+                    <div class="diagram-arrow"></div>
+                    <div class="diagram-box">ரெண்டர் கண்காணிப்பு</div>
+                </div>
+                
+                <div class="diagram-line">
+                    <div class="diagram-box">renderTriggered</div>
+                    <div class="diagram-arrow"></div>
+                    <div class="diagram-box">ரெண்டர் தூண்டல்</div>
+                </div>
+                
+                <div class="diagram-line">
+                    <div class="diagram-box">activated</div>
+                    <div class="diagram-arrow"></div>
+                    <div class="diagram-box">கேச் செய்யப்பட்ட கூறு</div>
+                </div>
+                
+                <div class="diagram-line">
+                    <div class="diagram-box">deactivated</div>
+                    <div class="diagram-arrow"></div>
+                    <div class="diagram-box">கேச் செய்யப்பட்ட கூறு</div>
+                </div>
+                
+                <div class="diagram-line">
+                    <div class="diagram-box">serverPrefetch</div>
+                    <div class="diagram-arrow"></div>
+                    <div class="diagram-box">சேவையக ரெண்டரிங்</div>
+                </div>
+            </div>
+            
+            <div class="best-practice-list">
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>errorCaptured</strong>: குழந்தை கூறுகளில் பிழை கையாளுதல்</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>activated/deactivated</strong>: &lt;KeepAlive&gt; உடன் கேச் செய்யப்பட்ட கூறுகள்</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>renderTracked/Triggered</strong>: வளர்ச்சி பயன்முறையில் பிழைதிருத்தம்</div>
+                </div>
+                
+                <div class="practice-item positive">
+                    <i class="fas fa-check-circle"></i>
+                    <div><strong>serverPrefetch</strong>: சேவையக-பக்க ரெண்டரிங் (SSR)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lifecycle Flow Diagram -->
+        <section class="content-section" id="flow-diagram">
+            <h2>வாழ்க்கைச் சுழற்சி பாய்வு வரைபடம்</h2>
+            
+            <div style="text-align: center; margin: 2rem 0;">
+                <div style="display: inline-block; text-align: left; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div style="margin-bottom: 1rem;">
+                        <div style="color: var(--git-color); font-weight: bold;">1. beforeCreate</div>
+                        <div style="font-size: 0.9rem; color: #666;">கூறு உருவாக்கத்திற்கு முன்</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem; margin-left: 2rem; border-left: 2px solid var(--git-color); padding-left: 1rem;">
+                        <div style="color: var(--git-color); font-weight: bold;">2. created</div>
+                        <div style="font-size: 0.9rem; color: #666;">தரவு & முறைகள் கிடைக்கும்</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem; margin-left: 4rem; border-left: 2px solid var(--git-color); padding-left: 1rem;">
+                        <div style="color: var(--git-color); font-weight: bold;">3. beforeMount</div>
+                        <div style="font-size: 0.9rem; color: #666;">DOM ஏற்றத்திற்கு முன்</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem; margin-left: 6rem; border-left: 2px solid var(--git-color); padding-left: 1rem;">
+                        <div style="color: var(--git-color); font-weight: bold;">4. mounted</div>
+                        <div style="font-size: 0.9rem; color: #666;">DOM உறுப்புகள் கிடைக்கும்</div>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; text-align: center; color: #666; font-style: italic;">
+                        தரவு மாற்றம் → beforeUpdate → updated
+                    </div>
+                    
+                    <div style="margin-top: 2rem;">
+                        <div style="color: var(--git-color); font-weight: bold;">5. beforeUnmount</div>
+                        <div style="font-size: 0.9rem; color: #666;">கூறு நீக்கத்திற்கு முன்</div>
+                    </div>
+                    
+                    <div style="margin-top: 1rem; margin-left: 2rem; border-left: 2px solid var(--git-color); padding-left: 1rem;">
+                        <div style="color: var(--git-color); font-weight: bold;">6. unmounted</div>
+                        <div style="font-size: 0.9rem; color: #666;">கூறு நீக்கப்பட்ட பிறகு</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vue Exercises -->
+        <section class="content-section" id="exercises">
+            <h2>Vue பயிற்சிகள்</h2>
+            
+            <p>பயிற்சிகளுடன் உங்களைச் சோதிக்கவும்</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> பயிற்சி:</h4>
+                <p>______ வாழ்க்கைச் சுழற்சி கொக்கி ஒரு கூறு DOM இலிருந்து நீக்கப்படுவதற்கு சற்று முன் அழைக்கப்படுகிறது.</p>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">beforeCreate</div>
+                            <div class="option-feedback incorrect">✗ தவறு! beforeCreate கூறு உருவாக்கத்திற்கு முன் அழைக்கப்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">mounted</div>
+                            <div class="option-feedback incorrect">✗ தவறு! mounted கூறு ஏற்றப்பட்ட பிறகு அழைக்கப்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">beforeUnmount</div>
+                            <div class="option-feedback correct">✓ சரி! beforeUnmount கூறு நீக்கப்படுவதற்கு சற்று முன் அழைக்கப்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">updated</div>
+                            <div class="option-feedback incorrect">✗ தவறு! updated கூறு புதுப்பிக்கப்பட்ட பிறகு அழைக்கப்படுகிறது</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20Template%20Refs.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20Provide%20Inject.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">வாழ்க்கைச் சுழற்சி கொக்கிகள்</a></li>
+                    <li><a href="#overview">கண்ணோட்டம்</a></li>
+                    <li><a href="#access-table">அணுகல் அட்டவணை</a></li>
+                    <li><a href="#beforecreate">beforeCreate</a></li>
+                    <li><a href="#created">created</a></li>
+                    <li><a href="#mounted">mounted</a></li>
+                    <li><a href="#updated">updated</a></li>
+                    <li><a href="#beforeunmount">beforeUnmount</a></li>
+                    <li><a href="#unmounted">unmounted</a></li>
+                    <li><a href="#other-hooks">பிற கொக்கிகள்</a></li>
+                    <li><a href="#flow-diagram">பாய்வு வரைபடம்</a></li>
+                    <li><a href="#exercises">Vue பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 'methods' Option - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important;
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important;
+        }
+        
+        /* Exercise hover effects */
+        .option-card:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            transform: translateX(5px) !important;
+        }
+        
+        .exercise-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue 'data' Option.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue 'computed' Option.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue 'methods' Option</h2>
+            <p>Vue 'methods' விருப்பத்தைக் கற்றுக்கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue 'methods' Option</h2>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🎯</span> Example</h4>
+                <p>ஒரு செய்தியை மாற்ற methods விருப்பத்திற்குள் ஒரு முறையைப் பயன்படுத்துதல்.</p>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>export default {
+  data() {
+    return {
+      msg: 'Hello World!',
+      showMsg: false
+    };
+  },
+  methods: {
+    toggleMsg() {
+      this.showMsg = !this.showMsg;
+    }
+  }
+};</code></pre>
+            </div>
+        </section>
+
+        <!-- Definition and Usage -->
+        <section class="content-section" id="definition-usage">
+            <h2>Definition and Usage</h2>
+            
+            <p>methods விருப்பம் என்பது Vue உதாரணத்தில் அறிவிக்கப்பட்ட அனைத்து முறைகளையும் கொண்ட ஒரு பொருளாகும்.</p>
+            
+            <p>முறைகளை நேரடியாக (this முக்கிய சொல்லில்லாமல்) ஒரு Vue பயன்பாட்டின் &lt;template&gt; இலிருந்து அழைக்க முடியும், எடுத்துக்காட்டாக ஒரு நிகழ்வு நடக்கும்போது ஒரு முறை இயக்கப்படுவதை அமைக்கும் போது, v-on வழிகாட்டியைப் பயன்படுத்தி.</p>
+            
+            <p>Vue உதாரணத்திற்குள் இருந்து ஒரு முறையை அழைக்க this முக்கிய சொல் பயன்படுத்தப்பட வேண்டும், எடுத்துக்காட்டாக ஒரு முறை மற்றொரு முறையால் அழைக்கப்படும் போது.</p>
+            
+            <div class="warning-box">
+                <h4><span class="warning-icon">⚠️</span> குறிப்பு:</h4>
+                <p>முறைகளை அறிவிக்கும் போது அம்புக்குறி செயல்பாடுகள் தவிர்க்கப்பட வேண்டும், ஏனெனில் this முக்கிய சொல்லைப் பயன்படுத்தி அத்தகைய செயல்பாட்டிற்குள் இருந்து Vue உதாரணத்தை அணுக முடியாது.</p>
+            </div>
+        </section>
+
+        <!-- Single Exercise Section -->
+        <section class="content-section" id="exercises">
+            <h2>Vue Exercises</h2>
+            
+            <p>Vue 'methods' விருப்பத்தைப் பற்றிய உங்கள் அறிவைச் சோதிக்க இந்த பயிற்சியை முயற்சிக்கவும்.</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> Vue.js இல், methods விருப்பத்திற்குள் முறைகளை வரையறுக்க சிறந்த வழி எது?</h4>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">சாதாரண செயல்பாடுகளைப் பயன்படுத்தவும், this சரியான Vue உதாரணத்தைக் குறிக்கும்</div>
+                            <div class="option-feedback correct">✓ சரி! சாதாரண செயல்பாடுகள் Vue முறைகளுக்கு சரியானவை. அவை Vue உதாரணத்தை this மூலம் அணுக அனுமதிக்கின்றன மற்றும் தரவு பண்புகள் மற்றும் பிற முறைகளுடன் சரியாக வேலை செய்கின்றன</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">அம்புக்குறி செயல்பாடுகளைப் பயன்படுத்தவும், அவை குறுகிய தொடரியல் கொண்டவை</div>
+                            <div class="option-feedback incorrect">✗ தவறு! அம்புக்குறி செயல்பாடுகள் Vue முறைகளுக்குப் பொருந்தாது. அவை தங்கள் சொந்த this மதிப்பைப் பிணைக்கின்றன, இது Vue உதாரணத்தைக் குறிக்காது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">வெளிப்படையாகப் பிணைக்கப்பட்ட செயல்பாடுகளைப் பயன்படுத்தவும், .bind(this) உடன்</div>
+                            <div class="option-feedback incorrect">✗ தவறு! சாதாரண செயல்பாடுகள் போதுமானவை. Vue முறைகளுக்கு வெளிப்படையான பைண்டிங் தேவையில்லை, ஏனெனில் Vue இது தானாகவே கையாளுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">ஒருங்கிணைந்த செயல்பாடுகளைப் பயன்படுத்தவும், அவை ஒரு வரிசையில் வரையறுக்கப்படுகின்றன</div>
+                            <div class="option-feedback incorrect">✗ தவறு! முறைகள் ஒரு வரிசையில் வரையறுக்கப்படுவதில்லை. அவை ஒரு பொருளில் வரையறுக்கப்படுகின்றன, ஒவ்வொரு முறையும் ஒரு செயல்பாடாக இருக்கும்</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue 'data' Option.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue 'computed' Option.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">Vue 'methods' விருப்பம்</a></li>
+                    <li><a href="#definition-usage">வரையறை மற்றும் பயன்பாடு</a></li>
+                    <li><a href="#methods-examples">முறைகள் எடுத்துக்காட்டுகள்</a></li>
+                    <li><a href="#methods-vs-computed">முறைகள் vs கம்ப்யூட்டட்</a></li>
+                    <li><a href="#arrow-functions">அம்புக்குறி செயல்பாடுகள்</a></li>
+                    <li><a href="#exercises">Vue பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 'key' Attribute - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20'is'%20Attribute.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20'ref'%20Attribute.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue 'key' Attribute</h2>
+            <p>Vue இல் 'key' பண்பைக் கற்றுக்கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue 'key' பண்பு</h2>
+            
+            <p>Vue.js இல் 'key' பண்பு v-for டைரக்டிவுடன் பயன்படுத்தப்படும் மிக முக்கியமான பண்புகளில் ஒன்றாகும். இது Vue க்கு v-for உடன் உருவாக்கப்பட்ட கூறுகளை சரியாக வேறுபடுத்த உதவுகிறது.</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🔑</span> முக்கிய புள்ளி:</h4>
+                <p>key பண்பு இல்லாமல், வரிசை மாற்றப்பட்டால் கூறு பண்புகள் கலக்கப்படலாம். key பண்பு Vue க்கு ஒவ்வொரு கூறையும் தனித்துவமாக அடையாளம் காண உதவுகிறது.</p>
+            </div>
+        </section>
+
+        <!-- Example -->
+        <section class="content-section" id="example">
+            <h2>எடுத்துக்காட்டு</h2>
+            
+            <p>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</p>
+            
+            <p>key பண்பு food-item கூறுகளில் v-for உடன் உருவாக்கப்பட்ட ஒவ்வொரு எலிமென்ட்டையும் தனித்துவமாக அடையாளம் காண பயன்படுகிறது.</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;food-item
+  v-for="x in foods"
+  :key="x.name"
+  :food-name="x.name"
+  :food-desc="x.desc"
+  :is-favorite="x.favorite"
+/&gt;</code></pre>
+            </div>
+            
+            <p>இந்த எடுத்துக்காட்டில், <code>:key="x.name"</code> ஒவ்வொரு food-item கூறுக்கும் தனித்துவமான அடையாளத்தை வழங்குகிறது. இது Vue க்கு கூறுகளை கண்காணிக்கவும், திறம்பட புதுப்பிக்கவும் உதவுகிறது.</p>
+        </section>
+
+        
+        <!-- Single Exercise Section -->
+        <section class="content-section" id="exercises">
+            <h2>Vue 'key' பண்பு பயிற்சி</h2>
+            
+            <p>Vue இல் 'key' பண்பு பற்றிய உங்கள் புரிதலைச் சோதிக்க இந்த பயிற்சியை முயற்சிக்கவும்.</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> Vue இல் v-for லூப்புடன் 'key' பண்பு பயன்படுத்தப்படாத போது என்ன நடக்கும்?</h4>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">வேகமான ரெண்டரிங் நடக்கும்</div>
+                            <div class="option-feedback incorrect">✗ தவறு! key இல்லாமல், Vue கூறுகளை திறம்பட புதுப்பிக்க முடியாது, இது வேகத்தை குறைக்கும்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">கூறு பண்புகள் கலக்கப்படலாம்</div>
+                            <div class="option-feedback correct">✓ சரி! key பண்பு இல்லாமல், வரிசை மாற்றப்பட்டால் கூறு பண்புகள் கலக்கப்படலாம்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">கூறுகள் தானாகவே அழிக்கப்படும்</div>
+                            <div class="option-feedback incorrect">✗ தவறு! கூறுகள் அழிக்கப்படாது, ஆனால் தவறாக புதுப்பிக்கப்படலாம்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">Vue செயல்படுத்துவதை நிறுத்தும்</div>
+                            <div class="option-feedback incorrect">✗ தவறு! Vue இன்னும் செயல்படும், ஆனால் எதிர்பாராத நடத்தையுடன்</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20'is'%20Attribute.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20'ref'%20Attribute.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">Vue 'key' பண்பு</a></li>
+                    <li><a href="#example">எடுத்துக்காட்டு</a></li>
+                    <li><a href="#definition">வரையறை மற்றும் பயன்பாடு</a></li>
+                    <li><a href="#importance">ஏன் முக்கியமானது</a></li>
+                    <li><a href="#exercises">பயிற்சி</a></li>
+                    <li><a href="#related-pages">தொடர்புடைய பக்கங்கள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

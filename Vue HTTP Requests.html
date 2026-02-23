@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue HTTP Requests - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+        
+        /* HTTP request visualization */
+        .http-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            border-left: 5px solid var(--git-color);
+        }
+        
+        .flow-step {
+            text-align: center;
+            flex: 1;
+            padding: 1rem;
+        }
+        
+        .flow-step i {
+            font-size: 2rem;
+            color: var(--git-color);
+            margin-bottom: 1rem;
+        }
+        
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: #666;
+        }
+        
+        .method-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: var(--git-color);
+            color: white;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 0.2rem;
+            font-weight: bold;
+        }
+        
+        .method-get { background: #28a745; }
+        .method-post { background: #007bff; }
+        .method-put { background: #ffc107; color: #333; }
+        .method-patch { background: #17a2b8; }
+        .method-delete { background: #dc3545; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20Teleport.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20Template%20Refs.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue HTTP Requests</h2>
+            <p>வாடிக்கையாளர் மற்றும் சேவையகத்திற்கு இடையேயான தகவல் தொடர்பு</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue HTTP கோரிக்கைகள்</h2>
+            
+            <p>HTTP கோரிக்கை என்பது ஒரு வாடிக்கையாளர் மற்றும் சேவையகத்திற்கு இடையேயான தகவல் தொடர்பின் ஒரு பகுதியாகும்.</p>
+            
+            <p>வாடிக்கையாளர் சேவையகத்திற்கு ஒரு HTTP கோரிக்கையை அனுப்புகிறார், இது கோரிக்கையைக் கையாளுகிறது மற்றும் ஒரு HTTP பதிலைத் தருகிறது.</p>
+        </section>
+
+        <!-- HTTP Basics -->
+        <section class="content-section" id="http-basics">
+            <h2>HTTP - ஹைப்பர் டெக்ஸ்ட் டிரான்ஸ்பர் ப்ரோட்டோகால்</h2>
+            
+            <p>HTTP என்பது ஹைப்பர் டெக்ஸ்ட் டிரான்ஸ்பர் ப்ரோட்டோகால் என்று பொருள்.</p>
+            
+            <p>நாம் இணையத்தில் உலாவும் போது நமது உலாவி பின்னணியில் எப்போதும் HTTP கோரிக்கைகளைச் செய்கிறது. நாம் ஒரு இணையப் பக்கத்தை அணுகும் போது, நமது உலாவி (வாடிக்கையாளர்) சேவையகத்திற்கு பல HTTP கோரிக்கைகளை அனுப்புகிறது, எங்களுக்குத் தேவையான பக்கத்தை அனைத்து தொடர்புடைய கோப்புகள் மற்றும் தரவுகளுடன் HTTP பதில்களாக அனுப்புகிறது.</p>
+            
+            <div class="http-flow">
+                <div class="flow-step">
+                    <i class="fas fa-desktop"></i>
+                    <h4>வாடிக்கையாளர்</h4>
+                    <p>HTTP கோரிக்கையை அனுப்புகிறது</p>
+                </div>
+                <div class="flow-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="flow-step">
+                    <i class="fas fa-server"></i>
+                    <h4>சேவையகம்</h4>
+                    <p>கோரிக்கையைச் செயல்படுத்துகிறது</p>
+                </div>
+                <div class="flow-arrow">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <div class="flow-step">
+                    <i class="fas fa-desktop"></i>
+                    <h4>வாடிக்கையாளர்</h4>
+                    <p>HTTP பதிலைப் பெறுகிறது</p>
+                </div>
+            </div>
+            
+            <p>மிகவும் பொதுவான HTTP கோரிக்கைகள் <span class="method-tag method-post">POST</span>, <span class="method-tag method-get">GET</span>, <span class="method-tag method-put">PUT</span>, <span class="method-tag method-patch">PATCH</span>, மற்றும் <span class="method-tag method-delete">DELETE</span> ஆகியவை ஆகும். Siva Team இல் எங்கள் HTTP கோரிக்கை முறைகள் பக்கத்தில் வெவ்வேறு வகையான HTTP கோரிக்கைகளைப் பற்றி மேலும் அறிக.</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">🌐</span> HTTP பற்றி:</h4>
+                <p>HTTP என்பது வலைத் தரவுகளை பரிமாறிக்கொள்ளப் பயன்படும் ப்ரோட்டோகால் ஆகும். இது வாடிக்கையாளர்-சேவையக மாதிரியில் செயல்படுகிறது, அங்கு ஒரு வலை உலாவி வாடிக்கையாளராக செயல்படுகிறது மற்றும் வலைச் சேவையகம் சேவையகமாக செயல்படுகிறது.</p>
+            </div>
+        </section>
+
+        <!-- The 'fetch' Method -->
+        <section class="content-section" id="fetch-method">
+            <h2>'fetch' முறை</h2>
+            
+            <p>Vue இல் ஒரு சேவையகத்திலிருந்து தரவைப் பெற JavaScript fetch() முறையைப் பயன்படுத்தலாம்.</p>
+            
+            <p>இந்த டுடோரியலில் fetch() முறையைப் பயன்படுத்தும்போது HTTP கோரிக்கை முறையைக் குறிப்பிட மாட்டோம், அதாவது பின்னணியில் பயன்படுத்தப்படும் இயல்புநிலை கோரிக்கை முறை GET ஆகும்.</p>
+            
+            <p>fetch() முறை தரவை எங்கிருந்து பெறுவது என்பதை அறிய ஒரு URL முகவரியை ஒரு வாதமாக எதிர்பார்க்கிறது.</p>
+            
+            <p>HTTP GET கோரிக்கையை அனுப்புவதற்கும், HTTP பதிலாக தரவைப் பெறுவதற்கும் fetch() முறையைப் பயன்படுத்தும் ஒரு எளிய எடுத்துக்காட்டு இங்கே உள்ளது. இந்த வழக்கில் கோரிக்கை செய்யப்பட்ட தரவு உள்ளூர் கோப்பு file.txt இல் உள்ள உரையாகும்:</p>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">📝</span> எடுத்துக்காட்டு</h4>
+                <p>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</p>
+                <p>App.vue:</p>
+            </div>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;button @click="fetchData"&gt;Fetch Data&lt;/button&gt;
+    &lt;p v-if="data"&gt;{{ data }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      data: null,
+    };
+  },
+  methods: {
+    fetchData() {
+      const response = fetch("file.txt");
+      this.data = response;
+    }
+  }
+};
+&lt;/script&gt;</code></pre>
+            </div>
+            
+            <p>மேலே உள்ள எடுத்துக்காட்டில், "[object Promise]" என்ற முடிவை மட்டுமே பெறுகிறோம், ஆனால் அது நமக்கு வேண்டியதல்ல.</p>
+            
+            <p>fetch() ஒரு வாக்குறுதி அடிப்படையிலான முறையாக இருப்பதால் இந்த முடிவைப் பெறுகிறோம், இது ஒரு வாக்குறுதிப் பொருளை வழங்குகிறது. எனவே fetch() முறையின் முதல் வருமானம் HTTP கோரிக்கை அனுப்பப்பட்டுள்ளது என்று அர்த்தமுள்ள ஒரு பொருள் மட்டுமே. இது "நிலுவையில்" உள்ள நிலையாகும்.</p>
+            
+            <p>fetch() முறை உண்மையில் நமக்குத் தேவையான தரவைப் பெறும்போது, வாக்குறுதி நிறைவேற்றப்படுகிறது.</p>
+        </section>
+
+        <!-- Using async/await -->
+        <section class="content-section" id="async-await">
+            <h2>async மற்றும் await பயன்படுத்துதல்</h2>
+            
+            <p>நமக்குத் தேவையான தரவுடன் பதில் நிறைவேறுவதற்குக் காத்திருக்க, fetch() முறைக்கு முன்னால் await ஆபரேட்டரைப் பயன்படுத்த வேண்டும்:</p>
+            
+            <div class="code-example">
+                <pre><code>const response = await fetch("file.txt");</code></pre>
+            </div>
+            
+            <p>ஒரு முறைக்குள் await ஆபரேட்டர் பயன்படுத்தப்படும்போது, async ஆபரேட்டருடன் முறை அறிவிக்கப்பட வேண்டும்:</p>
+            
+            <div class="code-example">
+                <pre><code>async fetchData() {
+  const response = await fetch("file.txt");
+  this.data = response;
+}</code></pre>
+            </div>
+            
+            <p>async ஆபரேட்டர் உலாவிக்கு முறை அசிங்க்ரோனஸ் என்று கூறுகிறது, அதாவது அது ஏதாவது ஒன்றிற்காக காத்திருக்கிறது, மற்றும் முறை முடிவடையும் வரை காத்திருக்கும் போது உலாவி மற்ற பணிகளைச் செய்யத் தொடரலாம்.</p>
+            
+            <p>இப்போது நாம் பெறுவது ஒரு "பதில்" மட்டுமே, "வாக்குறுதி" அல்ல, அதாவது file.txt கோப்பிற்குள் உள்ள உண்மையான உரையைப் பெற ஒரு படி நெருக்கமாக உள்ளோம்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;button @click="fetchData"&gt;Fetch Data&lt;/button&gt;
+    &lt;p v-if="data"&gt;{{ data }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      data: null,
+    };
+  },
+  methods: {
+    async fetchData() {
+      const response = await fetch("file.txt");
+      this.data = response;
+    }
+  }
+};
+&lt;/script&gt;</code></pre>
+            </div>
+            
+            <p>file.txt கோப்பிற்குள் உள்ள உரையைப் பெற, பதிலில் text() முறையைப் பயன்படுத்த வேண்டும். text() முறை ஒரு வாக்குறுதி அடிப்படையிலான முறையாக இருப்பதால், அதன் முன்னால் await ஆபரேட்டரைப் பயன்படுத்த வேண்டும்.</p>
+            
+            <p>இறுதியாக! file.txt கோப்பிற்குள் உள்ள உரையை fetch() முறையுடன் பெற நமக்குத் தேவையானது இப்போது உள்ளது:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;button @click="fetchData"&gt;Fetch Data&lt;/button&gt;
+    &lt;p v-if="data"&gt;{{ data }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      data: null,
+    };
+  },
+  methods: {
+    async fetchData() {
+      const response = await fetch("file.txt");
+      this.data = await response.text();
+    }
+  }
+};
+&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Fetch Data from JSON -->
+        <section class="content-section" id="fetch-json">
+            <h2>ஒரு JSON கோப்பிலிருந்து தரவைப் பெறுதல்</h2>
+            
+            <p>முந்தைய எடுத்துக்காட்டில் .txt கோப்பிலிருந்து உரையைப் பெற்றோம். ஆனால் தரவைச் சேமிக்க பல வழிகள் உள்ளன, இப்போது ஒரு .json கோப்பிலிருந்து தகவலை எவ்வாறு பெறலாம் என்பதைப் பார்ப்போம்.</p>
+            
+            <p>JSON என்பது ஒரு பொதுவான கோப்பு வடிவமாகும், இது தரவு உரையாகச் சேமிக்கப்படுவதால் மனிதர்களுக்கு படிக்க எளிதானது, மேலும் JSON வடிவமைப்பு நிரலாக்க மொழிகளால் பரவலாக ஆதரிக்கப்படுகிறது, எனவே நாம் எடுத்துக்காட்டாக, ஒரு .json கோப்பிலிருந்து எந்தத் தரவைப் பிரித்தெடுக்க வேண்டும் என்பதைக் குறிப்பிடலாம்.</p>
+            
+            <p>.json கோப்பிலிருந்து தரவைப் படிக்க, மேலே உள்ள எடுத்துக்காட்டுக்கு நாம் செய்ய வேண்டிய ஒரே மாற்றம் .json கோப்பைப் பெறுவது மற்றும் பதிலில் text() முறைக்குப் பதிலாக json() முறையைப் பயன்படுத்துவதாகும்.</p>
+            
+            <p>json() முறை HTTP கோரிக்கையிலிருந்து பதிலைப் படித்து ஒரு JavaScript பொருளை வழங்குகிறது.</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;button @click="fetchData"&gt;Fetch Data&lt;/button&gt;
+    &lt;pre v-if="data"&gt;{{ data }}&lt;/pre&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      data: null,
+    };
+  },
+  methods: {
+    async fetchData() {
+      const response = await fetch("bigLandMammals.json");
+      this.data = await response.json();
+    }
+  }
+};
+&lt;/script&gt;</code></pre>
+            </div>
+            
+            <p>json() முறையின் விளைவு ஒரு JavaScript பொருளாக இருப்பதால், bigLandMammals.json கோப்பிலிருந்து ஒரு சீரற்ற விலங்கைக் காட்ட மேலே உள்ள எடுத்துக்காட்டை மாற்றலாம்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;p&gt;Try clicking the button more than once to see new animals picked randomly.&lt;/p&gt;
+  &lt;button @click="fetchData"&gt;Fetch Data&lt;/button&gt;
+  &lt;div v-if="randomMammal"&gt;
+    &lt;h2&gt;{{ randomMammal.name }}&lt;/h2&gt;
+    &lt;p&gt;Max weight: {{ randomMammal.maxWeight }} kg&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      randomMammal: null
+    };
+  },
+  methods: {
+    async fetchData() {
+      const response = await fetch("bigLandMammals.json");
+      const data = await response.json();
+      const randIndex = Math.floor(Math.random()*data.results.length);
+      this.randomMammal = data.results[randIndex];
+    }
+  }
+};
+&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Data from API -->
+        <section class="content-section" id="api-data">
+            <h2>ஒரு API இலிருந்து தரவு</h2>
+            
+            <p>API என்பது அப்ளிகேஷன் ப்ரோக்ராமிங் இன்டர்ஃபேஸ் என்று பொருள். API பற்றி Siva Team இல் மேலும் அறியலாம்.</p>
+            
+            <p>நாம் இணைத்து பயன்படுத்தக்கூடிய பல சுவாரஸ்யமான இலவச APIகள் உள்ளன, வானிலை தரவு, பங்குச் சந்தை தரவு போன்றவற்றைப் பெற.</p>
+            
+            <p>HTTP கோரிக்கையுடன் ஒரு API ஐ அழைக்கும்போது நமக்குக் கிடைக்கும் பதில் அனைத்து வகையான தரவுகளையும் கொண்டிருக்கலாம், ஆனால் பெரும்பாலும் JSON வடிவத்தில் தரவுகளைக் கொண்டிருக்கும்.</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Example&lt;/h1&gt;
+  &lt;p&gt;Click the button to fetch data with an HTTP request.&lt;/p&gt;
+  &lt;p&gt;Each click generates an object with a random user from &lt;a href="https://random-data-api.com/" target="_blank"&gt;https://random-data-api.com/&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;The robot avatars are lovingly delivered by &lt;a href="http://Robohash.org" target="_blank"&gt;RoboHash&lt;/a&gt;.&lt;/p&gt;
+  &lt;button @click="fetchData"&gt;Fetch data&lt;/button&gt;
+  &lt;pre v-if="data"&gt;{{ data }}&lt;/pre&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    data() {
+      return {
+        data: null,
+      };
+    },
+    methods: {
+      async fetchData() {      
+        const response = await fetch("https://random-data-api.com/api/v2/users"); 
+        this.data = await response.json();
+      }   
+    }
+  };
+&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Exercise Section (ONLY ONE) -->
+        <section class="content-section" id="exercise">
+            <h2>Vue HTTP Requests பயிற்சி</h2>
+            
+            <p>Vue இல் HTTP கோரிக்கைகள் பற்றிய உங்கள் புரிதலை சோதிக்க இந்த பயிற்சியை முடிக்கவும்.</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> Vue.js இல் HTTP GET கோரிக்கையை செய்ய fetch() முறையைப் பயன்படுத்தும் போது, சரியான async/await தொடரியல் எது?</h4>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">async fetchData() { const data = fetch("api/data"); }</div>
+                            <div class="option-feedback incorrect">✗ தவறு! await ஆபரேட்டர் இல்லாமல் fetch() ஒரு Promise மட்டுமே வழங்கும்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">fetchData() { const data = await fetch("api/data"); }</div>
+                            <div class="option-feedback incorrect">✗ தவறு! await பயன்படுத்தப்படும் முறை async ஆக அறிவிக்கப்பட வேண்டும்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">async fetchData() { const response = await fetch("api/data"); const data = await response.json(); }</div>
+                            <div class="option-feedback correct">✓ சரி! async முறை, fetch() க்கு முன்னால் await, மற்றும் response.json() க்கு முன்னால் await ஆகியவை சரியான தொடரியல்</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">async fetchData() { const data = fetch("api/data").json(); }</div>
+                            <div class="option-feedback incorrect">✗ தவறு! json() முறையை நேரடியாக Promise இல் அழைக்க முடியாது, முதலில் பதிலைப் பெற வேண்டும்</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HTTP Request with Axios -->
+        <section class="content-section" id="axios">
+            <h2>Vue இல் 'axios' நூலகத்துடன் HTTP கோரிக்கை</h2>
+            
+            <p>'axios' JavaScript நூலகமும் HTTP கோரிக்கைகளைச் செய்ய அனுமதிக்கிறது.</p>
+            
+            <p>உங்கள் சொந்த கணினியில் எடுத்துக்காட்டை உருவாக்கவும் இயக்கவும், முதலில் உங்கள் திட்ட கோப்புறையில் terminal ஐப் பயன்படுத்தி 'axios' நூலகத்தை நிறுவ வேண்டும்:</p>
+            
+            <div class="code-example">
+                <pre><code>npm install axios</code></pre>
+            </div>
+            
+            <p>ஒரு சீரற்ற பயனரைப் பெற Vue இல் 'axios' நூலகத்தைப் பயன்படுத்துவது எப்படி:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;template&gt;
+  &lt;h1&gt;Example&lt;/h1&gt;
+  &lt;p&gt;Click the button to fetch data with an HTTP request.&lt;/p&gt;
+  &lt;button @click="fetchData"&gt;Fetch data&lt;/button&gt;
+  &lt;div v-if="data" id="dataDiv"&gt;
+    &lt;img :src="data.data.avatar" alt="avatar"&gt;
+    &lt;pre&gt;{{ data.data.first_name + " " + data.data.last_name }}&lt;/pre&gt;
+    &lt;p&gt;"{{ data.data.employment.title }}"&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  import axios from 'axios'
+
+  export default {
+    data() {
+      return {
+        data: null,
+      };
+    },
+    methods: {
+      async fetchData() {      
+        this.data = await axios.get("https://random-data-api.com/api/v2/users");
+      }
+    }
+  };
+&lt;/script&gt;</code></pre>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">⚡</span> fetch() vs axios:</h4>
+                <p>fetch() என்பது நவீன உலாவிகளில் உள்ளிடப்பட்ட API ஆகும், அதே நேரத்தில் axios என்பது ஒரு மூன்றாம் தரப்பு நூலகமாகும். Axios தானாகவே JSON ஐ பார்க்கிங் செய்கிறது, பிழைக் கையாளுதலைக் கொண்டுள்ளது மற்றும் பின்னோக்கிய இணக்கத்தன்மையைக் கொண்டுள்ளது, அதே நேரத்தில் fetch() க்கு கூடுதல் கட்டமைப்பு தேவைப்படுகிறது.</p>
+            </div>
+        </section>
+
+        <!-- HTTP Methods Comparison -->
+        <section class="content-section" id="methods-comparison">
+            <h2>HTTP முறைகள் ஒப்பீடு</h2>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>முறை</th>
+                            <th>விளக்கம்</th>
+                            <th>பொதுவான பயன்பாடு</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="method-tag method-get">GET</span></td>
+                            <td>தரவை மீட்டெடுக்கிறது (படிக்க மட்டும்)</td>
+                            <td>பக்கங்கள், படங்கள், API தரவு ஏற்றுதல்</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method-tag method-post">POST</span></td>
+                            <td>தரவைச் சமர்ப்பிக்கிறது/உருவாக்குகிறது</td>
+                            <td>படிவங்கள் சமர்ப்பிப்பு, புதிய உள்ளீடுகளை உருவாக்குதல்</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method-tag method-put">PUT</span></td>
+                            <td>தரவை முழுமையாக மாற்றியமைக்கிறது</td>
+                            <td>முழு வளத்தையும் புதுப்பித்தல்</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method-tag method-patch">PATCH</span></td>
+                            <td>தரவை பகுதியாக மாற்றியமைக்கிறது</td>
+                            <td>குறிப்பிட்ட புலங்களைப் புதுப்பித்தல்</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method-tag method-delete">DELETE</span></td>
+                            <td>தரவை நீக்குகிறது</td>
+                            <td>வளங்களை நீக்குதல்</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20Teleport.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20Template%20Refs.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">HTTP Requests</a></li>
+                    <li><a href="#http-basics">HTTP Basics</a></li>
+                    <li><a href="#fetch-method">fetch() முறை</a></li>
+                    <li><a href="#async-await">async/await</a></li>
+                    <li><a href="#fetch-json">JSON தரவு</a></li>
+                    <li><a href="#api-data">API தரவு</a></li>
+                    <li><a href="#axios">Axios நூலகம்</a></li>
+                    <li><a href="#exercise">பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

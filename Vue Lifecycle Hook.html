@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Lifecycle Hooks - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important; /* Remove pulse animation */
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important; /* Ensure no animations */
+        }
+        
+        .code-files {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .code-file {
+            background: #2d2d2d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .code-header {
+            background: #3d3d3d;
+            padding: 0.8rem 1rem;
+            color: #fff;
+            font-family: monospace;
+            font-weight: bold;
+            border-bottom: 1px solid #555;
+        }
+        
+        .code-content {
+            padding: 1rem;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20Template%20Refs.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20Provide%20Inject.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue Lifecycle Hooks</h2>
+            <p>Vue லைப்சைக்கிள் ஹுக்குகளைக் கற்றுக்கொள்ளுங்கள்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue லைப்சைக்கிள் ஹுக்குகள்</h2>
+            
+            <p>Vue இல் உள்ள லைப்சைக்கிள் ஹுக்குகள் என்பது கம்போனென்ட்டின் வாழ்க்கைச் சுழற்சியில் உள்ள சில கட்டங்களாகும், அங்கு நாம் விஷயங்களைச் செய்ய குறியீட்டைச் சேர்க்கலாம்.</p>
+            
+            <h3>லைப்சைக்கிள் ஹுக்குகள்</h3>
+            <p>ஒவ்வொரு முறையும் ஒரு கம்போனென்ட் அதன் வாழ்க்கைச் சுழற்சியில் ஒரு புதிய கட்டத்தை அடையும் போது, ஒரு குறிப்பிட்ட செயல்பாடு இயங்குகிறது, மேலும் நாம் அந்த செயல்பாட்டில் குறியீட்டைச் சேர்க்கலாம். இத்தகைய செயல்பாடுகள் லைப்சைக்கிள் ஹுக்குகள் என்று அழைக்கப்படுகின்றன, ஏனெனில் நாம் அந்த கட்டத்தில் எங்கள் குறியீட்டை "ஹுக்" செய்யலாம்.</p>
+            
+            <p>ஒரு கம்போனென்ட் கொண்டிருக்கும் அனைத்து லைப்சைக்கிள் ஹுக்குகள்:</p>
+            
+            <div class="code-example">
+                <pre><code>beforeCreate
+created
+beforeMount
+mounted
+beforeUpdate
+updated
+beforeUnmount
+unmounted
+errorCaptured
+renderTracked
+renderTriggered
+activated
+deactivated
+serverPrefetch</code></pre>
+            </div>
+        </section>
+
+        <!-- The 'beforeCreate' Hook -->
+        <section class="content-section" id="beforecreate">
+            <h2>'beforeCreate' ஹுக்</h2>
+            
+            <p>beforeCreate லைப்சைக்கிள் ஹுக் கம்போனென்ட் துவக்கப்படுவதற்கு முன் நடக்கும், எனவே இது Vue கம்போனென்ட்டின் தரவு, கம்ப்யூடட் ப்ராபர்ட்டிகள், மெத்தட்கள் மற்றும் இவெண்ட் லிஸ்டனர்களை அமைக்கும் முன்பு உள்ளது.</p>
+            
+            <p>beforeCreate ஹுக் உதாரணமாக ஒரு குளோபல் இவெண்ட் லிஸ்டனரை அமைக்க பயன்படுத்தப்படலாம், ஆனால் beforeCreate லைப்சைக்கிள் ஹுக்கிலிருந்து கம்போனென்ட்டுக்கு சொந்தமான உறுப்புகளை அணுக முயற்சிப்பதைத் தவிர்க்க வேண்டும், ஏனெனில் அவை இந்த கட்டத்தில் இன்னும் உருவாக்கப்படவில்லை.</p>
+            
+            <p>மேலும், beforeCreate லைப்சைக்கிள் ஹுக்கிலிருந்து DOM உறுப்புகளை அணுக முயற்சிப்பது அர்த்தமற்றது, ஏனெனில் அவை கம்போனென்ட் மவுண்ட் செய்யப்பட்ட பிறகுதான் உருவாக்கப்படுகின்றன.</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            <p>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</p>
+            
+            <div class="code-files">
+
+            <div class="code-example">
+                <div class="code-file">
+            <div class="code-example">
+                    <div class="code-header">CompOne.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+    &lt;h2&gt;Component&lt;/h2&gt;
+    &lt;p&gt;This is the component&lt;/p&gt;
+    &lt;p id="pResult"&gt;{{ text }}&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    data() {
+        return {
+            text: '...'
+        }
+    },
+  beforeCreate() {
+        this.text = 'initial text'; // This line has no effect
+    console.log("beforeCreate: The component is not created yet.");
+  }
+}
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-file"><div class="code-example">
+                  
+                </div>
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h1&gt;The 'beforeCreate' Lifecycle Hook&lt;/h1&gt;
+  &lt;p&gt;We can see the console.log() message from 'beforeCreate' lifecycle hook, but there is no effect from the text change we try to do to the Vue data property, because the Vue data property is not created yet.&lt;/p&gt;
+  &lt;button @click="this.activeComp = !this.activeComp"&gt;Add/Remove Component&lt;/button&gt;
+  &lt;div&gt;
+    &lt;comp-one v-if="activeComp"&gt;&lt;/comp-one&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      activeComp: false
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+#app > div {
+  border: dashed black 1px;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: lightgreen;
+}
+#pResult {
+  background-color: lightcoral;
+  display: inline-block;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">💡</span> உதவிக்குறிப்பு:</h4>
+                <p>மேலே உள்ள எடுத்துக்காட்டில், CompOne.vue இல் வரி 15 க்கு எந்த விளைவும் இல்லை, ஏனெனில் அந்த வரியில் நாம் Vue தரவு ப்ராபர்ட்டியின் உள்ளே உள்ள உரையை மாற்ற முயற்சிக்கிறோம், ஆனால் Vue தரவு ப்ராபர்ட்டி உண்மையில் இன்னும் உருவாக்கப்படவில்லை. மேலும், வரி 16 இல் உள்ள console.log() அழைப்பின் முடிவைப் பார்க்க பிரௌசர் கன்சோலைத் திறக்க நினைவில் கொள்ளுங்கள்.</p>
+            </div>
+        </section>
+
+        <!-- The 'created' Hook -->
+        <section class="content-section" id="created">
+            <h2>'created' ஹுக்</h2>
+            
+            <p>created லைப்சைக்கிள் ஹுக் கம்போனென்ட் துவக்கப்பட்ட பிறகு நடக்கும், எனவே Vue ஏற்கனவே கம்போனென்ட்டின் தரவு, கம்ப்யூடட் ப்ராபர்ட்டிகள், மெத்தட்கள் மற்றும் இவெண்ட் லிஸ்டனர்களை அமைத்துள்ளது.</p>
+            
+            <p>கம்போனென்ட் மவுண்ட் செய்யப்படும் வரை DOM உறுப்புகள் அணுக முடியாது என்பதால், created லைப்சைக்கிள் ஹுக்கிலிருந்து DOM உறுப்புகளை அணுக முயற்சிப்பதைத் தவிர்க்க வேண்டும்.</p>
+            
+            <p>created லைப்சைக்கிள் ஹுக் HTTP கோரிக்கைகளுடன் தரவைப் பெற அல்லது ஆரம்ப தரவு மதிப்புகளை அமைக்க பயன்படுத்தப்படலாம். கீழே உள்ள எடுத்துக்காட்டில் உள்ளது போல, தரவு ப்ராபர்ட்டி 'text' ஒரு ஆரம்ப மதிப்பை வழங்குகிறது:</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            
+            <div class="code-files">
+                <div class="code-file">
+            <div class="code-example">
+                    <div class="code-header">CompOne.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+    &lt;h2&gt;Component&lt;/h2&gt;
+    &lt;p&gt;This is the component&lt;/p&gt;
+    &lt;p id="pResult"&gt;{{ text }}&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    data() {
+        return {
+            text: '...'
+        }
+    },
+  created() {
+        this.text = 'initial text';
+    console.log("created: The component just got created.");
+  }
+}
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-file"><div class="code-example"><div class="code-example"></div>
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h1&gt;The 'created' Lifecycle Hook&lt;/h1&gt;
+  &lt;p&gt;We can see the console.log() message from 'created' lifecycle hook, and the text change we try to do to the Vue data property works, because the Vue data property is already created at this stage.&lt;/p&gt;
+  &lt;button @click="this.activeComp = !this.activeComp"&gt;Add/Remove Component&lt;/button&gt;
+  &lt;div&gt;
+    &lt;comp-one v-if="activeComp"&gt;&lt;/comp-one&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      activeComp: false
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+#app > div {
+  border: dashed black 1px;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: lightgreen;
+}
+#pResult {
+  background-color: lightcoral;
+  display: inline-block;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The 'beforeMount' Hook -->
+        <section class="content-section" id="beforemount">
+            <h2>'beforeMount' ஹுக்</h2>
+            
+            <p>beforeMount லைப்சைக்கிள் ஹுக் கம்போனென்ட் மவுண்ட் செய்யப்படுவதற்கு சற்று முன்பு நடக்கும், எனவே கம்போனென்ட் DOM இல் சேர்க்கப்படுவதற்கு சற்று முன்பு.</p>
+            
+            <p>கம்போனென்ட் மவுண்ட் செய்யப்படும் வரை DOM உறுப்புகள் அணுக முடியாது என்பதால், beforeMount லைப்சைக்கிள் ஹுக்கிலிருந்து DOM உறுப்புகளை அணுக முயற்சிப்பதைத் தவிர்க்க வேண்டும்.</p>
+            
+            <p>கீழே உள்ள எடுத்துக்காட்டு கம்போனென்ட்டில் DOM உறுப்புகளை இன்னும் அணுக முடியாது என்பதைக் காட்டுகிறது, CompOne.vue இல் வரி 11 வேலை செய்யாது, மற்றும் பிரௌசர் கன்சோலில் ஒரு பிழையை உருவாக்குகிறது:</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            
+            <div class="code-files">
+                <div class="code-file">
+            <div class="code-example">
+                    <div class="code-header">CompOne.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+    &lt;h2&gt;Component&lt;/h2&gt;
+    &lt;p&gt;This is the component&lt;/p&gt;
+    &lt;p ref="pEl" id="pEl"&gt;We try to access this text from the 'beforeMount' hook.&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  beforeMount() {
+    console.log("beforeMount: This is just before the component is mounted.");
+    this.$refs.pEl.innerHTML = "Hello World!"; // &lt;-- We cannot reach the 'pEl' DOM element at this stage 
+  }
+}
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-file"><div class="code-example">
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h1&gt;The 'beforeMount' Lifecycle Hook&lt;/h1&gt;
+  &lt;p&gt;We can see the console.log() message from the 'beforeMount' lifecycle hook, but the text change we try to do to the 'pEl' paragraph DOM element does not work, because the 'pEl' paragraph DOM element does not exist yet at this stage.&lt;/p&gt;
+  &lt;button @click="this.activeComp = !this.activeComp"&gt;Add/Remove Component&lt;/button&gt;
+  &lt;div&gt;
+    &lt;comp-one v-if="activeComp"&gt;&lt;/comp-one&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      activeComp: false
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+#app > div {
+  border: dashed black 1px;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: lightgreen;
+}
+#pEl {
+  background-color: lightcoral;
+  display: inline-block;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The 'mounted' Hook -->
+        <section class="content-section" id="mounted">
+            <h2>'mounted' ஹுக்</h2>
+            
+            <p>ஒரு கம்போனென்ட் DOM மரத்தில் சேர்க்கப்பட்ட உடனேயே, mounted() செயல்பாடு அழைக்கப்படுகிறது, மேலும் நாம் அந்த கட்டத்தில் எங்கள் குறியீட்டைச் சேர்க்கலாம்.</p>
+            
+            <p>கம்போனென்ட்டுக்குச் சொந்தமான DOM உறுப்புகள் தொடர்பான விஷயங்களைச் செய்ய இது முதல் வாய்ப்பாகும், கீழே உள்ள இரண்டாவது எடுத்துக்காட்டில் நாம் செய்வது போல ref பண்பு மற்றும் $refs பொருளைப் பயன்படுத்துதல்.</p>
+            
+            <h3>எடுத்துக்காட்டு 1</h3>
+            
+            <div class="code-files">
+                <div class="code-file">
+            <div class="code-example">
+                    <div class="code-header">CompOne.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h2&gt;Component&lt;/h2&gt;
+  &lt;p&gt;Right after this component is added to the DOM, the mounted() function is called and we can add code to that mounted() function. In this example, an alert popup box appears after this component is mounted.&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The reason that the alert is visible before the component is visible is because the alert is called before the browser gets to render the component to the screen.&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  mounted() {
+    alert("The component is mounted!");
+  }
+}
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-file"><div class="code-example">
+
+                </div><div class="code-example">
+
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h1&gt;The 'mounted' Lifecycle Hook&lt;/h1&gt;
+  &lt;button @click="this.activeComp = !this.activeComp"&gt;Create component&lt;/button&gt;
+  &lt;div&gt;
+    &lt;comp-one v-if="activeComp"&gt;&lt;/comp-one&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      activeComp: false
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+  div {
+    border: dashed black 1px;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    width: 400px;
+    background-color: lightgreen;
+  }
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">📝</span> குறிப்பு:</h4>
+                <p>மவுண்ட் செய்யப்பட்ட கட்டம் கம்போனென்ட் DOM இல் சேர்க்கப்பட்ட பிறகு நடக்கிறது, ஆனால் மேலே உள்ள எடுத்துக்காட்டில் alert() கம்போனென்ட் தெரியும் முன்பே தெரியும். இதற்கான காரணம் முதலில் கம்போனென்ட் DOM இல் சேர்க்கப்படுகிறது, ஆனால் பிரௌசர் கம்போனென்ட்டை திரையில் ரெண்டர் செய்யும் முன், மவுண்ட் செய்யப்பட்ட கட்டம் நடக்கிறது மற்றும் alert() தெரியும் மற்றும் கம்போனென்ட்டை ரெண்டர் செய்வதில் பிரௌசரை நிறுத்துகிறது.</p>
+            </div>
+            <div class="code-example">
+                  
+           
+            <div class="code-files">
+                <div class="code-file">
+            <div class="code-example">
+                    <div class="code-header">CompOne.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h2&gt;Form Component&lt;/h2&gt;
+  &lt;p&gt;When this component is added to the DOM tree, the mounted() function is called, and we put the cursor inside the input element.&lt;/p&gt;
+  &lt;form @submit.prevent&gt;
+    &lt;label&gt;
+      &lt;p&gt;
+        Name: &lt;br&gt;
+        &lt;input type="text" ref="inpName"&gt;
+      &lt;/p&gt;
+    &lt;/label&gt;
+    &lt;label&gt;
+      &lt;p&gt;
+        Age: &lt;br&gt;
+        &lt;input type="number"&gt;
+      &lt;/p&gt;
+    &lt;/label&gt;
+    &lt;button&gt;Submit&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;p&gt;(This form does not work, it is only here to show the mounted lifecycle hook.)&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    mounted() {
+      this.$refs.inpName.focus();
+    }
+  }
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The 'beforeUpdate' Hook -->
+        <section class="content-section" id="beforeupdate">
+            <h2>'beforeUpdate' ஹுக்</h2>
+            
+            <p>beforeUpdate லைப்சைக்கிள் ஹுக் எங்கள் கம்போனென்ட்டின் தரவில் ஏதேனும் மாற்றம் இருக்கும்போதெல்லாம் அழைக்கப்படுகிறது, ஆனால் புதுப்பிப்பு திரையில் ரெண்டர் செய்யப்படுவதற்கு முன்பு. beforeUpdate லைப்சைக்கிள் ஹுக் updated லைப்சைக்கிள் ஹுக்கிற்கு சற்று முன்பு நடக்கிறது.</p>
+            
+            <p>beforeUpdate ஹுக்கைப் பற்றிய சில சிறப்பு விஷயம் என்னவென்றால், புதிய புதுப்பிப்பைத் தூண்டாமல் நாம் பயன்பாட்டில் மாற்றங்களைச் செய்யலாம், எனவே இல்லையெனில் முடிவில்லா சுழற்சியைத் தவிர்க்கலாம். updated லைப்சைக்கிள் ஹுக்கில் பயன்பாட்டில் மாற்றங்களைச் செய்யக்கூடாது என்பதற்கு இதுவே காரணம், ஏனெனில் அந்த ஹுக்குடன், ஒரு முடிவில்லா சுழற்சி உருவாக்கப்படும். கீழே இருந்து மூன்றாவது எடுத்துக்காட்டைப் பாருங்கள், சிவப்பு நிறத்தில்.</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            <p>beforeUpdate() செயல்பாடு beforeUpdate() செயல்பாடு இயங்கியுள்ளது என்பதைக் குறிக்க ஆவணத்தில் ஒரு &lt;li&gt; டேக்கைச் சேர்க்கிறது.</p>
+            
+            <div class="code-files">
+                <div class="code-file">
+            <div class="code-example">
+                    <div class="code-header">CompOne.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h2&gt;Component&lt;/h2&gt;
+  &lt;p&gt;This is the component&lt;/p&gt;
+&lt;/template&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-file"><div class="code-example">
+
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h1&gt;The 'beforeUpdate' Lifecycle Hook&lt;/h1&gt;
+  &lt;p&gt;Whenever there is a change in our page, the application is 'updated' and the 'beforeUpdate' hook happens just before that.&lt;/p&gt;
+  &lt;p&gt;It is safe to modify our page in the 'beforeUpdate' hook like we do here, but if we modify our page in the 'updated' hook, we will generate an infinite loop.&lt;/p&gt;
+  &lt;button @click="this.activeComp = !this.activeComp"&gt;Add/Remove Component&lt;/button&gt;
+  &lt;div&gt;
+    &lt;comp-one v-if="activeComp"&gt;&lt;/comp-one&gt;
+  &lt;/div&gt;
+  &lt;ol ref="divLog"&gt;&lt;/ol&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      activeComp: true
+    }
+  },
+  beforeUpdate() {
+    this.$refs.divLog.innerHTML += "&lt;li&gt;beforeUpdate: This happened just before the 'updated' hook.&lt;/li&gt;";
+  }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+#app > div {
+  border: dashed black 1px;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: lightgreen;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The 'updated' Hook -->
+        <section class="content-section" id="updated">
+            <h2>'updated' ஹுக்</h2>
+            
+            <p>updated லைப்சைக்கிள் ஹுக் எங்கள் கம்போனென்ட் அதன் DOM மரத்தைப் புதுப்பித்த பிறகு அழைக்கப்படுகிறது.</p>
+            
+            <h3>எடுத்துக்காட்டு 1</h3>
+            <p>updated() செயல்பாடு console.log() உடன் ஒரு செய்தியை எழுதுகிறது. இது பக்கத்தை புதுப்பிக்கும் போதெல்லாம் நடக்கிறது, இந்த எடுத்துக்காட்டில் கம்போனென்ட் ஒவ்வொரு முறையும் சேர்க்கப்படும் அல்லது அகற்றப்படும்.</p>
+            
+            <div class="code-files">
+                <div class="code-file">
+            <div class="code-example">
+                    <div class="code-header">CompOne.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h2&gt;Component&lt;/h2&gt;
+  &lt;p&gt;This is the component&lt;/p&gt;
+&lt;/template&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-file"><div class="code-example">
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h1&gt;The 'updated' Lifecycle Hook&lt;/h1&gt;
+  &lt;p&gt;Whenever there is a change in our page, the application is updated and the updated() function is called. In this example we use console.log() in the updated() function that runs when our application is updated.&lt;/p&gt;
+  &lt;button @click="this.activeComp = !this.activeComp"&gt;Add/Remove Component&lt;/button&gt;
+  &lt;div&gt;
+    &lt;comp-one v-if="activeComp"&gt;&lt;/comp-one&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      activeComp: true
+    }
+  },
+  updated() {
+    console.log("The component is updated!");
+  }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+#app {
+  max-width: 450px;
+}
+#app > div {
+  border: dashed black 1px;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  width: 80%;
+  background-color: lightgreen;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <p>"Add/Remove Component" பொத்தானை 10 முறை கிளிக் செய்த பிறகு பிரௌசர் கன்சோலில் முடிவைப் பார்க்கலாம்:</p>
+            
+            <div class="image-box">
+    <h4><span class="tip-icon">🖼️</span> படம் 28: பிரௌசர் கன்சோல்</h4>
+    <img src="28.png" alt="Browser console screenshot after clicking Add/Remove Component 10 times" style="max-width: 100%; border-radius: 8px; border: 2px solid #ddd;">
+    <p class="image-caption">பிரௌசர் கன்சோல் ஸ்கிரீன்ஷாட் - "Add/Remove Component" பொத்தானை 10 முறை கிளிக் செய்த பிறகு</p>
+</div>
+            
+            <div class="warning-box">
+                <h4><span class="warning-icon">⚠️</span> எச்சரிக்கை:</h4>
+                <p>updated லைப்சைக்கிள் ஹுக் அழைக்கப்படும் போது பக்கத்தை மாற்றுவதில் நாம் கவனமாக இருக்க வேண்டும், ஏனெனில் பக்கம் மீண்டும் மீண்டும் புதுப்பிக்கும், முடிவில்லா சுழற்சியை உருவாக்கும்.</p>
+            </div>
+            
+            
+            <div class="code-files">
+                <div class="code-file">
+            <div class="code-example">
+                    <div class="code-header">CompOne.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h2&gt;Component&lt;/h2&gt;
+  &lt;p&gt;This is the component&lt;/p&gt;
+&lt;/template&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-file"><div class="code-example">
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h1&gt;The 'updated' Lifecycle Hook&lt;/h1&gt;
+  &lt;p&gt;Whenever there is a change in our page, the application is updated and the updated() function is called.&lt;/p&gt;
+  &lt;p&gt;The first change that causes the updated hook to be called is when we remove the component by clicking the button. When this happens, the update() function adds text to the last paragraph, which in turn updates the page again and again.&lt;/p&gt;
+  &lt;button @click="this.activeComp = !this.activeComp"&gt;Add/Remove Component&lt;/button&gt;
+  &lt;div&gt;
+    &lt;comp-one v-if="activeComp"&gt;&lt;/comp-one&gt;
+  &lt;/div&gt;
+  &lt;div&gt;{{ text }}&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      activeComp: true,
+      text: "Hello, "
+    }
+  },
+  updated() {
+    this.text += "hi, ";
+  }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+#app {
+  max-width: 450px;
+}
+#app > div {
+  border: dashed black 1px;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  width: 80%;
+  background-color: lightgreen;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div></div>
+            
+            <p>மேலே உள்ள குறியீட்டை உங்கள் இயந்திரத்தில் உள்ளூரில் dev மோடில் இயக்கும் போது, Chrome பிரௌசர் கன்சோல் எச்சரிக்கை இப்படித் தெரிகிறது:</p>
+            
+            <div class="image-box">
+    <h4><span class="tip-icon">🖼️</span> படம் 28: பிரௌசர் கன்சோல்</h4>
+    <img src="29.png" alt="Browser console screenshot after clicking Add/Remove Component 10 times" style="max-width: 100%; border-radius: 8px; border: 2px solid #ddd;">
+    <p class="image-caption">பிரௌசர் கன்சோல் ஸ்கிரீன்ஷாட் - "Add/Remove Component" பொத்தானை 10 முறை கிளிக் செய்த பிறகு</p>
+</div>
+        </section>
+
+        <!-- The 'beforeUnmount' Hook -->
+        <section class="content-section" id="beforeunmount">
+            <h2>'beforeUnmount' ஹுக்</h2>
+            
+            <p>beforeUnmount லைப்சைக்கிள் ஹுக் ஒரு கம்போனென்ட் DOM இலிருந்து அகற்றப்படுவதற்கு சற்று முன்பு அழைக்கப்படுகிறது.</p>
+            
+            <p>கீழே உள்ள எடுத்துக்காட்டில் நாம் காண்கிறபடி, beforeUnmount ஹுக்கில் இன்னும் DOM இல் கம்போனென்ட் உறுப்புகளை அணுகலாம்.</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            
+            <div class="code-files">
+                <div class="code-file">
+            <div class="code-example">
+
+                    <div class="code-header">CompOne.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h2&gt;Component&lt;/h2&gt;
+  &lt;p ref="pEl"&gt;Strawberries!&lt;/p&gt;
+&lt;/template&gt;
+  
+&lt;script&gt;
+export default {
+  beforeUnmount() {
+    alert("beforeUnmount: The text inside the p-tag is: " + this.$refs.pEl.innerHTML);
+  }
+}
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-file"><div class="code-example">
+                
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h1&gt;Lifecycle Hooks&lt;/h1&gt;
+  &lt;button @click="this.activeComp = !this.activeComp"&gt;{{ btnText }}&lt;/button&gt;
+  &lt;div&gt;
+    &lt;comp-one v-if="activeComp"&gt;&lt;/comp-one&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      activeComp: true
+    }
+  },
+  computed: {
+    btnText() {
+      if(this.activeComp) {
+        return 'Remove component'
+      }
+      else {
+        return 'Add component'
+      }
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+  div {
+    border: dashed black 1px;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    width: 400px;
+    background-color: lightgreen;
+  }
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The 'unmounted' Hook -->
+        <section class="content-section" id="unmounted">
+            <h2>'unmounted' ஹுக்</h2>
+            
+            <p>unmounted லைப்சைக்கிள் ஹுக் ஒரு கம்போனென்ட் DOM இலிருந்து அகற்றப்பட்ட பிறகு அழைக்கப்படுகிறது.</p>
+            
+            <p>இந்த ஹுக் உதாரணமாக இவெண்ட் லிஸ்டனர்களை அகற்ற அல்லது டைமர்கள் அல்லது இண்டர்வல்களை ரத்து செய்ய பயன்படுத்தப்படலாம்.</p>
+            
+            <p>ஒரு கம்போனென்ட் அன்மவுண்ட் செய்யப்படும் போது, unmounted() செயல்பாடு அழைக்கப்படுகிறது, மேலும் நாம் அதில் எங்கள் குறியீட்டைச் சேர்க்கலாம்:</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            
+            <div class="code-files">
+                <div class="code-file">
+            <div class="code-example">
+                    <div class="code-header">CompOne.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h2&gt;Component&lt;/h2&gt;
+  &lt;p&gt;When this component is removed from the DOM tree, the unmounted() function is called and we can add code to that function. In this example we create an alert popup box when this component is removed.&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  unmounted() {
+    alert("The component is removed (unmounted)!");
+  }
+}
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-file"><div class="code-example">
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h1&gt;Lifecycle Hooks&lt;/h1&gt;
+  &lt;button @click="this.activeComp = !this.activeComp"&gt;{{ btnText }}&lt;/button&gt;
+  &lt;div&gt;
+    &lt;comp-one v-if="activeComp"&gt;&lt;/comp-one&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      activeComp: true
+    }
+  },
+  computed: {
+    btnText() {
+      if(this.activeComp) {
+        return 'Remove component'
+      }
+      else {
+        return 'Add component'
+      }
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+  div {
+    border: dashed black 1px;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    width: 400px;
+    background-color: lightgreen;
+  }
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">📝</span> குறிப்பு:</h4>
+                <p>அன்மவுண்ட் செய்யப்பட்ட கட்டம் கம்போனென்ட் DOM இலிருந்து அகற்றப்பட்ட பிறகு நடக்கிறது, ஆனால் மேலே உள்ள எடுத்துக்காட்டில் alert() கம்போனென்ட் மறைவதற்கு முன்பே தெரியும். இதற்கான காரணம் முதலில் கம்போனென்ட் DOM இலிருந்து அகற்றப்படுகிறது, ஆனால் பிரௌசர் கம்போனென்ட்டின் அகற்றலை திரையில் ரெண்டர் செய்யும் முன், அன்மவுண்ட் செய்யப்பட்ட கட்டம் நடக்கிறது மற்றும் alert() தெரியும் மற்றும் கம்போனென்ட்டைக் காண்பிக்கும் பிரௌசரை நிறுத்துகிறது.</p>
+            </div>
+        </section>
+
+        <!-- The 'errorCaptured' Hook -->
+        <section class="content-section" id="errorcaptured">
+            <h2>'errorCaptured' ஹுக்</h2>
+            
+            <p>errorCaptured லைப்சைக்கிள் ஹுக் ஒரு குழந்தை/வழித்தோன்றல் கம்போனென்ட்டில் ஒரு பிழை நிகழும் போது அழைக்கப்படுகிறது.</p>
+            
+            <p>இந்த ஹுக் பிழை கையாளுதல், லாக்கிங் அல்லது பயனருக்கு பிழையைக் காண்பிக்க பயன்படுத்தப்படலாம்.</p>
+            
+            <h3>எடுத்துக்காட்டு 1</h3>
+            
+            <div class="code-files">
+                <div class="code-file">
+            <div class="code-example">
+                    <div class="code-header">CompOne.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h2&gt;Component&lt;/h2&gt;
+  &lt;p&gt;This is the component&lt;/p&gt;
+  &lt;button @click="generateError"&gt;Generate Error&lt;/button&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  methods: {
+    generateError() {
+      this.$refs.objEl.innerHTML = "hi";
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-file"><div class="code-example">
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h1&gt;The 'errorCaptured' Lifecycle Hook&lt;/h1&gt;
+  &lt;p&gt;Whenever there is an error in a child component, the errorCaptured() function is called on the parent.&lt;/p&gt;
+  &lt;p&gt;When the button inside the component is clicked, a method will run that tries to do changes to a $refs object that does not exist. This creates an error in the component that triggers the 'errorCaptured' lifecycle hook in the parent, and an alert box is displayed with information about the error.&lt;/p&gt;
+  &lt;p&gt;After clicking "Ok" in the alert box you can see the error in the browser console.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;comp-one&gt;&lt;/comp-one&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  errorCaptured() {
+    alert("An error occurred");
+  }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+#app > div {
+  border: dashed black 1px;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: lightgreen;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <p>பிழை பற்றிய தகவல்களை errorCaptured() செயல்பாட்டிற்கு வாதங்களாகப் பிடிக்க முடியும் மற்றும் இந்த வாதங்கள்:</p>
+            
+            <ul>
+                <li>பிழை</li>
+                <li>பிழையைத் தூண்டிய கம்போனென்ட்</li>
+                <li>பிழை மூல வகை</li>
+            </ul>
+            
+            
+            <div class="code-files">
+                <div class="code-file">
+            <div class="code-example">
+                    <div class="code-header">CompOne.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h2&gt;Component&lt;/h2&gt;
+  &lt;p&gt;This is the component&lt;/p&gt;
+  &lt;button @click="generateError"&gt;Generate Error&lt;/button&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  methods: {
+    generateError() {
+      this.$refs.objEl.innerHTML = "hi";
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-file"><div class="code-example">
+
+                
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h1&gt;The 'errorCaptured' Lifecycle Hook&lt;/h1&gt;
+  &lt;p&gt;Whenever there is an error in a child component, the errorCaptured() function is called on the parent.&lt;/p&gt;
+  &lt;p&gt;Open the browser console to see the captured error details.&lt;/p&gt;
+  &lt;div&gt;
+    &lt;comp-one&gt;&lt;/comp-one&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  errorCaptured(error,compInst,errorInfo) {
+    console.log("error: ", error);
+    console.log("compInst: ", compInst);
+    console.log("errorInfo: ", errorInfo);
+  }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+#app > div {
+  border: dashed black 1px;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: lightgreen;
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The 'renderTracked' and 'renderTriggered' Hooks -->
+        <section class="content-section" id="rendertracked">
+            <h2>'renderTracked' மற்றும் 'renderTriggered' லைப்சைக்கிள் ஹுக்குகள்</h2>
+            
+            <p>renderTracked ஹுக் ஒரு ரெண்டர் செயல்பாடு ஒரு ரியாக்டிவ் கம்போனென்டைக் கண்காணிக்க அல்லது கண்காணிக்க அமைக்கப்படும் போது இயங்கும். renderTracked ஹுக் வழக்கமாக ஒரு ரியாக்டிவ் கம்போனென்ட் துவக்கப்படும் போது இயங்கும்.</p>
+            
+            <p>renderTriggered ஹுக் அத்தகைய கண்காணிக்கப்பட்ட ரியாக்டிவ் கம்போனென்ட் மாறும்போது இயங்கும், எனவே ஒரு புதிய ரெண்டரைத் தூண்டுகிறது, இதனால் திரை சமீபத்திய மாற்றங்களுடன் புதுப்பிக்கப்படுகிறது.</p>
+            
+            <p>ரியாக்டிவ் கம்போனென்ட் என்பது மாறக்கூடிய ஒரு கம்போனென்ட் ஆகும்.</p>
+            
+            <p>ரெண்டர் செயல்பாடு என்பது Vue ஆல் தொகுக்கப்பட்ட ஒரு செயல்பாடாகும், இது ரியாக்டிவ் கம்போனென்ட்களைக் கண்காணிக்கிறது. ஒரு ரியாக்டிவ் கம்போனென்ட் மாறும்போது, ரெண்டர் செயல்பாடு தூண்டப்படுகிறது மற்றும் பயன்பாட்டை திரையில் மீண்டும் ரெண்டர் செய்கிறது.</p>
+            
+            <p>renderTracked மற்றும் renderTriggered ஹுக்கள் டீபகிஙிற்காக மட்டுமே பயன்படுத்தப்படும், மேலும் அவை டெவலப்மென்ட் மோட்டில் மட்டுமே கிடைக்கின்றன.</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            
+            <div class="code-files">
+                <div class="code-file">
+            <div class="code-example">
+                    <div class="code-header">CompOne.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h2&gt;Component One&lt;/h2&gt;
+  &lt;p&gt;This is a component.&lt;/p&gt;
+  &lt;button @click="counter++"&gt;Add One&lt;/button&gt;
+  &lt;p&gt;{{ counter }}&lt;/p&gt;
+&lt;/template&gt;
+  
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      counter: 0
+    }
+  },
+  renderTracked(evt) {
+    console.log("renderTracked: ",evt);
+    alert("renderTracked");
+  },
+  renderTriggered(evt) {
+    console.log("renderTriggered: ",evt)
+    alert("renderTriggered");
+  }
+}
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-file"><div class="code-example">
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h1&gt;The 'renderTracked' and 'renderTriggered' Lifecycle Hooks&lt;/h1&gt;
+  &lt;p&gt;The 'renderTracked' and 'renderTriggered' lifecycle hooks are used for debugging.&lt;/p&gt;
+  &lt;p&gt;&lt;mark&gt;This example only works in development mode, so to see the hooks run, you must copy this code and run it on you own computer in development mode.&lt;/mark&gt;&lt;/p&gt;
+  &lt;div&gt;
+    &lt;comp-one&gt;&lt;/comp-one&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;style scoped&gt;
+  div {
+    border: dashed black 1px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+    background-color: lightgreen;
+  }
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h4><span class="warning-icon">⚠️</span> முக்கிய குறிப்பு:</h4>
+                <p>renderTracked மற்றும் renderTriggered ஹுக்களில் இருந்து alert() மற்றும் console.log() ஐப் பார்க்க, நீங்கள் கீழே உள்ள எடுத்துக்காட்டில் உள்ள குறியீட்டை உங்கள் கணினியில் நகலெடுத்து பயன்பாட்டை டெவலப்மென்ட் மோட்டில் இயக்க வேண்டும்.</p>
+            </div>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">💡</span> குறிப்பு:</h4>
+                <p>மேலே உள்ள எடுத்துக்காட்டில் உள்ள குறியீடு உங்கள் கணினியில் நகலெடுத்து டெவலப்மென்ட் மோட்டில் இயக்குவதற்காகவே உள்ளது, ஏனெனில் renderTracked மற்றும் renderTriggered ஹுக்கள் டெவலப்மென்ட் மோட்டில் மட்டுமே வேலை செய்கின்றன.</p>
+            </div>
+        </section>
+
+        <!-- The 'activated' and 'deactivated' Hooks -->
+        <section class="content-section" id="activated">
+            <h2>'activated' மற்றும் 'deactivated' லைப்சைக்கிள் ஹுக்குகள்</h2>
+            
+            <p>இந்தப் பக்கத்தில் மேலே நாம் பார்க்க முடியும் என, ஒரு கம்போனென்ட் DOM இலிருந்து அகற்றப்படும் அல்லது சேர்க்கப்படும் போது mounted மற்றும் unmounted லைப்சைக்கிள் ஹுக்குகள் உள்ளன.</p>
+            
+            <p>activated மற்றும் deactivated லைப்சைக்கிள் ஹுக்கள் ஒரு கேச் செய்யப்பட்ட டைனமிக் கம்போனென்ட் சேர்க்கப்படும் அல்லது அகற்றப்படும் போது, ஆனால் DOM இலிருந்து அல்ல. கீழே உள்ள எடுத்துக்காட்டில் &lt;KeepAlive&gt; டேக் டைனமிக் கம்போனென்டை கேச் செய்ய பயன்படுத்தப்படுகிறது.</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            
+            <div class="code-files">
+                <div class="code-file">
+            <div class="code-example">
+                    <div class="code-header">CompOne.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h2&gt;Component&lt;/h2&gt;
+  &lt;p&gt;Below is a log with every time the 'activated', 'deactivated', 'mounted' or 'unmounted' hooks run.&lt;/p&gt;
+  &lt;ol ref="olEl"&gt;&lt;/ol&gt;
+  &lt;p&gt;You can also see when these hooks run in the console.&lt;/p&gt;
+&lt;/template&gt;
+  
+&lt;script&gt;
+export default {
+  mounted() {
+    this.logHook("mounted");
+  },
+  unmounted() {
+    this.logHook("unmounted");
+  },
+  activated() {
+    this.logHook("activated");
+  },
+  deactivated() {
+    this.logHook("deactivated");
+  },
+  methods: {
+    logHook(hookName) {
+      console.log(hookName);
+      const liEl = document.createElement("li");
+      liEl.innerHTML = hookName;
+      this.$refs.olEl.appendChild(liEl);
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+  li {
+    background-color: lightcoral;
+    width: 5em;
+  }
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-file"><div class="code-example">
+
+                
+                    <div class="code-header">App.vue:</div>
+                    <div class="code-content">
+                        <pre><code>&lt;template&gt;
+  &lt;h1&gt;The 'activated' and 'deactivated' Lifecycle Hooks&lt;/h1&gt;
+  &lt;p&gt;In this example for the 'activated' and 'deactivated' hooks we also see when and if the 'mounted' and 'unmounted' hooks are run.&lt;/p&gt;
+  &lt;button @click="this.activeComp = !this.activeComp"&gt;Include component&lt;/button&gt;
+  &lt;div&gt;
+    &lt;KeepAlive&gt;
+      &lt;comp-one v-if="activeComp"&gt;&lt;/comp-one&gt;
+    &lt;/KeepAlive&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  data() {
+    return {
+      activeComp: false
+    }
+  }
+}
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+  div {
+    border: dashed black 1px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+    background-color: lightgreen;
+  }
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The 'serverPrefetch' Hook -->
+        <section class="content-section" id="serverprefetch">
+            <h2>'serverPrefetch' லைப்சைக்கிள் ஹுக்</h2>
+            
+            <p>'serverPrefetch' ஹுக் சர்வர்-சைட் ரெண்டரிங் (SSR) போது மட்டுமே அழைக்கப்படுகிறது.</p>
+            
+            <p>'serverPrefetch' ஹுக்கிற்கான விளக்கம் மற்றும் எடுத்துக்காட்டை உருவாக்குவதற்கு ஒப்பீட்டளவில் நீண்ட அறிமுகம் மற்றும் அமைப்பு தேவைப்படும், மேலும் அது இந்த டுடோரியலின் நோக்கத்திற்கு அப்பாற்பட்டது.</p>
+        </section>
+
+        <!-- Vue Exercises -->
+        <section class="content-section" id="exercises">
+            <h2>Vue பயிற்சிகள்</h2>
+            
+            <p>பயிற்சிகளுடன் உங்களை சோதிக்கவும்</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> பயிற்சி:</h4>
+                <p>______ லைப்சைக்கிள் ஹுக் ஒரு கம்போனென்ட் DOM இலிருந்து அகற்றப்படுவதற்கு சற்று முன்பு அழைக்கப்படுகிறது.</p>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">beforeMount</div>
+                            <div class="option-feedback incorrect">✗ தவறு! beforeMount ஹுக் ஒரு கம்போனென்ட் DOM இல் சேர்க்கப்படுவதற்கு முன்பு அழைக்கப்படுகிறது, அகற்றப்படுவதற்கு அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">beforeCreate</div>
+                            <div class="option-feedback incorrect">✗ தவறு! beforeCreate ஹுக் கம்போனென்ட் உருவாக்கப்படுவதற்கு முன்பு அழைக்கப்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">beforeUnmount</div>
+                            <div class="option-feedback correct">✓ சரி! beforeUnmount ஹுக் ஒரு கம்போனென்ட் DOM இலிருந்து அகற்றப்படுவதற்கு சற்று முன்பு அழைக்கப்படுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">beforeUpdate</div>
+                            <div class="option-feedback incorrect">✗ தவறு! beforeUpdate ஹுக் கம்போனென்ட் புதுப்பிக்கப்படுவதற்கு முன்பு அழைக்கப்படுகிறது</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20Template%20Refs.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20Provide%20Inject.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">Vue லைப்சைக்கிள் ஹுக்குகள்</a></li>
+                    <li><a href="#beforecreate">beforeCreate ஹுக்</a></li>
+                    <li><a href="#created">created ஹுக்</a></li>
+                    <li><a href="#beforemount">beforeMount ஹுக்</a></li>
+                    <li><a href="#mounted">mounted ஹுக்</a></li>
+                    <li><a href="#beforeupdate">beforeUpdate ஹுக்</a></li>
+                    <li><a href="#updated">updated ஹுக்</a></li>
+                    <li><a href="#beforeunmount">beforeUnmount ஹுக்</a></li>
+                    <li><a href="#unmounted">unmounted ஹுக்</a></li>
+                    <li><a href="#errorcaptured">errorCaptured ஹுக்</a></li>
+                    <li><a href="#rendertracked">renderTracked/Triggered</a></li>
+                    <li><a href="#activated">activated/deactivated</a></li>
+                    <li><a href="#serverprefetch">serverPrefetch</a></li>
+                    <li><a href="#exercises">பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>

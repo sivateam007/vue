@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Introduction - Siva Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section p, 
+        .content-section li,
+        .content-section h3,
+        .content-section h4,
+        .comparison-card p {
+            color: #333 !important;
+        }
+        
+        .tip-box p,
+        .tip-box li,
+        .tip-box h4 {
+            color: white !important;
+        }
+        
+        .warning-box p,
+        .warning-box li,
+        .warning-box h4 {
+            color: white !important;
+        }
+        
+        .exercise-box p,
+        .exercise-box h4 {
+            color: white !important;
+        }
+        
+        /* Stable logo styling - NO ANIMATIONS */
+        .logo-icon {
+            animation: none !important;
+        }
+        
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: none !important;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--git-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo.jpg" alt="Siva Team Logo" class="logo-image">
+                </div>
+                <h1>Siva Team <span>Institution</span></h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Navigation Tabs -->
+    <div class="nav-tabs">
+        <a href="Vue%20Tutorial.html" class="nav-tab prev">
+            <i class="fas fa-arrow-left"></i>
+            <span>முந்தைய</span>
+        </a>
+        <a href="Vue%20Directive.html" class="nav-tab next">
+            <span>அடுத்தது</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Vue Introduction</h2>
+            <p>Vue அறிமுகம்</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Vue Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Vue அறிமுகம்</h2>
+            
+            <p>Vue என்பது ஒரு JavaScript கட்டமைப்பாகும். இது ஒரு &lt;script&gt; குறிச்சொல்லுடன் ஒரு HTML பக்கத்தில் சேர்க்கப்படலாம்.</p>
+            
+            <p>Vue, வழிமுறைகளுடன் HTML பண்புகளை விரிவுபடுத்துகிறது, மற்றும் வெளிப்பாடுகளுடன் HTML க்கு தரவை பிணைக்கிறது.</p>
+        </section>
+
+        <!-- Vue is a JavaScript Framework -->
+        <section class="content-section" id="framework">
+            <h2>Vue ஒரு JavaScript கட்டமைப்பு</h2>
+            
+            <p>Vue என்பது JavaScript இல் எழுதப்பட்ட ஒரு முன்னணி JavaScript கட்டமைப்பாகும்.</p>
+            
+            <p>Vue க்கு ஒத்த கட்டமைப்புகள் React மற்றும் Angular ஆகும், ஆனால் Vue மிகவும் இலகுவானது மற்றும் தொடங்குவது எளிதானது.</p>
+            
+            <p>Vue ஒரு JavaScript கோப்பாக விநியோகிக்கப்படுகிறது, மற்றும் ஒரு script குறிச்சொல்லுடன் ஒரு வலைப்பக்கத்தில் சேர்க்கப்படலாம்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Why Learn Vue? -->
+        <section class="content-section" id="why-learn">
+            <h2>ஏன் Vue கற்றுக்கொள்ள வேண்டும்?</h2>
+            
+            <ul>
+                <li>இது எளிமையானது மற்றும் பயன்படுத்த எளிதானது.</li>
+                <li>இது எளிமையான மற்றும் சிக்கலான திட்டங்களையும் கையாள முடியும்.</li>
+                <li>அதன் வளர்ந்து வரும் புகழ் மற்றும் திறந்த-மூல சமூக ஆதரவு.</li>
+                <li>சாதாரண JavaScript இல் HTML மற்றும் JavaScript எவ்வாறு இணைக்கப்பட்டுள்ளது என்று எழுத வேண்டும், ஆனால் Vue இல் ஒரு இணைப்பு உள்ளது என்பதை உறுதி செய்து, மீதமுள்ளவற்றை Vue கவனிக்கும்.</li>
+                <li>இது ஒரு திறமையான வளர்ச்சி செயல்முறையை அனுமதிக்கிறது, இது டெம்ப்ளேட்-அடிப்படையிலான தொடரியல், இருதரப்பு தரவு பிணைப்பு மற்றும் ஒரு மையப்படுத்தப்பட்ட மாநில மேலாண்மை ஆகியவற்றைக் கொண்டுள்ளது.</li>
+            </ul>
+            
+            <div class="tip-box">
+                <h4><span class="tip-icon">💡</span> குறிப்பு:</h4>
+                <p>இந்த புள்ளிகளில் சில புரிந்துகொள்வதற்கு கடினமாக இருந்தால், கவலைப்பட வேண்டாம், இந்த டுடோரியலின் முடிவில் நீங்கள் புரிந்துகொள்வீர்கள்.</p>
+            </div>
+        </section>
+
+        <!-- The Options API -->
+        <section class="content-section" id="options-api">
+            <h2>விருப்பங்கள் API</h2>
+            
+            <p>Vue இல் குறியீட்டை எழுத இரண்டு வெவ்வேறு வழிகள் உள்ளன: விருப்பங்கள் API மற்றும் கலவை API.</p>
+            
+            <p>அடிப்படை கருத்துகள் விருப்பங்கள் API மற்றும் கலவை API இரண்டிற்கும் ஒரே மாதிரியானவை, எனவே ஒன்றைக் கற்றுக்கொண்ட பிறகு, மற்றொன்றிற்கு எளிதாக மாறலாம்.</p>
+            
+            <p>விருப்பங்கள் API இந்த டுடோரியலில் எழுதப்பட்டுள்ளது, ஏனெனில் இது தொடக்கநிலைக்கு மிகவும் உதவியாகவும், மிகவும் அறிமுகமான கட்டமைப்புடன் கருதப்படுகிறது.</p>
+            
+            <p>விருப்பங்கள் API மற்றும் கலவை API இடையே உள்ள வேறுபாடுகளைப் பற்றி மேலும் அறிய இந்த டுடோரியலின் முடிவில் இந்த பக்கத்தைப் பாருங்கள்.</p>
+        </section>
+
+        <!-- My first page -->
+        <section class="content-section" id="first-page">
+            <h2>எனது முதல் பக்கம்</h2>
+            
+            <p>5 அடிப்படை படிகளில் நமது முதல் Vue வலைப்பக்கத்தை எவ்வாறு உருவாக்கலாம் என்பதை இப்போது கற்றுக்கொள்வோம்:</p>
+            
+            <ol>
+                <li>ஒரு அடிப்படை HTML கோப்புடன் தொடங்கவும்.</li>
+                <li>Vue இணைய ஒரு &lt;div&gt; குறிச்சொல்லை id="app" உடன் சேர்க்கவும்.</li>
+                <li>Vue உடன் இணைப்பு ஒரு &lt;script&gt; குறிச்சொல்லை Vue க்கான இணைப்புடன் சேர்ப்பதன் மூலம் உலாவிக்கு எவ்வாறு கையாள வேண்டும் என்று கூறுங்கள்.</li>
+                <li>Vue நிகழ்வு உள்ளே ஒரு &lt;script&gt; குறிச்சொல்லை சேர்க்கவும்.</li>
+                <li>Vue நிகழ்வை &lt;div id="app"&gt; குறிச்சொல்லுடன் இணைக்கவும்.</li>
+            </ol>
+            
+            <p>இந்தப் படிகள் விரிவாக விவரிக்கப்பட்டுள்ளன, 'Try It Yourself' எடுத்துக்காட்டுடன் முழு குறியீடும் கீழே உள்ளது.</p>
+        </section>
+
+        <!-- Step 1: HTML page -->
+        <section class="content-section" id="step1">
+            <h3><span class="step-number">1</span> HTML பக்கம்</h3>
+            
+            <p>ஒரு எளிய HTML பக்கத்துடன் தொடங்கவும்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;title&gt;My first Vue page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Step 2: Add a <div> -->
+        <section class="content-section" id="step2">
+            <h3><span class="step-number">2</span> ஒரு &lt;div&gt; சேர்க்கவும்</h3>
+            
+            <p>Vue க்கு உங்கள் பக்கத்தில் ஒரு HTML உறுப்பு இணைக்கப்பட வேண்டும்.</p>
+            
+            <p>&lt;body&gt; குறிச்சொல்லுக்குள் ஒரு &lt;div&gt; குறிச்சொல்லை வைத்து, அதற்கு ஒரு id கொடுங்கள்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;body&gt;
+  &lt;div id="app"&gt;&lt;/div&gt;
+&lt;/body&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Step 3: Add a link to Vue -->
+        <section class="content-section" id="step3">
+            <h3><span class="step-number">3</span> Vue க்கு இணைப்பு சேர்க்கவும்</h3>
+            
+            <p>எங்கள் Vue குறியீட்டை விளக்க உலாவியை உதவ, இந்த &lt;script&gt; குறிச்சொல்லைச் சேர்க்கவும்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Step 4: Add the Vue instance -->
+        <section class="content-section" id="step4">
+            <h3><span class="step-number">4</span> Vue நிகழ்வை சேர்க்கவும்</h3>
+            
+            <p>இப்போது எங்கள் Vue குறியீட்டை சேர்க்க வேண்டும்.</p>
+            
+            <p>இது Vue நிகழ்வு என்று அழைக்கப்படுகிறது மற்றும் தரவு மற்றும் முறைகள் மற்றும் பிற விஷயங்களைக் கொண்டிருக்கலாம், ஆனால் இப்போது அது ஒரு செய்தியை மட்டுமே கொண்டுள்ளது.</p>
+            
+            <p>இந்த &lt;script&gt; குறிச்சொல்லின் கடைசி வரியில் எங்கள் Vue நிகழ்வு &lt;div id="app"&gt; குறிச்சொல்லுடன் இணைக்கப்பட்டுள்ளது:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;div id="app"&gt;&lt;/div&gt;
+
+&lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+
+  const app = Vue.createApp({
+    data() {
+      return {
+        message: "Hello World!"
+      }
+    }
+  })
+
+ app.mount('#app')
+
+&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Step 5: Display 'message' with Text Interpolation -->
+        <section class="content-section" id="step5">
+            <h3><span class="step-number">5</span> உரை இடைச்செருகல் மூலம் 'message' காட்டு</h3>
+            
+            <p>இறுதியாக, நாம் உரை இடைச்செருகலைப் பயன்படுத்தலாம், இது தரவுக்கான ஒரு பொறிக்குறியாக இரட்டை சுருள் பிரேஸ்கள் {{ }} உடன் ஒரு Vue தொடரியல் ஆகும்.</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;div id="app"&gt; {{ message }} &lt;/div&gt;</code></pre>
+            </div>
+            
+            <p>உலாவி {{ message }} ஐ Vue நிகழ்வுக்குள் உள்ள 'message' பண்புகளில் சேமிக்கப்பட்ட உரையுடன் மாற்றும்.</p>
+        </section>
+
+        <!-- Complete Example -->
+        <section class="content-section" id="complete-example">
+            <h2>முழு எடுத்துக்காட்டு: எனது முதல் Vue பக்கம்!</h2>
+            
+            <p>உங்கள் சொந்த Vue சேவையகத்தைப் பெறுங்கள்</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;title&gt;My first Vue page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;div id="app"&gt;
+    {{ message }}
+  &lt;/div&gt;
+
+  &lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;
+
+  &lt;script&gt;
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "Hello World!"
+        }
+      }
+    })
+
+   app.mount('#app')
+
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+            
+            <p>இந்த குறியீட்டை 'Try it Yourself' பொத்தானுடன் சோதிக்கவும்.</p>
+        </section>
+
+        <!-- Text Interpolation -->
+        <section class="content-section" id="text-interpolation">
+            <h2>உரை இடைச்செருகல்</h2>
+            
+            <p>உரை இடைச்செருகல் என்பது வலைப்பக்கத்தில் காட்ட Vue நிகழ்விலிருந்து உரை எடுக்கப்படும் போது ஆகும்.</p>
+            
+            <p>உலாவி இந்தக் குறியீட்டை உள்ளே கொண்ட பக்கத்தைப் பெறுகிறது:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;div id="app"&gt; {{ message }} &lt;/div&gt;</code></pre>
+            </div>
+            
+            <p>பின்னர் உலாவி Vue நிகழ்வின் 'message' பண்புக்குள் உள்ள உரையைக் கண்டறிந்து Vue குறியீட்டை இதில் மொழிபெயர்க்கிறது:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;div id="app"&gt;Hello World!&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- JavaScript in Text Interpolation -->
+        <section class="content-section" id="js-interpolation">
+            <h2>உரை இடைச்செருகலில் JavaScript</h2>
+            
+            <p>எளிமையான JavaScript வெளிப்பாடுகளையும் இரட்டை சுருள் பிரேஸ்கள் {{ }} உள்ளே எழுதலாம்.</p>
+            
+            <h3>எடுத்துக்காட்டு</h3>
+            <p>div உறுப்புக்குள் செய்திக்கு ஒரு சீரற்ற எண்ணைச் சேர்க்க JavaScript தொடரியலைப் பயன்படுத்தவும்:</p>
+            
+            <div class="code-example">
+                <pre><code>&lt;div id="app"&gt;
+  {{ message }} &lt;br&gt;
+  {{'Random number: ' + Math.ceil(Math.random()*6) }}
+&lt;/div&gt;
+
+&lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+
+  const app = Vue.createApp({
+    data() {
+      return {
+        message: "Hello World!"
+      }
+    }
+  })
+
+ app.mount('#app')
+
+&lt;/script&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- Get Started -->
+        <section class="content-section" id="get-started">
+            <h2>தொடங்குங்கள்</h2>
+            
+            <p>இந்த டுடோரியல் உங்களுக்கு Vue இன் அடிப்படைகளைக் கற்பிக்கும்.</p>
+            
+            <p>இந்த டுடோரியலைப் பின்பற்ற HTML, CSS மற்றும் JavaScript ஆகியவற்றின் அடிப்படை முன்னறிவு அனுபவம் தேவை.</p>
+        </section>
+
+        <!-- Vue Exercises -->
+        <section class="content-section" id="exercises">
+            <h2>Vue பயிற்சிகள்</h2>
+            
+            <p>பயிற்சிகளுடன் உங்களைச் சோதிக்கவும்</p>
+            
+            <div class="exercise-box">
+                <h4><span class="exercise-icon">❓</span> பயிற்சி:</h4>
+                <p>'message' தரவு பண்பு மதிப்பைக் காட்ட உரை இடைச்செருகலைப் பயன்படுத்தவும்.</p>
+                
+                <div class="code-example">
+                    <pre><code>&lt;div id="app"&gt;
+&lt;/div&gt;
+&lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const app = Vue.createApp({
+    data() {
+      return {
+        message: "Hello World!"
+      }
+    }
+  })
+  app.mount('#app')
+&lt;/script&gt;</code></pre>
+                </div>
+                
+                <div class="options-grid">
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">&lt;div id="app"&gt; message &lt;/div&gt;</div>
+                            <div class="option-feedback incorrect">✗ தவறு! இது வெறும் HTML உரை, Vue இடைச்செருகல் அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">&lt;div id="app"&gt; {{ "Hello World!" }} &lt;/div&gt;</div>
+                            <div class="option-feedback incorrect">✗ தவறு! இது நேரடி உரை, 'message' தரவு பண்பு அல்ல</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="true">
+                        <div class="option-content">
+                            <div class="option-text">&lt;div id="app"&gt; {{ message }} &lt;/div&gt;</div>
+                            <div class="option-feedback correct">✓ சரி! இது Vue இடைச்செருகல் மூலம் 'message' தரவு பண்பைக் காட்டுகிறது</div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" data-correct="false">
+                        <div class="option-content">
+                            <div class="option-text">&lt;div id="app"&gt; ${message} &lt;/div&gt;</div>
+                            <div class="option-feedback incorrect">✗ தவறு! இது Vue தொடரியல் அல்ல, இது JavaScript template literals</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <a href="Vue%20Tutorial.html" class="nav-tab prev">
+                <i class="fas fa-arrow-left"></i>
+                <span>முந்தைய</span>
+            </a>
+            <a href="Vue%20Directive.html" class="nav-tab next">
+                <span>அடுத்தது</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Siva Team Institution</h3>
+                <p>Leading educational institution providing quality programming education in Tamil.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#introduction">Vue அறிமுகம்</a></li>
+                    <li><a href="#framework">Vue கட்டமைப்பு</a></li>
+                    <li><a href="#why-learn">ஏன் Vue கற்க?</a></li>
+                    <li><a href="#options-api">விருப்பங்கள் API</a></li>
+                    <li><a href="#first-page">முதல் பக்கம்</a></li>
+                    <li><a href="#text-interpolation">உரை இடைச்செருகல்</a></li>
+                    <li><a href="#js-interpolation">JS இடைச்செருகல்</a></li>
+                    <li><a href="#exercises">Vue பயிற்சிகள்</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Location & Hours</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Siva Team Institution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all content sections for animation
+        document.querySelectorAll('.content-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Exercise interaction
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Show feedback for all options
+                document.querySelectorAll('.option-card').forEach(c => {
+                    c.querySelector('.option-feedback').style.display = 'block';
+                });
+            });
+        });
+    </script>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+</body>
+</html>
